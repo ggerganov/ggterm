@@ -20,6 +20,8 @@ git clone https://github.com/ggerganov/ggterm --recursive
 cd ggterm
 
 ./install.sh
+
+# optionally add "source ~/.myenv" at the end of your ~/.bashrc
 ```
 
 ## Vim C++ features
