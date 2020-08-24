@@ -8,6 +8,8 @@ My terminal configuration for C++ development with Vim.
 
 ## Quick start
 
+The repo is meant to be used on Ubuntu 18.04+ but could also work on Mac OS with some adaptations.
+
 ```bash
 sudo apt-get install vim g++ cmake python-setuptools python3-pip clangd-10
 sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-10 100
