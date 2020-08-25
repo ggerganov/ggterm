@@ -26,6 +26,16 @@ cd ggterm
 
 ## Vim C++ features
 
+Vim is configured with the following plugins:
+
+- Vundle
+- YouCompleteMe
+- LanguageClient-neovim (configured with clangd)
+- deoplete
+- NERDTree
+- Fugitive
+- fzf
+
 To enable all features make sure to have a `compile_commands.json` file in the root source directory of your project.
 When using CMake, I usually create it like this:
 
