@@ -48,11 +48,15 @@ My Vim usage is tab-oriented. Check the [.vimrc](.vimrc) file for all available 
 
 | Action | Shortcut |
 | ------ | ------ |
-| tt | open new tab |
+| tn | open new tab |
 | tc | clone current tab |
 | t[0-9] | switch to tab [0-9] |
+| tm[0-9] | move tab to position [0-9] |
 | ;d | go to definition |
 | ;r | list all references |
+| ;h | symbol info |
+| \gl | all commits |
+| \ga | commits for current file |
 | \gdc | go to declaration |
 | Ctrl + f | fuzzy search file |
 | Ctrl + p | fuzzy search text |
