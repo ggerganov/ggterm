@@ -202,6 +202,7 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_max_diagnostics_to_display = 200
 let g:ycm_clangd_uses_ycmd_caching = 0
 let g:ycm_clangd_binary_path = exepath("clangd")
+let g:ycm_clangd_args=['--header-insertion=never']
 
 nnoremap <F5>           :YcmForceCompileAndDiagnostics<CR>
 nnoremap <leader>gic    :vsplit<CR><c-w><right>:YcmCompleter GoToInclude<CR>
