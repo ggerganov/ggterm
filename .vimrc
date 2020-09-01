@@ -382,6 +382,7 @@ endtry
 set background=dark
 set termguicolors
 set colorcolumn=160
+hi Normal guibg=NONE ctermbg=NONE
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -399,17 +400,17 @@ let g:echodoc#enable_at_startup = 1
 let g:echodoc#type = 'signature'
 
 " deoplete
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 0
 
 " toggle transparent background
-let t:is_transparent = 0
+let g:is_transparent = 1
 function! Toggle_transparent_background()
-    if t:is_transparent == 1
+    if g:is_transparent == 1
         hi Normal guibg=#282A36 ctermbg=236
-        let t:is_transparent = 0
+        let g:is_transparent = 0
     else
         hi Normal guibg=NONE ctermbg=NONE
-        let t:is_transparent = 1
+        let g:is_transparent = 1
     endif
 endfunction
 nnoremap <C-x><C-t> :call Toggle_transparent_background()<CR>
