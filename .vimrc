@@ -199,7 +199,7 @@ set backspace=2
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_always_populate_location_list = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_max_diagnostics_to_display = 200
+let g:ycm_max_diagnostics_to_display = 16
 let g:ycm_clangd_uses_ycmd_caching = 0
 let g:ycm_clangd_binary_path = exepath("clangd")
 let g:ycm_clangd_args=['--header-insertion=never']
@@ -210,14 +210,13 @@ nnoremap <leader>gdc    :vsplit<CR><c-w><right>:YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>gdf    :vsplit<CR><c-w><right>:YcmCompleter GoToDefinition<CR>
 nnoremap <leader>gip    :vsplit<CR><c-w><right>:YcmCompleter GoToImprecise<CR>
 nnoremap <leader>f      :YcmCompleter FixIt<CR>
-nnoremap <F9>           :YcmCompleter FixIt<CR>
 
 " FzF
 nnoremap <C-f> :Files<Cr>
 nnoremap <C-p> :Ag<Cr>
 
-nnoremap <silent> K :call SearchWordWithAg()<CR>
-vnoremap <silent> K :call SearchVisualSelectionWithAg()<CR>
+nnoremap <silent> <C-k> :call SearchWordWithAg()<CR>
+vnoremap <silent> <C-k> :call SearchVisualSelectionWithAg()<CR>
 nnoremap <silent> <leader>gl :Commits<CR>
 nnoremap <silent> <leader>ga :BCommits<CR>
 nnoremap <silent> <leader>ft :Filetypes<CR>
@@ -414,3 +413,21 @@ function! Toggle_transparent_background()
     endif
 endfunction
 nnoremap <C-x><C-t> :call Toggle_transparent_background()<CR>
+
+" gdb
+:packadd termdebug
+
+let g:termdebug_popup = 0
+let g:termdebug_wide = 160
+let g:termdebug_useFloatingHover = 0
+
+nnoremap <F3> :Run<CR>
+nnoremap <F4> :Continue<CR>
+nnoremap <F5> :Step<CR>
+nnoremap <F6> :Over<CR>
+nnoremap <F7> :Finish<CR>
+nnoremap <F8> :Break<CR>
+nnoremap <F9> :Clear<CR>
+nnoremap <F10> :Stop<CR>
+
+vnoremap <K> :Evaluate<CR>

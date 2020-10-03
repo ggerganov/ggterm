@@ -63,4 +63,4 @@ My Vim usage is tab-oriented. Check the [.vimrc](.vimrc) file for all available 
 | Ctrl + o | switch between source and header file |
 | Ctrl + n | toggle NERD tree |
 | Ctrl + l | open NERD tree in current folder |
-| Shift + k | fuzzy search current text under cursor |
+| Ctrl + k | fuzzy search current text under cursor |
