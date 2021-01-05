@@ -111,6 +111,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'ericcurtin/CurtineIncSw.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'Shougo/echodoc.vim'
+Plugin 'ruanyl/vim-gh-line'
 Plugin 'dracula/vim', { 'name': 'dracula' }
 
 if has('nvim')
@@ -416,6 +417,10 @@ nnoremap <C-x><C-t> :call Toggle_transparent_background()<CR>
 
 " gdb
 :packadd termdebug
+
+" gh-line
+let g:gh_line_map = '<leader>gH'
+let g:gh_line_blame_map = '<leader>gB'
 
 let g:termdebug_popup = 0
 let g:termdebug_wide = 160
