@@ -113,7 +113,7 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'Shougo/echodoc.vim'
 Plugin 'ruanyl/vim-gh-line'
 Plugin 'dracula/vim', { 'name': 'dracula' }
-Plugin 'gauteh/vim-cppman'
+"Plugin 'gauteh/vim-cppman'
 Plugin 'puremourning/vimspector', {
   \ 'do': 'python3 install_gadget.py --enable-vscode-cpptools'
   \ }
@@ -449,7 +449,7 @@ endfunction
 command! -range=% JbzClangFormat call <sid>JbzClangFormat (<line1>, <line2>)
 
 " add watch statement from visual selection
-:vnoremap <F7> y:VimspectorWatch <C-r><C-r>"<cr>
+:vnoremap <F7> y:VimspectorWatch <C-r><C-r>"
 
 " Autoformatting with clang-format
 au FileType c,cpp nnoremap <buffer><leader>lf :<C-u>JbzClangFormat<CR>
