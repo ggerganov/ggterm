@@ -58,9 +58,23 @@ My Vim usage is tab-oriented. Check the [.vimrc](.vimrc) file for all available 
 | \gl | all commits |
 | \ga | commits for current file |
 | \gdc | go to declaration |
+| \rs | remove all trailing spaces |
+| \lf | clang-format |
+| \gH | open line in Github |
+| \gB | blame line in Github |
 | Ctrl + f | fuzzy search file |
 | Ctrl + p | fuzzy search text |
 | Ctrl + o | switch between source and header file |
 | Ctrl + n | toggle NERD tree |
 | Ctrl + l | open NERD tree in current folder |
 | Ctrl + k | fuzzy search current text under cursor |
+| F5 | Start debugging |
+| F5 | Continue until break |
+| F10 | Step over |
+| F11 | Step into |
+| F12 | Complete the current funcion |
+| F9 | Toggle breakpoint |
+| F3 | Stop debugging |
+| F4 Start again with same options	|
+| F6 | Interrupt the debuger |
+| F7 | Add watch expression from visual selection |

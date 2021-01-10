@@ -108,11 +108,15 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'pangloss/vim-javascript'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'ericcurtin/CurtineIncSw.vim'
+Plugin 'derekwyatt/vim-fswitch'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'Shougo/echodoc.vim'
 Plugin 'ruanyl/vim-gh-line'
 Plugin 'dracula/vim', { 'name': 'dracula' }
+Plugin 'gauteh/vim-cppman'
+Plugin 'puremourning/vimspector', {
+  \ 'do': 'python3 install_gadget.py --enable-vscode-cpptools'
+  \ }
 
 if has('nvim')
   Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -324,9 +328,6 @@ set undodir=~/.vim/undodir
 set autoread
 au CursorHold,CursorHoldI * checktime
 
-" Switch between .h* and .c* files
-map <C-o> :call CurtineIncSw()<CR>
-
 " toggle quick fix window with compile errors \`
 function! GetBufferList()
   redir =>buflist
@@ -357,20 +358,6 @@ endfunction
 
 nmap <silent> <leader>l :call ToggleList("Location List", 'l')<CR>
 nmap <silent> <leader>e :call ToggleList("Quickfix List", 'c')<CR>
-
-command -bang -nargs=? QFix call QFixToggle(<bang>0)
-function! QFixToggle(forced)
-  if exists("g:qfix_win") && a:forced == 0
-    cclose
-    unlet g:qfix_win
-  else
-    copen 10
-    let g:qfix_win = bufnr("$")
-  endif
-endfunction
-
-nmap <silent> <F7> :QFix<CR>
-autocmd FileType qf nnoremap <buffer> <Enter> <C-W><Enter><C-W>T
 
 " colorscheme
 try
@@ -416,23 +403,54 @@ endfunction
 nnoremap <C-x><C-t> :call Toggle_transparent_background()<CR>
 
 " gdb
-:packadd termdebug
+":packadd termdebug
+"
+"let g:termdebug_popup = 0
+"let g:termdebug_wide = 160
+"let g:termdebug_useFloatingHover = 0
+"
+"nnoremap <F3> :Run<CR>
+"nnoremap <F4> :Continue<CR>
+"nnoremap <F5> :Step<CR>
+"nnoremap <F6> :Over<CR>
+"nnoremap <F7> :Finish<CR>
+"nnoremap <F8> :Break<CR>
+"nnoremap <F9> :Clear<CR>
+"nnoremap <F10> :Stop<CR>
+
+"vnoremap <K> :Evaluate<CR>
 
 " gh-line
 let g:gh_line_map = '<leader>gH'
 let g:gh_line_blame_map = '<leader>gB'
 
-let g:termdebug_popup = 0
-let g:termdebug_wide = 160
-let g:termdebug_useFloatingHover = 0
+" remove all trailing whitespaces
+nnoremap <silent> <leader>rs :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 
-nnoremap <F3> :Run<CR>
-nnoremap <F4> :Continue<CR>
-nnoremap <F5> :Step<CR>
-nnoremap <F6> :Over<CR>
-nnoremap <F7> :Finish<CR>
-nnoremap <F8> :Break<CR>
-nnoremap <F9> :Clear<CR>
-nnoremap <F10> :Stop<CR>
+" vim-fswitch
+au BufEnter *.h  let b:fswitchdst = "c,cpp,cc,m"
+au BufEnter *.cc let b:fswitchdst = "h,hpp"
 
-vnoremap <K> :Evaluate<CR>
+nnoremap <silent> <C-o> :FSHere<cr>
+nnoremap <silent> <localleader>oh :FSSplitLeft<cr>
+nnoremap <silent> <localleader>oj :FSSplitBelow<cr>
+nnoremap <silent> <localleader>ok :FSSplitAbove<cr>
+nnoremap <silent> <localleader>ol :FSSplitRight<cr>
+
+" vimspector
+let g:vimspector_enable_mappings = 'HUMAN'
+
+" clang-format
+function! s:JbzClangFormat(first, last)
+  let l:winview = winsaveview()
+  execute a:first . "," . a:last . "!clang-format"
+  call winrestview(l:winview)
+endfunction
+command! -range=% JbzClangFormat call <sid>JbzClangFormat (<line1>, <line2>)
+
+" add watch statement from visual selection
+:vnoremap <F7> y:VimspectorWatch <C-r><C-r>"<cr>
+
+" Autoformatting with clang-format
+au FileType c,cpp nnoremap <buffer><leader>lf :<C-u>JbzClangFormat<CR>
+au FileType c,cpp vnoremap <buffer><leader>lf :JbzClangFormat<CR>
