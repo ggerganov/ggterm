@@ -24,8 +24,6 @@ set sw=4
 set et
 set background=dark
 set number
-map <F2> i <%   %><LEFT><LEFT><LEFT><LEFT>
-map <F3> i <%=   %><LEFT><LEFT><LEFT><LEFT>
 set wildmode=longest:full
 set wildmenu
 set textwidth=0
@@ -454,3 +452,12 @@ command! -range=% JbzClangFormat call <sid>JbzClangFormat (<line1>, <line2>)
 " Autoformatting with clang-format
 au FileType c,cpp nnoremap <buffer><leader>lf :<C-u>JbzClangFormat<CR>
 au FileType c,cpp vnoremap <buffer><leader>lf :JbzClangFormat<CR>
+
+set encoding=utf-8
+set fileencodings=utf-8
+scriptencoding utf-8
+set encoding=utf-8
+
+" look for local .vimrc
+set exrc
+set secure
