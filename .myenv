@@ -26,3 +26,8 @@ if [ "$TERM_PROGRAM" == "iTerm.app" ] ; then
 fi
 
 export EDITOR=vim
+
+# kitten
+alias icat="kitty +kitten icat"
+alias diff="kitty +kitten diff"
+alias gd="git difftool --no-symlinks --dir-diff"

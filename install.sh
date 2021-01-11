@@ -42,11 +42,21 @@ else
     ln -s ${PWD}/.vim ~/.vim
 fi
 
+echo "[+] Checking if ~/.config/kitty exists"
+if [ -e ~/.config/kitty ] ; then
+    echo "~/.config/kitty already exists. Copying files"
+    cp -v ${PWD}/kitty/* ~/.config/kitty/
+else
+    echo "[+] Creating ~/.config/kitty symlink"
+    ln -s ${PWD}/kitty ~/.config/kitty
+fi
+
 echo "[+] Creating ~/.* symlinks"
 ln -f -s ${PWD}/.vimrc ~/.vimrc
 ln -f -s ${PWD}/.vimrc ~/.gvimrc
 ln -f -s ${PWD}/.myenv ~/.myenv
 ln -f -s ${PWD}/.gdbinit ~/.gdbinit
+ln -f -s ${PWD}/.gitconfig ~/.gitconfig
 
 mkdir -p ~/.vim/bundle
 ln -f -s ${PWD}/submodules/Vundle.vim ~/.vim/bundle/Vundle.vim

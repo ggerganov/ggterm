@@ -1,0 +1,32 @@
+[alias]
+    ci = commit
+    st = status
+    co = checkout
+    br = branch
+
+[core]
+    editor = nvim
+
+[merge]
+    tool = vimdiff
+
+[color]
+    ui = true
+[credential]
+    helper = store
+[filter "lfs"]
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
+
+[diff]
+    tool = kitty
+    guitool = kitty.gui
+[difftool]
+    prompt = false
+    trustExitCode = true
+[difftool "kitty"]
+    cmd = kitty +kitten diff $LOCAL $REMOTE
+[difftool "kitty.gui"]
+    cmd = kitty kitty +kitten diff $LOCAL $REMOTE
