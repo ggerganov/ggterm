@@ -113,7 +113,7 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'Shougo/echodoc.vim'
+"Plugin 'Shougo/echodoc.vim'
 Plugin 'ruanyl/vim-gh-line'
 Plugin 'dracula/vim', { 'name': 'dracula' }
 Plugin 'justinmk/vim-sneak'
@@ -382,10 +382,10 @@ else
 endif
 
 " echodoc
-set cmdheight=2
-"set noshowmode
-let g:echodoc#enable_at_startup = 1
-let g:echodoc#type = 'signature'
+"set cmdheight=2
+""set noshowmode
+"let g:echodoc#enable_at_startup = 1
+"let g:echodoc#type = 'signature'
 
 " deoplete
 "let g:deoplete#enable_at_startup = 0
@@ -470,7 +470,7 @@ let g:sneak#s_next = 1
 
 " cursor hover time
 set updatetime=250
-nnoremap <leader>d <plug>(YCMHover)
+map <leader>d <plug>(YCMHover)
 
 " conflicts with the vim-illuminate plugin
 autocmd FileType cpp :setlocal iskeyword-=:
