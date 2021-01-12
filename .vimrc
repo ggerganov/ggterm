@@ -33,6 +33,8 @@ set hlsearch
 set wrap
 set cin
 "set spell
+set guicursor=
+set backspace=2
 
 " fix copy-paste
 set t_BE=
@@ -73,11 +75,14 @@ nnoremap t7  :tabnext 7<CR>
 nnoremap t8  :tabnext 8<CR>
 nnoremap t9  :tabnext 9<CR>
 
-" fold options
-set foldmethod=syntax
-set foldnestmax=10
-set nofoldenable
-set foldlevel=20
+" fold options (makes vim very slow!)
+"set foldmethod=syntax
+"set foldnestmax=10
+"set nofoldenable
+"set foldlevel=20
+
+" make vim very slow!
+"set relativenumber
 
 " OpenCL like C
 au BufRead,BufNewFile *.cl set filetype=c
@@ -112,18 +117,19 @@ Plugin 'Shougo/echodoc.vim'
 Plugin 'ruanyl/vim-gh-line'
 Plugin 'dracula/vim', { 'name': 'dracula' }
 Plugin 'justinmk/vim-sneak'
-"Plugin 'gauteh/vim-cppman'
+Plugin 'RRethy/vim-illuminate'
+Plugin 'gauteh/vim-cppman'
 Plugin 'puremourning/vimspector', {
   \ 'do': 'python3 install_gadget.py --enable-vscode-cpptools'
   \ }
 
-if has('nvim')
-  Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plugin 'Shougo/deoplete.nvim'
-  Plugin 'roxma/nvim-yarp'
-  Plugin 'roxma/vim-hug-neovim-rpc'
-endif
+"if has('nvim')
+"  Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"else
+"  Plugin 'Shougo/deoplete.nvim'
+"  Plugin 'roxma/nvim-yarp'
+"  Plugin 'roxma/vim-hug-neovim-rpc'
+"endif
 
 " LSP for neovim
 Plugin 'autozimu/LanguageClient-neovim', {
@@ -144,6 +150,7 @@ filetype plugin indent on    " required
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_loadSettings = 1
 "let g:LanguageClient_settingsPath = '/home/user/.vim/settings.json'
+set omnifunc=LanguageClient#complete
 set completefunc=LanguageClient#complete
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 let g:LanguageClient_serverStderr = '/tmp/clangd.stderr'
@@ -195,18 +202,19 @@ map <C-n> :NERDTreeToggle<CR>
 map <C-l> :NERDTreeFind<CR>
 let g:NERDTreeDirArrows=0
 
-set backspace=2
-
 " YCM plugin options
 "let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 "let g:loaded_youcompleteme = 1
-let g:ycm_confirm_extra_conf = 0
+"let g:ycm_confirm_extra_conf = 0
 let g:ycm_always_populate_location_list = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_max_diagnostics_to_display = 16
-let g:ycm_clangd_uses_ycmd_caching = 0
-let g:ycm_clangd_binary_path = exepath("clangd")
-let g:ycm_clangd_args=['--header-insertion=never']
+"let g:ycm_cache_omnifunc = 0
+"let g:ycm_autoclose_preview_window_after_insert = 0
+"let g:ycm_autoclose_preview_window_after_insertion = 0
+"let g:ycm_autoclose_preview_window_after_completion = 0
+"let g:ycm_clangd_uses_ycmd_caching = 1
+"let g:ycm_clangd_binary_path = exepath("clangd")
+"let g:ycm_clangd_args=['--header-insertion=never']
 
 nnoremap <F5>           :YcmForceCompileAndDiagnostics<CR>
 nnoremap <leader>gic    :vsplit<CR><c-w><right>:YcmCompleter GoToInclude<CR>
@@ -283,9 +291,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
 set laststatus=2
 
-"highlight link sensibleWhitespaceError Error
-"autocmd Syntax * syntax match sensibleWhitespaceError excludenl /\s\+\%#\@<!$\| \+\ze\t/ display containedin=ALL
-
 " Shortcuts for LSP
 nnoremap <silent> ;h :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> ;d :vsplit<CR><c-w><right>:call LanguageClient#textDocument_definition()<CR>
@@ -305,10 +310,7 @@ nnoremap <silent> ;R :call LanguageClient#textDocument_rename()<CR>
 "nnoremap <leader>lm :call LanguageClient_contextMenu()<CR>
 
 " Tagbar
-nmap <F8> :TagbarToggle<CR>
-
-set relativenumber
-set guicursor=
+nmap <C-F8> :TagbarToggle<CR>
 
 autocmd VimEnter * highlight ExtraWhitespace ctermbg=red guibg=red
 autocmd WinEnter * highlight ExtraWhitespace ctermbg=red guibg=red
@@ -386,7 +388,7 @@ let g:echodoc#enable_at_startup = 1
 let g:echodoc#type = 'signature'
 
 " deoplete
-let g:deoplete#enable_at_startup = 0
+"let g:deoplete#enable_at_startup = 0
 
 " toggle transparent background
 let g:is_transparent = 1
@@ -465,3 +467,11 @@ set secure
 
 " vim-sneak
 let g:sneak#s_next = 1
+
+" cursor hover time
+set updatetime=250
+nnoremap <leader>d <plug>(YCMHover)
+
+" conflicts with the vim-illuminate plugin
+autocmd FileType cpp :setlocal iskeyword-=:
+autocmd FileType cpp :setlocal iskeyword-=>
