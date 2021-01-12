@@ -75,6 +75,7 @@ My Vim usage is tab-oriented. Check the [.vimrc](.vimrc) file for all available 
 | F12 | Complete the current funcion |
 | F9 | Toggle breakpoint |
 | F3 | Stop debugging |
-| F4 Start again with same options	|
+| F4 | Start again with same options	|
 | F6 | Interrupt the debuger |
 | F7 | Add watch expression from visual selection |
+| \F8 | Run to cursor |
