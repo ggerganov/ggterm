@@ -111,6 +111,7 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'Shougo/echodoc.vim'
 Plugin 'ruanyl/vim-gh-line'
 Plugin 'dracula/vim', { 'name': 'dracula' }
+Plugin 'justinmk/vim-sneak'
 "Plugin 'gauteh/vim-cppman'
 Plugin 'puremourning/vimspector', {
   \ 'do': 'python3 install_gadget.py --enable-vscode-cpptools'
@@ -461,3 +462,6 @@ set encoding=utf-8
 " look for local .vimrc
 set exrc
 set secure
+
+" vim-sneak
+let g:sneak#s_next = 1
