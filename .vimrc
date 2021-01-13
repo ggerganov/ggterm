@@ -147,7 +147,7 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 " Configure LSP plugin
-let g:LanguageClient_autoStart = 1
+let g:LanguageClient_autoStart = 0
 let g:LanguageClient_loadSettings = 1
 "let g:LanguageClient_settingsPath = '/home/user/.vim/settings.json'
 set omnifunc=LanguageClient#complete
@@ -205,13 +205,13 @@ let g:NERDTreeDirArrows=0
 " YCM plugin options
 "let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 "let g:loaded_youcompleteme = 1
-"let g:ycm_confirm_extra_conf = 0
+let g:ycm_confirm_extra_conf = 0
 let g:ycm_always_populate_location_list = 1
 let g:ycm_max_diagnostics_to_display = 16
 "let g:ycm_cache_omnifunc = 0
-"let g:ycm_autoclose_preview_window_after_insert = 0
-"let g:ycm_autoclose_preview_window_after_insertion = 0
-"let g:ycm_autoclose_preview_window_after_completion = 0
+"let g:ycm_autoclose_preview_window_after_insert = 1
+"let g:ycm_autoclose_preview_window_after_insertion = 1
+"let g:ycm_autoclose_preview_window_after_completion = 1
 "let g:ycm_clangd_uses_ycmd_caching = 1
 "let g:ycm_clangd_binary_path = exepath("clangd")
 "let g:ycm_clangd_args=['--header-insertion=never']
@@ -221,6 +221,9 @@ nnoremap <leader>gic    :vsplit<CR><c-w><right>:YcmCompleter GoToInclude<CR>
 nnoremap <leader>gdc    :vsplit<CR><c-w><right>:YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>gdf    :vsplit<CR><c-w><right>:YcmCompleter GoToDefinition<CR>
 nnoremap <leader>gip    :vsplit<CR><c-w><right>:YcmCompleter GoToImprecise<CR>
+nnoremap <leader>grf    :YcmCompleter GoToReferences<CR>
+nnoremap ;d             :vsplit<CR><c-w><right>:YcmCompleter GoToDefinition<CR>
+nnoremap ;r             :YcmCompleter GoToReferences<CR>
 nnoremap <leader>f      :YcmCompleter FixIt<CR>
 
 " FzF
@@ -292,11 +295,11 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 set laststatus=2
 
 " Shortcuts for LSP
-nnoremap <silent> ;h :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> ;d :vsplit<CR><c-w><right>:call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> ;r :call LanguageClient#textDocument_references()<CR>
-nnoremap <silent> ;s :call LanguageClient_textDocument_documentSymbol()<CR>
-nnoremap <silent> ;R :call LanguageClient#textDocument_rename()<CR>
+"nnoremap <silent> ;h :call LanguageClient#textDocument_hover()<CR>
+"nnoremap <silent> ;d :vsplit<CR><c-w><right>:call LanguageClient#textDocument_definition()<CR>
+"nnoremap <silent> ;r :call LanguageClient#textDocument_references()<CR>
+"nnoremap <silent> ;s :call LanguageClient_textDocument_documentSymbol()<CR>
+"nnoremap <silent> ;R :call LanguageClient#textDocument_rename()<CR>
 
 "nnoremap <leader>ld :call LanguageClient#textDocument_definition()<CR>
 "nnoremap <leader>lr :call LanguageClient#textDocument_rename()<CR>
@@ -371,6 +374,7 @@ set background=dark
 set termguicolors
 set colorcolumn=160
 hi Normal guibg=NONE ctermbg=NONE
+hi Pmenu guibg=#128060
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -469,9 +473,11 @@ set secure
 let g:sneak#s_next = 1
 
 " cursor hover time
-set updatetime=250
+set updatetime=1000
 map <leader>d <plug>(YCMHover)
 
 " conflicts with the vim-illuminate plugin
 autocmd FileType cpp :setlocal iskeyword-=:
 autocmd FileType cpp :setlocal iskeyword-=>
+autocmd FileType cpp :setlocal iskeyword-=<
+autocmd FileType cpp :setlocal iskeyword-=!
