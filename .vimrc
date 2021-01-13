@@ -118,9 +118,14 @@ Plugin 'dracula/vim', { 'name': 'dracula' }
 Plugin 'justinmk/vim-sneak'
 Plugin 'RRethy/vim-illuminate'
 Plugin 'gauteh/vim-cppman'
+Plugin 'Shougo/echodoc.vim'
 Plugin 'puremourning/vimspector', {
   \ 'do': 'python3 install_gadget.py --enable-vscode-cpptools'
   \ }
+
+" echodoc
+let g:echodoc#enable_at_startup = 1
+let g:echodoc#type = 'popup'
 
 " fzf
 set rtp+=~/.fzf

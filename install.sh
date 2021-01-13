@@ -68,7 +68,7 @@ if [ ! -e "./.vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so" ] ; then
     echo "[+] Compiling YCM with semantic support for C-family languages"
 
     cd ~/.vim/bundle/YouCompleteMe
-    ./install.py --clang-completer
+    ./install.py --clangd-completer
     cd ${PWD}
 fi
 
