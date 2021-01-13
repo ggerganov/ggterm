@@ -113,7 +113,6 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'octol/vim-cpp-enhanced-highlight'
-"Plugin 'Shougo/echodoc.vim'
 Plugin 'ruanyl/vim-gh-line'
 Plugin 'dracula/vim', { 'name': 'dracula' }
 Plugin 'justinmk/vim-sneak'
@@ -123,20 +122,6 @@ Plugin 'puremourning/vimspector', {
   \ 'do': 'python3 install_gadget.py --enable-vscode-cpptools'
   \ }
 
-"if has('nvim')
-"  Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"else
-"  Plugin 'Shougo/deoplete.nvim'
-"  Plugin 'roxma/nvim-yarp'
-"  Plugin 'roxma/vim-hug-neovim-rpc'
-"endif
-
-" LSP for neovim
-Plugin 'autozimu/LanguageClient-neovim', {
-\ 'branch': 'next',
-\ 'do': 'bash install.sh',
-\ }
-
 " fzf
 set rtp+=~/.fzf
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -145,28 +130,6 @@ Plugin 'junegunn/fzf.vim'
 " " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-
-" Configure LSP plugin
-let g:LanguageClient_autoStart = 0
-let g:LanguageClient_loadSettings = 1
-"let g:LanguageClient_settingsPath = '/home/user/.vim/settings.json'
-set omnifunc=LanguageClient#complete
-set completefunc=LanguageClient#complete
-set formatexpr=LanguageClient_textDocument_rangeFormatting()
-let g:LanguageClient_serverStderr = '/tmp/clangd.stderr'
-let g:LanguageClient_rootMarkers = {
-\ 'cpp': ['compile_commands.json', 'build'],
-\ }
-
-" Support for more languages may be added here.
-"\ 'cpp': ['cquery', '--language-server', '--log-file=/tmp/cq.log'],
-"\ 'c': ['cquery', '--language-server', '--log-file=/tmp/cq.log'],
-let g:LanguageClient_serverCommands = {
-\ 'cpp': ['clangd', '-background-index',],
-\ 'c': ['clangd'],
-\ }
-"let g:LanguageClient_trace = 'verbose'
-"let g:LanguageClient_setLoggingLevel = 'DEBUG'
 
 " Rainbow parentheses plugin
 let g:rbpt_colorpairs = [
@@ -195,7 +158,7 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 " This breaks folding
-"au Syntax * RainbowParenthesesLoadBraces
+au Syntax * RainbowParenthesesLoadBraces
 
 " Open NERD Tree with Ctrl-n
 map <C-n> :NERDTreeToggle<CR>
@@ -294,24 +257,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
 set laststatus=2
 
-" Shortcuts for LSP
-"nnoremap <silent> ;h :call LanguageClient#textDocument_hover()<CR>
-"nnoremap <silent> ;d :vsplit<CR><c-w><right>:call LanguageClient#textDocument_definition()<CR>
-"nnoremap <silent> ;r :call LanguageClient#textDocument_references()<CR>
-"nnoremap <silent> ;s :call LanguageClient_textDocument_documentSymbol()<CR>
-"nnoremap <silent> ;R :call LanguageClient#textDocument_rename()<CR>
-
-"nnoremap <leader>ld :call LanguageClient#textDocument_definition()<CR>
-"nnoremap <leader>lr :call LanguageClient#textDocument_rename()<CR>
-"nnoremap <leader>lf :call LanguageClient#textDocument_formatting()<CR>
-"nnoremap <leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
-"nnoremap <leader>lx :call LanguageClient#textDocument_references()<CR>
-"nnoremap <leader>la :call LanguageClient_workspace_applyEdit()<CR>
-"nnoremap <leader>lc :call LanguageClient#textDocument_completion()<CR>
-"nnoremap <leader>lh :call LanguageClient#textDocument_hover()<CR>
-"nnoremap <leader>ls :call LanguageClient_textDocument_documentSymbol()<CR>
-"nnoremap <leader>lm :call LanguageClient_contextMenu()<CR>
-
 " Tagbar
 nmap <C-F8> :TagbarToggle<CR>
 
@@ -384,15 +329,6 @@ if has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
-
-" echodoc
-"set cmdheight=2
-""set noshowmode
-"let g:echodoc#enable_at_startup = 1
-"let g:echodoc#type = 'signature'
-
-" deoplete
-"let g:deoplete#enable_at_startup = 0
 
 " toggle transparent background
 let g:is_transparent = 1

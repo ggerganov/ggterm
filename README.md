@@ -30,11 +30,11 @@ Vim is configured with the following plugins:
 
 - Vundle
 - YouCompleteMe
-- LanguageClient-neovim (configured with clangd)
-- deoplete
 - NERDTree
 - Fugitive
 - fzf
+- vimspector
+- etc.
 
 To enable all features make sure to have a `compile_commands.json` file in the root source directory of your project.
 When using CMake, I usually create it like this:
@@ -54,7 +54,6 @@ My Vim usage is tab-oriented. Check the [.vimrc](.vimrc) file for all available 
 | tm[0-9] | move tab to position [0-9] |
 | ;d | go to definition |
 | ;r | list all references |
-| ;h | symbol info |
 | \gl | all commits |
 | \ga | commits for current file |
 | \gdc | go to declaration |
