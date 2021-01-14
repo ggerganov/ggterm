@@ -107,7 +107,8 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'petRUShka/vim-opencl'
 Plugin 'majutsushi/tagbar'
-Plugin 'airblade/vim-gitgutter'
+" conflicts with YCM errors :(
+"Plugin 'airblade/vim-gitgutter'
 Plugin 'pangloss/vim-javascript'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'tpope/vim-fugitive'
@@ -325,6 +326,9 @@ set termguicolors
 set colorcolumn=160
 hi Normal guibg=NONE ctermbg=NONE
 hi Pmenu guibg=#128060
+
+" ycm errors highlight
+"hi YcmErrorLine guibg=#3f0000
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
