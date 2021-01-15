@@ -427,4 +427,4 @@ autocmd FileType cpp :setlocal iskeyword-=[
 autocmd FileType cpp :setlocal iskeyword-=]
 
 " share system clipboard
-set clipboard=unnamedplus
+vnoremap Y "+y
