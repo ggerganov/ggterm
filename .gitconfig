@@ -11,8 +11,8 @@
     tool = vimdiff
 
 [user]
-    #name = John Doe
-    #email = johndoe@gmail.com
+    #name = Georgi Gerganov
+    #email = ggerganov@gmail.com
 
 [color]
     ui = true
