@@ -103,8 +103,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clangd-completer' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'majutsushi/tagbar'
-" conflicts with YCM errors :(
-"Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'tpope/vim-fugitive'
@@ -129,6 +128,10 @@ call plug#end()
 " echodoc
 let g:echodoc#enable_at_startup = 1
 let g:echodoc#type = 'popup'
+
+" gitgutter
+let g:gitgutter_sign_allow_clobber = 1
+let g:gitgutter_sign_priority = 5
 
 " Rainbow parentheses plugin
 let g:rbpt_colorpairs = [
