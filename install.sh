@@ -20,6 +20,7 @@ function require_pkg {
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     require_pkg vim
+    require_pkg vim-gtk3
     require_pkg g++
     require_pkg git
     require_pkg cmake
