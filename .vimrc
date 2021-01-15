@@ -95,13 +95,11 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'scrooloose/nerdtree'
 Plug 'Yggdroot/indentLine'
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'Valloric/YouCompleteMe', {
-  \ 'do': 'python3 install.py --clangd-completer'
-  \ }
-Plug 'rdnetto/YCM-Generator'
+Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clangd-completer' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'majutsushi/tagbar'
@@ -118,9 +116,8 @@ Plug 'justinmk/vim-sneak'
 Plug 'RRethy/vim-illuminate'
 Plug 'gauteh/vim-cppman'
 Plug 'Shougo/echodoc.vim'
-Plug 'puremourning/vimspector', {
-  \ 'do': 'python3 install_gadget.py --enable-vscode-cpptools'
-  \ }
+Plug 'puremourning/vimspector'
+Plug 'rhysd/clever-f.vim'
 
 " fzf - has to be before plug#end() ?
 set rtp+=~/.fzf
