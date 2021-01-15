@@ -173,6 +173,7 @@ let g:NERDTreeDirArrows=0
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_always_populate_location_list = 1
 let g:ycm_max_diagnostics_to_display = 16
+let g:ycm_goto_buffer_command = 'split-or-existing-window'
 "let g:ycm_cache_omnifunc = 0
 "let g:ycm_autoclose_preview_window_after_insert = 1
 "let g:ycm_autoclose_preview_window_after_insertion = 1
@@ -182,12 +183,12 @@ let g:ycm_max_diagnostics_to_display = 16
 "let g:ycm_clangd_args=['--header-insertion=never']
 
 nnoremap <F5>           :YcmForceCompileAndDiagnostics<CR>
-nnoremap <leader>gic    :vsplit<CR><c-w><right>:YcmCompleter GoToInclude<CR>
-nnoremap <leader>gdc    :vsplit<CR><c-w><right>:YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>gdf    :vsplit<CR><c-w><right>:YcmCompleter GoToDefinition<CR>
-nnoremap <leader>gip    :vsplit<CR><c-w><right>:YcmCompleter GoToImprecise<CR>
+nnoremap <leader>gic    :rightbelow vertical YcmCompleter GoToInclude<CR>
+nnoremap <leader>gdc    :rightbelow vertical YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gdf    :rightbelow vertical YcmCompleter GoToDefinition<CR>
+nnoremap <leader>gip    :rightbelow vertical YcmCompleter GoToImprecise<CR>
 nnoremap <leader>grf    :YcmCompleter GoToReferences<CR>
-nnoremap ;d             :vsplit<CR><c-w><right>:YcmCompleter GoToDefinition<CR>
+nnoremap ;d             :rightbelow vertical YcmCompleter GoToDefinition<CR>
 nnoremap ;r             :YcmCompleter GoToReferences<CR>
 nnoremap <leader>f      :YcmCompleter FixIt<CR>
 
