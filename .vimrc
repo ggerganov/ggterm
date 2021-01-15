@@ -87,55 +87,51 @@ nnoremap t9  :tabnext 9<CR>
 " OpenCL like C
 au BufRead,BufNewFile *.cl set filetype=c
 
-" Vundle plugin manager
-set nocompatible              " be iMproved, required
-filetype off                  " required
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    "autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+call plug#begin('~/.vim/plugged')
 
-call vundle#begin()
-" " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'scrooloose/nerdtree'
-Plugin 'Yggdroot/indentLine'
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'rdnetto/YCM-Generator'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'petRUShka/vim-opencl'
-Plugin 'majutsushi/tagbar'
+Plug 'scrooloose/nerdtree'
+Plug 'Yggdroot/indentLine'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'Valloric/YouCompleteMe', {
+  \ 'do': 'python3 install.py --clangd-completer'
+  \ }
+Plug 'rdnetto/YCM-Generator'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'majutsushi/tagbar'
 " conflicts with YCM errors :(
-"Plugin 'airblade/vim-gitgutter'
-Plugin 'pangloss/vim-javascript'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'derekwyatt/vim-fswitch'
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'ruanyl/vim-gh-line'
-Plugin 'dracula/vim', { 'name': 'dracula' }
-Plugin 'justinmk/vim-sneak'
-Plugin 'RRethy/vim-illuminate'
-Plugin 'gauteh/vim-cppman'
-Plugin 'Shougo/echodoc.vim'
-Plugin 'puremourning/vimspector', {
+"Plug 'airblade/vim-gitgutter'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'tpope/vim-fugitive'
+Plug 'derekwyatt/vim-fswitch'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'ruanyl/vim-gh-line'
+Plug 'dracula/vim', { 'name': 'dracula' }
+Plug 'justinmk/vim-sneak'
+Plug 'RRethy/vim-illuminate'
+Plug 'gauteh/vim-cppman'
+Plug 'Shougo/echodoc.vim'
+Plug 'puremourning/vimspector', {
   \ 'do': 'python3 install_gadget.py --enable-vscode-cpptools'
   \ }
+
+" fzf - has to be before plug#end() ?
+set rtp+=~/.fzf
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+call plug#end()
 
 " echodoc
 let g:echodoc#enable_at_startup = 1
 let g:echodoc#type = 'popup'
-
-" fzf
-set rtp+=~/.fzf
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plugin 'junegunn/fzf.vim'
-
-" " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
 
 " Rainbow parentheses plugin
 let g:rbpt_colorpairs = [
@@ -426,3 +422,5 @@ autocmd FileType cpp :setlocal iskeyword-=:
 autocmd FileType cpp :setlocal iskeyword-=>
 autocmd FileType cpp :setlocal iskeyword-=<
 autocmd FileType cpp :setlocal iskeyword-=!
+autocmd FileType cpp :setlocal iskeyword-=[
+autocmd FileType cpp :setlocal iskeyword-=]
