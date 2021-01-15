@@ -50,6 +50,8 @@ ln -f -s ${PWD}/.myenv ~/.myenv
 ln -f -s ${PWD}/.gdbinit ~/.gdbinit
 ln -f -s ${PWD}/.gitconfig ~/.gitconfig
 
+git update-index --assume-unchanged .gitconfig
+
 echo "[+] Language server 'clangd' installation instructions"
 echo "    sudo apt-get install clangd-10"
 echo "    sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-10 100"

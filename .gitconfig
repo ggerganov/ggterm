@@ -9,7 +9,7 @@
 
 [merge]
     tool = vimdiff
-    
+
 [user]
     #name = John Doe
     #email = johndoe@gmail.com
