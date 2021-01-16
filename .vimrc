@@ -427,4 +427,5 @@ autocmd FileType cpp :setlocal iskeyword-=[
 autocmd FileType cpp :setlocal iskeyword-=]
 
 " share system clipboard
+autocmd VimLeave * call system("xsel -ib", getreg("+"))
 vnoremap Y "+y
