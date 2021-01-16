@@ -2,7 +2,7 @@
 
 My terminal configuration for C++ development with Vim.
 
-**Warning: use at your own risk. Using this repo can mess up your existing environment**
+**Warning: use at your own risk. Using this repo can mess up your existing environment! It is highly recommended to first try it out in a fresh VM!**
 
 <a href="https://i.imgur.com/wHmDf5N.png" target="_blank">![screenshot-0](https://i.imgur.com/wHmDf5N.png)</a>
 
@@ -13,8 +13,6 @@ The repo is meant to be used on Ubuntu 18.04+ but could also work on Mac OS with
 ```bash
 sudo apt-get install vim g++ cmake python-setuptools python3-pip clangd-10
 sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-10 100
-
-pip3 install --user pynvim
 
 git clone https://github.com/ggerganov/ggterm --recursive
 cd ggterm
@@ -28,7 +26,6 @@ cd ggterm
 
 Vim is configured with the following plugins:
 
-- Vundle
 - YouCompleteMe
 - NERDTree
 - Fugitive
