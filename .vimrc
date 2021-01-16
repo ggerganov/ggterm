@@ -415,7 +415,7 @@ set secure
 let g:sneak#s_next = 1
 
 " cursor hover time
-set updatetime=1000
+set updatetime=5000
 map <leader>d <plug>(YCMHover)
 
 " conflicts with the vim-illuminate plugin
@@ -425,6 +425,7 @@ autocmd FileType cpp :setlocal iskeyword-=<
 autocmd FileType cpp :setlocal iskeyword-=!
 autocmd FileType cpp :setlocal iskeyword-=[
 autocmd FileType cpp :setlocal iskeyword-=]
+autocmd FileType cpp :setlocal iskeyword-=*
 
 " share system clipboard
 autocmd VimLeave * call system("xsel -ib", getreg("+"))
