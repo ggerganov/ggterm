@@ -430,3 +430,6 @@ autocmd FileType cpp :setlocal iskeyword-=*
 " share system clipboard
 autocmd VimLeave * call system("xsel -ib", getreg("+"))
 vnoremap Y "+y
+
+" store swap files
+set directory=~/.vim/swapfiles/

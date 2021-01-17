@@ -50,6 +50,8 @@ ln -f -s ${PWD}/.myenv ~/.myenv
 ln -f -s ${PWD}/.gdbinit ~/.gdbinit
 ln -f -s ${PWD}/.gitconfig ~/.gitconfig
 
+mkdir ~/.vim/swapfiles
+
 git update-index --assume-unchanged .gitconfig
 
 echo "[+] Language server 'clangd' installation instructions"
