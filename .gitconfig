@@ -10,10 +10,6 @@
 [merge]
     tool = vimdiff
 
-[user]
-    #name = Georgi Gerganov
-    #email = ggerganov@gmail.com
-
 [color]
     ui = true
 [credential]
