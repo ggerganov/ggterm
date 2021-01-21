@@ -193,7 +193,7 @@ nnoremap ;r             :YcmCompleter GoToReferences<CR>
 nnoremap <leader>f      :YcmCompleter FixIt<CR>
 
 " FzF
-nnoremap <C-f> :Files<Cr>
+nnoremap <C-f> :GFiles<Cr>
 nnoremap <C-p> :Ag<Cr>
 
 nnoremap <silent> <C-k> :call SearchWordWithAg()<CR>
