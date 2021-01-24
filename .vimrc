@@ -16,7 +16,7 @@ syntax enable
 "autocmd BufEnter *.h :setlocal cindent cino=j1,(0,ws,Ws
 "autocmd BufEnter *.cpp :setlocal cindent cino=j1,(0,ws,Ws
 set cino=j1,(0,ws,W8,N-s,g-0
-autocmd BufEnter *.h :setlocal cindent cino=j1,(0,ws,W8,N-s,g-0
+autocmd BufEnter *.h   :setlocal cindent cino=j1,(0,ws,W8,N-s,g-0
 autocmd BufEnter *.cpp :setlocal cindent cino=j1,(0,ws,W8,N-s,g-0
 
 set ts=4
@@ -117,6 +117,7 @@ Plug 'gauteh/vim-cppman'
 Plug 'Shougo/echodoc.vim'
 Plug 'puremourning/vimspector'
 Plug 'rhysd/clever-f.vim'
+Plug 'othree/html5.vim'
 
 " fzf - has to be before plug#end() ?
 set rtp+=~/.fzf
