@@ -434,3 +434,6 @@ vnoremap Y "+y
 
 " store swap files
 set directory=~/.vim/swapfiles//
+
+" edit json
+let g:vim_json_conceal=0
