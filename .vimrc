@@ -454,3 +454,6 @@ command! -range=% JbzClangFormat call <sid>JbzClangFormat (<line1>, <line2>)
 " Autoformatting with clang-format
 au FileType c,cpp nnoremap <buffer><leader>lf :<C-u>JbzClangFormat<CR>
 au FileType c,cpp vnoremap <buffer><leader>lf :JbzClangFormat<CR>
+
+" edit json
+let g:vim_json_conceal=0
