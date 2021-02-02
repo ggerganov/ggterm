@@ -2,7 +2,7 @@
 
 My terminal configuration for C++ development with Vim.
 
-**Warning: use at your own risk. Using this repo can mess up your existing environment**
+**Warning: use at your own risk. Using this repo can mess up your existing environment! It is highly recommended to first try it out in a fresh VM!**
 
 <a href="https://i.imgur.com/wHmDf5N.png" target="_blank">![screenshot-0](https://i.imgur.com/wHmDf5N.png)</a>
 
@@ -13,8 +13,6 @@ The repo is meant to be used on Ubuntu 18.04+ but could also work on Mac OS with
 ```bash
 sudo apt-get install vim g++ cmake python-setuptools python3-pip clangd-10
 sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-10 100
-
-pip3 install --user pynvim
 
 git clone https://github.com/ggerganov/ggterm --recursive
 cd ggterm
@@ -28,13 +26,12 @@ cd ggterm
 
 Vim is configured with the following plugins:
 
-- Vundle
 - YouCompleteMe
-- LanguageClient-neovim (configured with clangd)
-- deoplete
 - NERDTree
 - Fugitive
 - fzf
+- vimspector
+- etc.
 
 To enable all features make sure to have a `compile_commands.json` file in the root source directory of your project.
 When using CMake, I usually create it like this:
@@ -54,7 +51,6 @@ My Vim usage is tab-oriented. Check the [.vimrc](.vimrc) file for all available 
 | tm[0-9] | move tab to position [0-9] |
 | ;d | go to definition |
 | ;r | list all references |
-| ;h | symbol info |
 | \gl | all commits |
 | \ga | commits for current file |
 | \gdc | go to declaration |
@@ -75,6 +71,7 @@ My Vim usage is tab-oriented. Check the [.vimrc](.vimrc) file for all available 
 | F12 | Complete the current funcion |
 | F9 | Toggle breakpoint |
 | F3 | Stop debugging |
-| F4 Start again with same options	|
+| F4 | Start again with same options	|
 | F6 | Interrupt the debuger |
 | F7 | Add watch expression from visual selection |
+| \F8 | Run to cursor |

@@ -11,9 +11,7 @@ if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
 
-# large bash history
-export HISTSIZE=10000
-export HISTFILESIZE=10000
+export CUDA_CACHE_DISABLE=1
 
 # ls colors
 export CLICOLOR=1
@@ -26,3 +24,13 @@ if [ "$TERM_PROGRAM" == "iTerm.app" ] ; then
 fi
 
 export EDITOR=vim
+
+# kitten
+alias icat="kitty +kitten icat"
+alias diff="kitty +kitten diff"
+alias gd="git difftool --no-symlinks --dir-diff"
+
+export HISTSIZE=10000
+export HISTFILESIZE=10000
+
+source ~/.myenv.local

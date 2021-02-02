@@ -16,7 +16,7 @@ syntax enable
 "autocmd BufEnter *.h :setlocal cindent cino=j1,(0,ws,Ws
 "autocmd BufEnter *.cpp :setlocal cindent cino=j1,(0,ws,Ws
 set cino=j1,(0,ws,W8,N-s,g-0
-autocmd BufEnter *.h :setlocal cindent cino=j1,(0,ws,W8,N-s,g-0
+autocmd BufEnter *.h   :setlocal cindent cino=j1,(0,ws,W8,N-s,g-0
 autocmd BufEnter *.cpp :setlocal cindent cino=j1,(0,ws,W8,N-s,g-0
 
 set ts=4
@@ -24,8 +24,6 @@ set sw=4
 set et
 set background=dark
 set number
-map <F2> i <%   %><LEFT><LEFT><LEFT><LEFT>
-map <F3> i <%=   %><LEFT><LEFT><LEFT><LEFT>
 set wildmode=longest:full
 set wildmenu
 set textwidth=0
@@ -35,6 +33,8 @@ set hlsearch
 set wrap
 set cin
 "set spell
+set guicursor=
+set backspace=2
 
 " fix copy-paste
 set t_BE=
@@ -75,92 +75,64 @@ nnoremap t7  :tabnext 7<CR>
 nnoremap t8  :tabnext 8<CR>
 nnoremap t9  :tabnext 9<CR>
 
-" fold options
-set foldmethod=syntax
-set foldnestmax=10
-set nofoldenable
-set foldlevel=20
+" fold options (makes vim very slow!)
+"set foldmethod=syntax
+"set foldnestmax=10
+"set nofoldenable
+"set foldlevel=20
+
+" make vim very slow!
+"set relativenumber
 
 " OpenCL like C
 au BufRead,BufNewFile *.cl set filetype=c
 
-" Vundle plugin manager
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-
-call vundle#begin()
-" " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'scrooloose/nerdtree'
-Plugin 'Yggdroot/indentLine'
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'rdnetto/YCM-Generator'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'petRUShka/vim-opencl'
-Plugin 'majutsushi/tagbar'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'pangloss/vim-javascript'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'derekwyatt/vim-fswitch'
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'Shougo/echodoc.vim'
-Plugin 'ruanyl/vim-gh-line'
-Plugin 'dracula/vim', { 'name': 'dracula' }
-"Plugin 'gauteh/vim-cppman'
-Plugin 'puremourning/vimspector', {
-  \ 'do': 'python3 install_gadget.py --enable-vscode-cpptools'
-  \ }
-
-if has('nvim')
-  Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plugin 'Shougo/deoplete.nvim'
-  Plugin 'roxma/nvim-yarp'
-  Plugin 'roxma/vim-hug-neovim-rpc'
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    "autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" LSP for neovim
-Plugin 'autozimu/LanguageClient-neovim', {
-\ 'branch': 'next',
-\ 'do': 'bash install.sh',
-\ }
+call plug#begin('~/.vim/plugged')
 
-" fzf
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+Plug 'scrooloose/nerdtree'
+Plug 'Yggdroot/indentLine'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clangd-completer' }
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'majutsushi/tagbar'
+Plug 'airblade/vim-gitgutter'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'tpope/vim-fugitive'
+Plug 'derekwyatt/vim-fswitch'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'ruanyl/vim-gh-line'
+Plug 'dracula/vim', { 'name': 'dracula' }
+Plug 'justinmk/vim-sneak'
+Plug 'RRethy/vim-illuminate'
+Plug 'gauteh/vim-cppman'
+Plug 'Shougo/echodoc.vim'
+Plug 'puremourning/vimspector'
+Plug 'rhysd/clever-f.vim'
+Plug 'othree/html5.vim'
+
+" fzf - has to be before plug#end() ?
 set rtp+=~/.fzf
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plugin 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
-" " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()
 
-" Configure LSP plugin
-let g:LanguageClient_autoStart = 1
-let g:LanguageClient_loadSettings = 1
-"let g:LanguageClient_settingsPath = '/home/user/.vim/settings.json'
-set completefunc=LanguageClient#complete
-set formatexpr=LanguageClient_textDocument_rangeFormatting()
-let g:LanguageClient_serverStderr = '/tmp/clangd.stderr'
-let g:LanguageClient_rootMarkers = {
-\ 'cpp': ['compile_commands.json', 'build'],
-\ }
+" echodoc
+let g:echodoc#enable_at_startup = 1
+let g:echodoc#type = 'popup'
 
-" Support for more languages may be added here.
-"\ 'cpp': ['cquery', '--language-server', '--log-file=/tmp/cq.log'],
-"\ 'c': ['cquery', '--language-server', '--log-file=/tmp/cq.log'],
-let g:LanguageClient_serverCommands = {
-\ 'cpp': ['clangd', '-background-index',],
-\ 'c': ['clangd'],
-\ }
-"let g:LanguageClient_trace = 'verbose'
-"let g:LanguageClient_setLoggingLevel = 'DEBUG'
+" gitgutter
+let g:gitgutter_sign_allow_clobber = 1
+let g:gitgutter_sign_priority = 5
 
 " Rainbow parentheses plugin
 let g:rbpt_colorpairs = [
@@ -189,35 +161,40 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 " This breaks folding
-"au Syntax * RainbowParenthesesLoadBraces
+au Syntax * RainbowParenthesesLoadBraces
 
 " Open NERD Tree with Ctrl-n
 map <C-n> :NERDTreeToggle<CR>
 map <C-l> :NERDTreeFind<CR>
 let g:NERDTreeDirArrows=0
 
-set backspace=2
-
 " YCM plugin options
 "let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 "let g:loaded_youcompleteme = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_always_populate_location_list = 1
-let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_max_diagnostics_to_display = 16
-let g:ycm_clangd_uses_ycmd_caching = 0
-let g:ycm_clangd_binary_path = exepath("clangd")
-let g:ycm_clangd_args=['--header-insertion=never']
+let g:ycm_goto_buffer_command = 'split-or-existing-window'
+"let g:ycm_cache_omnifunc = 0
+"let g:ycm_autoclose_preview_window_after_insert = 1
+"let g:ycm_autoclose_preview_window_after_insertion = 1
+"let g:ycm_autoclose_preview_window_after_completion = 1
+"let g:ycm_clangd_uses_ycmd_caching = 1
+"let g:ycm_clangd_binary_path = exepath("clangd")
+"let g:ycm_clangd_args=['--header-insertion=never']
 
 nnoremap <F5>           :YcmForceCompileAndDiagnostics<CR>
-nnoremap <leader>gic    :vsplit<CR><c-w><right>:YcmCompleter GoToInclude<CR>
-nnoremap <leader>gdc    :vsplit<CR><c-w><right>:YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>gdf    :vsplit<CR><c-w><right>:YcmCompleter GoToDefinition<CR>
-nnoremap <leader>gip    :vsplit<CR><c-w><right>:YcmCompleter GoToImprecise<CR>
+nnoremap <leader>gic    :rightbelow vertical YcmCompleter GoToInclude<CR>
+nnoremap <leader>gdc    :rightbelow vertical YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gdf    :rightbelow vertical YcmCompleter GoToDefinition<CR>
+nnoremap <leader>gip    :rightbelow vertical YcmCompleter GoToImprecise<CR>
+nnoremap <leader>grf    :YcmCompleter GoToReferences<CR>
+nnoremap ;d             :rightbelow vertical YcmCompleter GoToDefinition<CR>
+nnoremap ;r             :YcmCompleter GoToReferences<CR>
 nnoremap <leader>f      :YcmCompleter FixIt<CR>
 
 " FzF
-nnoremap <C-f> :Files<Cr>
+nnoremap <C-f> :GFiles<Cr>
 nnoremap <C-p> :Ag<Cr>
 
 nnoremap <silent> <C-k> :call SearchWordWithAg()<CR>
@@ -284,32 +261,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
 set laststatus=2
 
-"highlight link sensibleWhitespaceError Error
-"autocmd Syntax * syntax match sensibleWhitespaceError excludenl /\s\+\%#\@<!$\| \+\ze\t/ display containedin=ALL
-
-" Shortcuts for LSP
-nnoremap <silent> ;h :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> ;d :vsplit<CR><c-w><right>:call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> ;r :call LanguageClient#textDocument_references()<CR>
-nnoremap <silent> ;s :call LanguageClient_textDocument_documentSymbol()<CR>
-nnoremap <silent> ;R :call LanguageClient#textDocument_rename()<CR>
-
-"nnoremap <leader>ld :call LanguageClient#textDocument_definition()<CR>
-"nnoremap <leader>lr :call LanguageClient#textDocument_rename()<CR>
-"nnoremap <leader>lf :call LanguageClient#textDocument_formatting()<CR>
-"nnoremap <leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
-"nnoremap <leader>lx :call LanguageClient#textDocument_references()<CR>
-"nnoremap <leader>la :call LanguageClient_workspace_applyEdit()<CR>
-"nnoremap <leader>lc :call LanguageClient#textDocument_completion()<CR>
-"nnoremap <leader>lh :call LanguageClient#textDocument_hover()<CR>
-"nnoremap <leader>ls :call LanguageClient_textDocument_documentSymbol()<CR>
-"nnoremap <leader>lm :call LanguageClient_contextMenu()<CR>
-
 " Tagbar
-nmap <F8> :TagbarToggle<CR>
-
-set relativenumber
-set guicursor=
+nmap <C-F8> :TagbarToggle<CR>
 
 autocmd VimEnter * highlight ExtraWhitespace ctermbg=red guibg=red
 autocmd WinEnter * highlight ExtraWhitespace ctermbg=red guibg=red
@@ -370,6 +323,10 @@ set background=dark
 set termguicolors
 set colorcolumn=160
 hi Normal guibg=NONE ctermbg=NONE
+hi Pmenu guibg=#128060
+
+" ycm errors highlight
+"hi YcmErrorLine guibg=#3f0000
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -379,15 +336,6 @@ if has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
-
-" echodoc
-set cmdheight=2
-"set noshowmode
-let g:echodoc#enable_at_startup = 1
-let g:echodoc#type = 'signature'
-
-" deoplete
-let g:deoplete#enable_at_startup = 0
 
 " toggle transparent background
 let g:is_transparent = 1
@@ -454,6 +402,38 @@ command! -range=% JbzClangFormat call <sid>JbzClangFormat (<line1>, <line2>)
 " Autoformatting with clang-format
 au FileType c,cpp nnoremap <buffer><leader>lf :<C-u>JbzClangFormat<CR>
 au FileType c,cpp vnoremap <buffer><leader>lf :JbzClangFormat<CR>
+
+set encoding=utf-8
+set fileencodings=utf-8
+scriptencoding utf-8
+set encoding=utf-8
+
+" look for local .vimrc
+set exrc
+set secure
+
+" vim-sneak
+let g:sneak#s_next = 1
+
+" cursor hover time
+set updatetime=5000
+map <leader>d <plug>(YCMHover)
+
+" conflicts with the vim-illuminate plugin
+autocmd FileType cpp :setlocal iskeyword-=:
+autocmd FileType cpp :setlocal iskeyword-=>
+autocmd FileType cpp :setlocal iskeyword-=<
+autocmd FileType cpp :setlocal iskeyword-=!
+autocmd FileType cpp :setlocal iskeyword-=[
+autocmd FileType cpp :setlocal iskeyword-=]
+autocmd FileType cpp :setlocal iskeyword-=*
+
+" share system clipboard
+autocmd VimLeave * call system("xsel -ib", getreg("+"))
+vnoremap Y "+y
+
+" store swap files
+set directory=~/.vim/swapfiles//
 
 " edit json
 let g:vim_json_conceal=0
