@@ -176,6 +176,7 @@ let g:ycm_always_populate_location_list = 0
 let g:ycm_max_diagnostics_to_display = 16
 let g:ycm_enable_diagnostic_highlighting = 0
 let g:ycm_auto_trigger = 1
+let g:ycm_auto_hover = ''
 let g:ycm_goto_buffer_command = 'split-or-existing-window'
 "let g:ycm_cache_omnifunc = 0
 "let g:ycm_autoclose_preview_window_after_insert = 1
@@ -418,7 +419,7 @@ set secure
 let g:sneak#s_next = 1
 
 " cursor hover time
-set updatetime=5000
+set updatetime=1000
 map <leader>d <plug>(YCMHover)
 
 " conflicts with the vim-illuminate plugin
