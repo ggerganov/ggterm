@@ -441,3 +441,85 @@ set directory=~/.vim/swapfiles//
 
 " edit json
 let g:vim_json_conceal=0
+
+" YCM fix auto trigger
+" Milliseconds - tweak to liking
+let s:debounce = 250
+
+" --------
+"  Below here is evil. You should not read, use or otherwise acknowledge
+"  its existence.
+"
+"  YOU HAVE BEEN WARNED.
+" --------
+
+let g:ycm_auto_trigger = 0
+
+" Find the SID of autoload/youcompleteme.vim
+function! s:FindYouCompleteMeInternal()
+  let scripts = split( execute( 'scriptnames' ), '\n' )
+  for line in scripts
+    let match = matchlist( line,
+                         \ '\m\v^\s*(\d+): \f+autoload\/youcompleteme.vim$' )
+
+    if len( match ) > 0 && match[ 0 ] !=# ''
+      return match[ 1 ]
+    endif
+  endfo
+
+  return -1
+endfunction
+
+let s:youcompleteme_internal = -1
+let s:timer = 0
+
+function! s:CallYCMInt( f )
+  if s:youcompleteme_internal < 0
+    return
+  endif
+
+  exe "call \<SNR>" . s:youcompleteme_internal . '_' . a:f
+endfunction
+
+function! s:TriggerUserDefinedCompletion( ... )
+  call s:CallYCMInt( 'Complete()' )
+  call s:CallYCMInt( 'RequestCompletion()' )
+  call s:CallYCMInt( 'UpdateSignatureHelp()' )
+  call s:CallYCMInt( 'RequestSignatureHelp()' )
+endfunction
+
+let s:looked = 0
+
+function! s:LookForYCMInt( ... )
+  let s:youcompleteme_internal = s:FindYouCompleteMeInternal()
+  if s:youcompleteme_internal < 0
+    let s:looked += 1
+    if s:looked > 10
+      " abort
+      return
+    endif
+    call timer_start( 500, funcref( 's:LookForYCMInt' ) )
+    return
+  endif
+  augroup Local
+    au InsertCharPre * call s:StartYcmTrigger()
+    au InsertLeave * call s:StopYcmTrigger()
+  augroup END
+endfunction
+
+function! s:StartYcmTrigger() abort
+  call timer_stop( s:timer )
+  let s:timer = timer_start( s:debounce,
+                           \ funcref( 's:TriggerUserDefinedCompletion' ) )
+endf
+
+function! s:StopYcmTrigger() abort
+  call timer_stop( s:timer )
+endf
+
+augroup LocalStartup
+  au!
+  au VimEnter * call s:LookForYCMInt()
+augroup END
+
+" -------------------------------------------------------------------
