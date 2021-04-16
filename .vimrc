@@ -444,7 +444,7 @@ let g:vim_json_conceal=0
 
 " YCM fix auto trigger
 " Milliseconds - tweak to liking
-let s:debounce = 250
+let s:debounce = 80
 
 " --------
 "  Below here is evil. You should not read, use or otherwise acknowledge
@@ -523,3 +523,6 @@ augroup LocalStartup
 augroup END
 
 " -------------------------------------------------------------------
+
+au BufRead,BufNewFile *.log set syntax=messages
+au BufRead,BufNewFile *.dump set syntax=python
