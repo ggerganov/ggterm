@@ -442,6 +442,9 @@ set directory=~/.vim/swapfiles//
 " edit json
 let g:vim_json_conceal=0
 
+" vim illuminate
+let g:Illuminate_delay = 500
+
 " YCM fix auto trigger
 " Milliseconds - tweak to liking
 let s:debounce = 80
