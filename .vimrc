@@ -75,12 +75,6 @@ nnoremap t7  :tabnext 7<CR>
 nnoremap t8  :tabnext 8<CR>
 nnoremap t9  :tabnext 9<CR>
 
-" fold options (makes vim very slow!)
-"set foldmethod=syntax
-"set foldnestmax=10
-"set nofoldenable
-"set foldlevel=20
-
 " make vim very slow!
 "set relativenumber
 
@@ -160,8 +154,14 @@ let g:rbpt_loadcmd_toggle = 0
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
-" This breaks folding
-au Syntax * RainbowParenthesesLoadBraces
+" This breaks folding. Use it for C++ because we disable folding
+au Syntax cpp RainbowParenthesesLoadBraces
+
+" fold options (makes vim very slow!)
+au Syntax typescript setlocal foldmethod=syntax
+au Syntax typescript setlocal foldnestmax=10
+au Syntax typescript setlocal nofoldenable
+au Syntax typescript setlocal foldlevel=20
 
 " Open NERD Tree with Ctrl-n
 map <C-n> :NERDTreeToggle<CR>
