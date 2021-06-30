@@ -112,6 +112,7 @@ Plug 'Shougo/echodoc.vim'
 Plug 'puremourning/vimspector'
 Plug 'rhysd/clever-f.vim'
 Plug 'othree/html5.vim'
+Plug 'fladson/vim-kitty'
 
 " fzf - has to be before plug#end() ?
 set rtp+=~/.fzf
