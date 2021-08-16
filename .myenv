@@ -30,7 +30,7 @@ alias icat="kitty +kitten icat"
 alias diff="kitty +kitten diff"
 alias gd="git difftool --no-symlinks --dir-diff"
 
-export HISTSIZE=10000
-export HISTFILESIZE=10000
+export HISTSIZE=100000
+export HISTFILESIZE=100000
 
 source ~/.myenv.local
