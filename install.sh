@@ -35,6 +35,14 @@ sudo python setup.py install
 cd ../../
 #ln -f -s ${PWD}/submodules/powerline-shell/powerline-shell.py ~/.powerline-shell.py
 
+echo "[+] Checking if ~/.config/powerline-shell exists"
+if [ -e ~/.config/powerline-shell ] ; then
+    echo "~/.config/powerline-shell already exists. Nothing to do"
+else
+    echo "[+] Creating ~/.config/powerline-shell symlink"
+    ln -s ${PWD}/powerline-shell/config.json ~/.config/powerline-shell/config.json
+fi
+
 echo "[+] Checking if ~/.config/kitty exists"
 if [ -e ~/.config/kitty ] ; then
     echo "~/.config/kitty already exists. Nothing to do"
