@@ -141,8 +141,8 @@ au Syntax cpp,typescript setlocal foldlevel=20
 " remember folding for a file
 augroup remember_folds
     autocmd!
-    autocmd BufWinLeave * mkview
-    autocmd BufWinEnter * silent! loadview
+    autocmd BufWinLeave cpp,typescript mkview
+    autocmd BufWinEnter cpp,typescript silent! loadview
 augroup END
 
 " Open NERD Tree with Ctrl-n
