@@ -92,7 +92,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'scrooloose/nerdtree'
 Plug 'Yggdroot/indentLine'
-Plug 'kien/rainbow_parentheses.vim'
+Plug 'luochen1990/rainbow'
 Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clangd-completer' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -129,40 +129,21 @@ let g:echodoc#type = 'popup'
 let g:gitgutter_sign_allow_clobber = 1
 let g:gitgutter_sign_priority = 5
 
-" Rainbow parentheses plugin
-let g:rbpt_colorpairs = [
- \ ['brown',        'RoyalBlue3'],
- \ ['Lightblue',    'SeaGreen3'],
- \ ['lightgray',    'DarkOrchid3'],
- \ ['lightgreen',   'firebrick3'],
- \ ['lightcyan',    'RoyalBlue3'],
- \ ['lightred',     'SeaGreen3'],
- \ ['lightmagenta', 'DarkOrchid3'],
- \ ['lightgreen',   'firebrick3'],
- \ ['lightcyan',    'RoyalBlue3'],
- \ ['lightred',     'SeaGreen3'],
- \ ['lightmagenta', 'DarkOrchid3'],
- \ ['Lightblue',    'firebrick3'],
- \ ['lightgreen',   'RoyalBlue3'],
- \ ['lightcyan',    'SeaGreen3'],
- \ ['lightred',     'DarkOrchid3'],
- \ ['red',          'firebrick3'],
- \ ]
+" rainbow
+let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 
-let g:rbpt_max = 16
-let g:rbpt_loadcmd_toggle = 0
+" folding
+au Syntax cpp,typescript setlocal foldmethod=syntax
+au Syntax cpp,typescript setlocal foldnestmax=10
+au Syntax cpp,typescript setlocal nofoldenable
+au Syntax cpp,typescript setlocal foldlevel=20
 
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-" This breaks folding. Use it for C++ because we disable folding
-au Syntax cpp RainbowParenthesesLoadBraces
-
-" fold options (makes vim very slow!)
-au Syntax typescript setlocal foldmethod=syntax
-au Syntax typescript setlocal foldnestmax=10
-au Syntax typescript setlocal nofoldenable
-au Syntax typescript setlocal foldlevel=20
+" remember folding for a file
+augroup remember_folds
+    autocmd!
+    autocmd BufWinLeave * mkview
+    autocmd BufWinEnter * silent! loadview
+augroup END
 
 " Open NERD Tree with Ctrl-n
 map <C-n> :NERDTreeToggle<CR>
