@@ -132,11 +132,11 @@ let g:gitgutter_sign_priority = 5
 " rainbow
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 
-" folding
-au Syntax cpp,typescript setlocal foldmethod=syntax
-au Syntax cpp,typescript setlocal foldnestmax=10
-au Syntax cpp,typescript setlocal nofoldenable
-au Syntax cpp,typescript setlocal foldlevel=20
+" folding (only typescript, because with cpp vim becomes super slow)
+au Syntax typescript setlocal foldmethod=syntax
+au Syntax typescript setlocal foldnestmax=10
+au Syntax typescript setlocal nofoldenable
+au Syntax typescript setlocal foldlevel=20
 
 " remember folding for a file
 augroup remember_folds
@@ -247,7 +247,9 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 set laststatus=2
 
 " Tagbar
+let g:tagbar_sort = 0
 nmap <C-F8> :TagbarToggle<CR>
+autocmd FileType c,cpp nested :TagbarOpen
 
 autocmd VimEnter * highlight ExtraWhitespace ctermbg=red guibg=red
 autocmd WinEnter * highlight ExtraWhitespace ctermbg=red guibg=red
