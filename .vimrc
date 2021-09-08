@@ -214,7 +214,7 @@ let g:fugitive_git_executable = 'LANG=en_US.UTF-8 git'
 nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
 nnoremap <silent> <leader>gc :Gcommit<CR>
-nnoremap <silent> <leader>gb :Gblame<CR>
+nnoremap <silent> <leader>gb :Git blame<CR>
 nnoremap <silent> <leader>ge :Gedit<CR>
 nnoremap <silent> <leader>gE :Gedit<space>
 nnoremap <silent> <leader>gr :Gread<CR>
