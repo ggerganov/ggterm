@@ -91,12 +91,10 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'scrooloose/nerdtree'
-Plug 'Yggdroot/indentLine'
 Plug 'luochen1990/rainbow'
 Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clangd-completer' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
@@ -245,11 +243,6 @@ augroup END
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
 set laststatus=2
-
-" Tagbar
-let g:tagbar_sort = 0
-nmap <C-F8> :TagbarToggle<CR>
-autocmd FileType c,cpp nested :TagbarOpen
 
 autocmd VimEnter * highlight ExtraWhitespace ctermbg=red guibg=red
 autocmd WinEnter * highlight ExtraWhitespace ctermbg=red guibg=red
@@ -513,3 +506,9 @@ augroup END
 
 au BufRead,BufNewFile *.log set syntax=messages
 au BufRead,BufNewFile *.dump set syntax=python
+
+" center searches
+nmap gg ggzz
+nmap  n nzz
+nmap  N Nzz
+set scrolloff=4
