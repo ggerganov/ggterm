@@ -40,7 +40,7 @@ if [ -e ~/.config/powerline-shell ] ; then
     echo "~/.config/powerline-shell already exists. Nothing to do"
 else
     echo "[+] Creating ~/.config/powerline-shell symlink"
-    ln -s ${PWD}/powerline-shell/config.json ~/.config/powerline-shell/config.json
+    ln -s ${PWD}/powerline-shell ~/.config/powerline-shell
 fi
 
 echo "[+] Checking if ~/.config/kitty exists"
@@ -59,6 +59,7 @@ ln -f -s ${PWD}/.gdbinit ~/.gdbinit
 ln -f -s ${PWD}/.gitconfig ~/.gitconfig
 
 mkdir ~/.vim/swapfiles
+mkdir ~/.vim/undodir
 
 git update-index --assume-unchanged .gitconfig
 
