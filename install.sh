@@ -9,7 +9,7 @@ git submodule update --init
 echo "[+] Installing powerline-shell"
 
 function require_pkg {
-    if [ "`dpkg -l $1 | grep $1 | grep -v none`" == "" ] ; then
+    if [ ! command -v $1 &> /dev/null ] && [ "`dpkg -l $1 | grep $1 | grep -v none`" == "" ] ; then
         echo "Please install '$1' first:"
         echo ""
         echo "        $ sudo apt-get install $1"
@@ -49,6 +49,12 @@ if [ -e ~/.config/kitty ] ; then
 else
     echo "[+] Creating ~/.config/kitty symlink"
     ln -s ${PWD}/kitty ~/.config/kitty
+fi
+
+if [[ "$OSTYPE" == "darwin" ]]; then
+    ln -sf ${PWD}/kitty/kitty-macos.conf ${PWD}/kitty/local.conf
+else
+    ln -sf ${PWD}/kitty/kitty-linux.conf ${PWD}/kitty/local.conf
 fi
 
 echo "[+] Creating ~/.* symlinks"
