@@ -111,6 +111,7 @@ Plug 'puremourning/vimspector'
 Plug 'rhysd/clever-f.vim'
 Plug 'othree/html5.vim'
 Plug 'fladson/vim-kitty'
+Plug 'junegunn/vim-easy-align'
 
 " fzf - has to be before plug#end() ?
 set rtp+=~/.fzf
@@ -512,3 +513,22 @@ nmap gg ggzz
 nmap  n nzz
 nmap  N Nzz
 set scrolloff=4
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+nmap ga=       mxgaip=`x
+nmap ga(       mxgaip<Down><C-x>(<Enter>`x
+nmap ga<Space> mxgaip<Space>`x
+nmap gad       ga<Space>ga=
+
+let g:easy_align_delimiters = {
+\ 'd': {
+\      'pattern': ' \ze\S\+\s*[;=]',
+\      'left_margin': 0,
+\      'right_margin': 0
+\   }
+\ }
