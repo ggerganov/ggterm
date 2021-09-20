@@ -517,6 +517,11 @@ set scrolloff=4
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
+xmap ga=       mxgaip=`x
+xmap ga(       mxgaip<Down><C-x>(<Enter>`x
+xmap ga<Space> mxgaip<Space>`x
+xmap gad       ga<Space>ga=
+
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
