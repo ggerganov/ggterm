@@ -27,7 +27,7 @@ export EDITOR=vim
 
 # kitten
 alias icat="kitty +kitten icat"
-alias diff="kitty +kitten diff"
+#alias diff="kitty +kitten diff"
 alias gd="git difftool --no-symlinks --dir-diff"
 
 export HISTSIZE=100000
