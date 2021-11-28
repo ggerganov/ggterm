@@ -92,7 +92,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'scrooloose/nerdtree'
 Plug 'luochen1990/rainbow'
-Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clangd-completer' }
+"Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clangd-completer' }
+Plug 'tabnine/YouCompleteMe', { 'do': 'python3 install.py --clangd-completer' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
