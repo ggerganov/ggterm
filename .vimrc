@@ -75,8 +75,15 @@ nnoremap t7  :tabnext 7<CR>
 nnoremap t8  :tabnext 8<CR>
 nnoremap t9  :tabnext 9<CR>
 
-" make vim very slow!
-"set relativenumber
+" enable relative line numbers
+set number relativenumber
+
+" switch to absolute when tab is not on focus
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+augroup END
 
 " OpenCL like C
 au BufRead,BufNewFile *.cl set filetype=c
