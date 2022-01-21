@@ -59,7 +59,7 @@ map <A-DOWN> <c-w><down>
 nnoremap th  :tabfirst<CR>
 nnoremap tj  :tabprev<CR>
 nnoremap tk  :tabnext<CR>
-nnoremap tl  :tablast<CR>
+"nnoremap tl  :tablast<CR>
 nnoremap tt  :tabedit<Space>
 nnoremap tm  :tabm<Space>
 nnoremap tn  :tabnew<CR>
@@ -74,6 +74,13 @@ nnoremap t6  :tabnext 6<CR>
 nnoremap t7  :tabnext 7<CR>
 nnoremap t8  :tabnext 8<CR>
 nnoremap t9  :tabnext 9<CR>
+
+if !exists('g:lasttab')
+    let g:lasttab = 1
+endif
+nmap tl :exe "tabn ".g:lasttab<CR>
+nmap t<Tab> :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
 
 " enable relative line numbers
 set number relativenumber
@@ -120,6 +127,7 @@ Plug 'rhysd/clever-f.vim'
 Plug 'othree/html5.vim'
 Plug 'fladson/vim-kitty'
 Plug 'junegunn/vim-easy-align'
+Plug 'ziglang/zig.vim'
 
 " fzf - has to be before plug#end() ?
 set rtp+=~/.fzf
