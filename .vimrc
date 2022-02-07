@@ -416,7 +416,12 @@ let g:sneak#s_next = 1
 
 " cursor hover time
 set updatetime=1000
-map <leader>d <plug>(YCMHover)
+if has('nvim')
+    nnoremap <leader>d :YcmCompleter GetType<CR>
+    nnoremap <leader>D :YcmCompleter GetDoc<CR>
+else
+    nmap <leader>d <plug>(YCMHover)
+endif
 
 " conflicts with the vim-illuminate plugin
 autocmd FileType c,cpp :setlocal iskeyword-=:
