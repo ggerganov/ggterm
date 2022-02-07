@@ -555,3 +555,6 @@ let g:easy_align_delimiters = {
 \      'right_margin': 0
 \   }
 \ }
+
+" nercommenter
+let g:NERDDefaultAlign = 'left'
