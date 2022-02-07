@@ -128,6 +128,7 @@ Plug 'othree/html5.vim'
 Plug 'fladson/vim-kitty'
 Plug 'junegunn/vim-easy-align'
 Plug 'ziglang/zig.vim'
+Plug 'preservim/nerdcommenter'
 
 " fzf - has to be before plug#end() ?
 set rtp+=~/.fzf
