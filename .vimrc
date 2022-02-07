@@ -558,3 +558,6 @@ let g:easy_align_delimiters = {
 
 " nercommenter
 let g:NERDDefaultAlign = 'left'
+
+" copilot
+highlight CopilotSuggestion guifg=#00aaaa ctermfg=8
