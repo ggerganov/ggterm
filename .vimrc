@@ -50,10 +50,10 @@ map <C-LEFT> <c-w><
 map <C-RIGHT> <c-w>>
 map <C-UP> <c-w>-
 map <C-DOWN> <c-w>+
-map <A-LEFT> <c-w><left>
-map <A-RIGHT> <c-w><right>
-map <A-UP> <c-w><up>
-map <A-DOWN> <c-w><down>
+map <S-A-LEFT> <c-w><left>
+map <S-A-RIGHT> <c-w><right>
+map <S-A-UP> <c-w><up>
+map <S-A-DOWN> <c-w><down>
 
 " Tab navigation like Firefox.
 nnoremap th  :tabfirst<CR>
@@ -195,7 +195,8 @@ nnoremap <leader>f      :YcmCompleter FixIt<CR>
 
 " FzF
 nnoremap <C-f> :GFiles<Cr>
-nnoremap <C-p> :Ag<Cr>
+nnoremap <C-i> :Ag<Cr>
+nnoremap <C-p> :Ag2<Cr>
 
 nnoremap <silent> <C-k> :call SearchWordWithAg()<CR>
 vnoremap <silent> <C-k> :call SearchVisualSelectionWithAg()<CR>
@@ -219,7 +220,7 @@ function! SearchVisualSelectionWithAg() range
     execute 'Ag' selection
 endfunction
 
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
+command! -bang -nargs=* Ag2 call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 
 " Fugitive
 " Fix broken syntax highlight in gitcommit files
