@@ -35,6 +35,7 @@ set cin
 "set spell
 set guicursor=
 set backspace=2
+set mouse=a
 
 " fix copy-paste
 set t_BE=
@@ -397,6 +398,10 @@ command! -range=% JbzClangFormat call <sid>JbzClangFormat (<line1>, <line2>)
 
 " add watch statement from visual selection
 :vnoremap <F7> y:VimspectorWatch <C-r><C-r>"
+" for normal mode - the word under the cursor
+nmap <F7> <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+xmap <F7> <Plug>VimspectorBalloonEval
 
 " Autoformatting with clang-format
 au FileType c,cpp nnoremap <buffer><leader>lf :<C-u>JbzClangFormat<CR>
