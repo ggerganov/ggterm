@@ -1,0 +1,65 @@
+{
+    "configurations": {
+        "linux-gdb": {
+            "adapter": "vscode-cpptools",
+            "configuration": {
+                "request": "launch",
+                "type": "cppdebug",
+                "cwd": "${workspaceRoot}/${BuildPath}/",
+                "program": "${workspaceRoot}/${BuildPath}/${Executable}",
+                "args": [ "*${CommandLineArgs}" ],
+                "externalConsole": true,
+                "MIMode": "gdb",
+                "logging": {
+                    "engineLogging": false
+                }
+            },
+            "breakpoints": {
+                "exception": {
+                    "cpp_throw": "N",
+                    "cpp_catch": "N"
+                }
+            }
+        },
+        "linux-gdb-attach": {
+            "adapter": "vscode-cpptools",
+            "configuration": {
+                "request": "attach",
+                "program": "${workspaceRoot}/${BuildPath}/${Executable}",
+                "MIMode": "gdb"
+            }
+        },
+        "mac-arm64-lldb": {
+            "adapter": "CodeLLDB",
+            "configuration": {
+                "request": "launch",
+                "type": "lldb",
+                "cwd": "${workspaceRoot}/${BuildPath}/",
+                "program": "${workspaceRoot}/${BuildPath}/${Executable}",
+                "args": [ "*${CommandLineArgs}" ],
+                "externalConsole": true,
+                "console": "integratedTerminal",
+                "targetArchitecture": "arm64",
+                "MIMode": "lldb",
+                "logging": {
+                    "engineLogging": false
+                }
+            },
+            "breakpoints": {
+                "exception": {
+                    "cpp_throw": "N",
+                    "cpp_catch": "N"
+                }
+            }
+        },
+        "mac-arm64-lldb-attach": {
+            "adapter": "CodeLLDB",
+            "configuration": {
+                "request": "attach",
+                "targetArchitecture": "arm64",
+                "program": "${workspaceRoot}/${BuildPath}/${Executable}",
+                "MIMode": "lldb"
+            }
+        }
+    }
+}
