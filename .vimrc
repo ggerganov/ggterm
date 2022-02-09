@@ -130,6 +130,9 @@ Plug 'fladson/vim-kitty'
 Plug 'junegunn/vim-easy-align'
 Plug 'ziglang/zig.vim'
 Plug 'preservim/nerdcommenter'
+if has('nvim')
+    Plug 'github/copilot.vim'
+endif
 
 " fzf - has to be before plug#end() ?
 set rtp+=~/.fzf
