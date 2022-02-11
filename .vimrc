@@ -184,6 +184,7 @@ Plug 'derekwyatt/vim-fswitch'
 Plug 'dracula/vim', { 'name': 'dracula' }
 Plug 'fladson/vim-kitty'
 Plug 'gauteh/vim-cppman'
+Plug 'ilyachur/cmake4vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
 Plug 'leafgarland/typescript-vim'
@@ -197,7 +198,9 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'rhysd/clever-f.vim'
 Plug 'ruanyl/vim-gh-line'
 Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ziglang/zig.vim'
@@ -236,7 +239,7 @@ let g:ycm_always_populate_location_list = 1
 let g:ycm_max_diagnostics_to_display = 16
 let g:ycm_enable_diagnostic_highlighting = 0
 let g:ycm_auto_trigger = 1
-"let g:ycm_auto_hover = ''
+let g:ycm_auto_hover = ''
 let g:ycm_goto_buffer_command = 'split-or-existing-window'
 "let g:ycm_cache_omnifunc = 0
 "let g:ycm_autoclose_preview_window_after_insert = 1
@@ -415,6 +418,18 @@ let g:NERDDefaultAlign = 'left'
 " copilot
 highlight CopilotSuggestion guifg=#00aaaa ctermfg=8
 
+" cmake4vim
+let g:make_arguments = '-j$(($(getconf _NPROCESSORS_ONLN) - 2))'
+let g:cmake_build_dir = 'build-debug/'
+let g:cmake_build_executor = 'dispatch'
+
+nmap <silent> <leader>r :CMakeRun<CR>
+nmap <silent> <leader>b :CMakeBuild<CR>
+nmap <silent> <leader>B :FZFCMakeSelectTarget<CR>
+
+" vim-disaptch
+nmap <silent> <leader>k :AbortDispatch<CR>
+
 "==============================
 " Extra shortcuts
 "==============================
@@ -484,87 +499,3 @@ command! -range=% JbzClangFormat call <sid>JbzClangFormat (<line1>, <line2>)
 
 au FileType c,cpp nnoremap <buffer><leader>lf :<C-u>JbzClangFormat<CR>
 au FileType c,cpp vnoremap <buffer><leader>lf :JbzClangFormat<CR>
-
-"""" Is this still needed ??
-"" YCM fix auto trigger
-"" Milliseconds - tweak to liking
-"let s:debounce = 80
-"
-"" --------
-""  Below here is evil. You should not read, use or otherwise acknowledge
-""  its existence.
-""
-""  YOU HAVE BEEN WARNED.
-"" --------
-"
-"let g:ycm_auto_trigger = 0
-"
-"" Find the SID of autoload/youcompleteme.vim
-"function! s:FindYouCompleteMeInternal()
-"  let scripts = split( execute( 'scriptnames' ), '\n' )
-"  for line in scripts
-"    let match = matchlist( line,
-"                         \ '\m\v^\s*(\d+): \f+autoload\/youcompleteme.vim$' )
-"
-"    if len( match ) > 0 && match[ 0 ] !=# ''
-"      return match[ 1 ]
-"    endif
-"  endfo
-"
-"  return -1
-"endfunction
-"
-"let s:youcompleteme_internal = -1
-"let s:timer = 0
-"
-"function! s:CallYCMInt( f )
-"  if s:youcompleteme_internal < 0
-"    return
-"  endif
-"
-"  exe "call \<SNR>" . s:youcompleteme_internal . '_' . a:f
-"endfunction
-"
-"function! s:TriggerUserDefinedCompletion( ... )
-"  call s:CallYCMInt( 'Complete()' )
-"  call s:CallYCMInt( 'RequestCompletion()' )
-"  call s:CallYCMInt( 'UpdateSignatureHelp()' )
-"  call s:CallYCMInt( 'RequestSignatureHelp()' )
-"endfunction
-"
-"let s:looked = 0
-"
-"function! s:LookForYCMInt( ... )
-"  let s:youcompleteme_internal = s:FindYouCompleteMeInternal()
-"  if s:youcompleteme_internal < 0
-"    let s:looked += 1
-"    if s:looked > 10
-"      " abort
-"      return
-"    endif
-"    call timer_start( 500, funcref( 's:LookForYCMInt' ) )
-"    return
-"  endif
-"  augroup Local
-"    au InsertCharPre * call s:StartYcmTrigger()
-"    au InsertLeave * call s:StopYcmTrigger()
-"  augroup END
-"endfunction
-"
-"function! s:StartYcmTrigger() abort
-"  call timer_stop( s:timer )
-"  let s:timer = timer_start( s:debounce,
-"                           \ funcref( 's:TriggerUserDefinedCompletion' ) )
-"endf
-"
-"function! s:StopYcmTrigger() abort
-"  call timer_stop( s:timer )
-"endf
-"
-"augroup LocalStartup
-"  au!
-"  au VimEnter * call s:LookForYCMInt()
-"augroup END
-"
-"" -------------------------------------------------------------------
-
