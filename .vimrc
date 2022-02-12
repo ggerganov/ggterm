@@ -184,7 +184,8 @@ Plug 'derekwyatt/vim-fswitch'
 Plug 'dracula/vim', { 'name': 'dracula' }
 Plug 'fladson/vim-kitty'
 Plug 'gauteh/vim-cppman'
-Plug 'ilyachur/cmake4vim'
+"Plug 'ilyachur/cmake4vim'
+Plug 'ggerganov/cmake4vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
 Plug 'leafgarland/typescript-vim'
@@ -424,12 +425,13 @@ let g:make_arguments = '-j$(($(getconf _NPROCESSORS_ONLN) - 2))'
 let g:cmake_build_dir = 'build-debug/'
 let g:cmake_build_executor = 'dispatch'
 
-nmap <silent> <leader>r :CMakeRun<CR>
+nmap <silent> <leader>r :CMakeRunFromBuildDir<CR>
+nmap          <leader>R :CMakeRunFromBuildDir <RIGHT>
 nmap <silent> <leader>b :CMakeBuild<CR>
 nmap <silent> <leader>B :FZFCMakeSelectTarget<CR>
 
 " vim-disaptch
-nmap <silent> <leader>k :AbortDispatch<CR>
+nmap <silent> <leader>k :AbortDispatch<CR><leader>e
 
 "==============================
 " Extra shortcuts
