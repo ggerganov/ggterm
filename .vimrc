@@ -188,11 +188,8 @@ Plug 'gauteh/vim-cppman'
 Plug 'ggerganov/cmake4vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
-Plug 'leafgarland/typescript-vim'
 Plug 'luochen1990/rainbow'
 Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'othree/html5.vim'
-Plug 'pangloss/vim-javascript'
 Plug 'preservim/nerdcommenter'
 Plug 'puremourning/vimspector'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
@@ -201,11 +198,21 @@ Plug 'ruanyl/vim-gh-line'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'elzr/vim-json'
+
+" zig
 Plug 'ziglang/zig.vim'
+
+" html/javascript/typescript/react
+Plug 'othree/html5.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'maxmellon/vim-jsx-pretty'
+
 if has('nvim')
     Plug 'github/copilot.vim'
 endif
