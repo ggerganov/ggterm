@@ -299,7 +299,7 @@ endfunction
 
 command! -bang -nargs=* Ag2 call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 
-" Fugitive
+" vim-fugitive
 " Fix broken syntax highlight in gitcommit files
 " (https://github.com/tpope/vim-git/issues/12)
 let g:fugitive_git_executable = 'LANG=en_US.UTF-8 git'
@@ -333,6 +333,8 @@ augroup fugitiveSettings
     autocmd FileType gitcommit setlocal nolist
     autocmd BufReadPost fugitive://* setlocal bufhidden=delete
 augroup END
+
+nmap <silent> <leader>gg tt<CR>tm0<CR>:G<CR><C-w><DOWN>:q<CR>
 
 " StatusLine
 let g:airline#extensions#tabline#enabled = 1
