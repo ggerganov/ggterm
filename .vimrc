@@ -141,7 +141,7 @@ au TabLeave * let g:lasttab = tabpagenr()
 "==============================
 
 " custom C++ indentation
-set cino=j1,(0,ws,W8,N-s,g-0
+"set cino=j1,(0,ws,W8,N-s,g-0
 autocmd BufEnter *.h   :setlocal cindent cino=j1,(0,ws,W8,N-s,g-0
 autocmd BufEnter *.cpp :setlocal cindent cino=j1,(0,ws,W8,N-s,g-0
 
@@ -155,16 +155,16 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 " folding (NOTE: makes C++ autocompletion super slow!)
-au Syntax typescript setlocal foldmethod=syntax
-au Syntax typescript setlocal foldnestmax=2
-au Syntax typescript setlocal nofoldenable
-au Syntax typescript setlocal foldlevel=4
+au Syntax typescript,typescriptreact setlocal foldmethod=syntax
+au Syntax typescript,typescriptreact setlocal foldnestmax=2
+au Syntax typescript,typescriptreact setlocal nofoldenable
+au Syntax typescript,typescriptreact setlocal foldlevel=4
 
 " remember folding for a file
 augroup remember_folds
     autocmd!
-    autocmd BufWinLeave cpp,typescript mkview
-    autocmd BufWinEnter cpp,typescript silent! loadview
+    autocmd BufWinLeave cpp,typescript,typescriptreact mkview
+    autocmd BufWinEnter cpp,typescript,typescriptreact silent! loadview
 augroup END
 
 au BufRead,BufNewFile *.log set syntax=messages
