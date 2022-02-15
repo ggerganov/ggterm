@@ -434,8 +434,8 @@ let g:make_arguments = '-j$(($(getconf _NPROCESSORS_ONLN) - 2))'
 let g:cmake_build_dir = 'build-debug/'
 let g:cmake_build_executor = 'dispatch'
 
-nmap <silent> <leader>r :CMakeRunFromBuildDir<CR>
-nmap          <leader>R :CMakeRunFromBuildDir <RIGHT>
+nmap <silent> <leader>r :CMakeRunFromBuildDir <C-R>=g:cmake_run_last_args<CR><CR>
+nmap          <leader>R :CMakeRunFromBuildDir <C-R>=g:cmake_run_last_args<CR><RIGHT>
 nmap <silent> <leader>b :CMakeBuild<CR>
 nmap <silent> <leader>B :FZFCMakeSelectTarget<CR>
 
