@@ -263,6 +263,7 @@ nnoremap <leader>gic :rightbelow vertical YcmCompleter GoToInclude<CR>
 nnoremap <leader>gdc :rightbelow vertical YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>gdf :rightbelow vertical YcmCompleter GoToDefinition<CR>
 nnoremap <leader>gip :rightbelow vertical YcmCompleter GoToImprecise<CR>
+nnoremap <leader>grr :rightbelow vertical YcmCompleter RefactorRename
 nnoremap <leader>grf :YcmCompleter GoToReferences<CR>
 nnoremap ;d          :rightbelow vertical YcmCompleter GoToDefinition<CR>
 nnoremap ;r          :YcmCompleter GoToReferences<CR>
