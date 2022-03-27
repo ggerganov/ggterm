@@ -154,7 +154,12 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     "autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" folding (NOTE: makes C++ autocompletion super slow!)
+"au Syntax cpp setlocal foldmethod=indent
+"au Syntax cpp setlocal nofoldenable
+"au Syntax cpp setlocal foldnestmax=20
+"au Syntax cpp setlocal foldlevel=20
+
+" syntax folding (NOTE: makes C++ autocompletion super slow!)
 au Syntax typescript,typescriptreact setlocal foldmethod=syntax
 au Syntax typescript,typescriptreact setlocal foldnestmax=2
 au Syntax typescript,typescriptreact setlocal nofoldenable
@@ -163,8 +168,8 @@ au Syntax typescript,typescriptreact setlocal foldlevel=4
 " remember folding for a file
 augroup remember_folds
     autocmd!
-    autocmd BufWinLeave cpp,typescript,typescriptreact mkview
-    autocmd BufWinEnter cpp,typescript,typescriptreact silent! loadview
+    autocmd BufWinLeave *.h,*.cpp mkview
+    autocmd BufWinEnter *.h,*.cpp silent! loadview
 augroup END
 
 au BufRead,BufNewFile *.log set syntax=messages
@@ -203,6 +208,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'elzr/vim-json'
+Plug 'Konfekt/FastFold'
 
 " zig
 Plug 'ziglang/zig.vim'
@@ -442,6 +448,17 @@ nmap <silent> <leader>B :FZFCMakeSelectTarget<CR>
 
 " vim-disaptch
 nmap <silent> <leader>k :AbortDispatch<CR><leader>e
+
+" fastfold
+nmap zuz <Plug>(FastFoldUpdate)
+let g:fastfold_savehook = 1
+let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
+let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
+
+autocmd FileType c,cpp setlocal foldmethod=syntax
+autocmd FileType c,cpp setlocal nofoldenable
+autocmd FileType c,cpp setlocal foldnestmax=20
+autocmd FileType c,cpp setlocal foldlevel=20
 
 "==============================
 " Extra shortcuts
