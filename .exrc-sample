@@ -1,0 +1,1 @@
+let g:cmake_build_dir = 'build/full-debug'
