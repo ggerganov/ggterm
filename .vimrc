@@ -208,7 +208,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'elzr/vim-json'
-Plug 'Konfekt/FastFold'
+"Plug 'Konfekt/FastFold'
 
 " zig
 Plug 'ziglang/zig.vim'
@@ -450,15 +450,15 @@ nmap <silent> <leader>B :FZFCMakeSelectTarget<CR>
 nmap <silent> <leader>k :AbortDispatch<CR><leader>e
 
 " fastfold
-nmap zuz <Plug>(FastFoldUpdate)
-let g:fastfold_savehook = 1
-let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
-let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
-
-autocmd FileType c,cpp setlocal foldmethod=syntax
-autocmd FileType c,cpp setlocal nofoldenable
-autocmd FileType c,cpp setlocal foldnestmax=20
-autocmd FileType c,cpp setlocal foldlevel=20
+"nmap zuz <Plug>(FastFoldUpdate)
+"let g:fastfold_savehook = 1
+"let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
+"let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
+"
+"autocmd FileType c,cpp setlocal foldmethod=syntax
+"autocmd FileType c,cpp setlocal nofoldenable
+"autocmd FileType c,cpp setlocal foldnestmax=20
+"autocmd FileType c,cpp setlocal foldlevel=20
 
 "==============================
 " Extra shortcuts
