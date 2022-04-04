@@ -168,8 +168,8 @@ au Syntax typescript,typescriptreact setlocal foldlevel=4
 " remember folding for a file
 augroup remember_folds
     autocmd!
-    autocmd BufWinLeave *.h,*.cpp mkview
-    autocmd BufWinEnter *.h,*.cpp silent! loadview
+    autocmd BufWinLeave .vimrc,*.h,*.cpp mkview
+    autocmd BufWinEnter .vimrc,*.h,*.cpp silent! loadview
 augroup END
 
 au BufRead,BufNewFile *.log set syntax=messages
@@ -186,7 +186,6 @@ Plug 'Shougo/echodoc.vim'
 Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clangd-completer --ts-completer' }
 Plug 'airblade/vim-gitgutter'
 Plug 'derekwyatt/vim-fswitch'
-Plug 'dracula/vim', { 'name': 'dracula' }
 Plug 'fladson/vim-kitty'
 Plug 'gauteh/vim-cppman'
 "Plug 'ilyachur/cmake4vim'
@@ -209,6 +208,11 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'elzr/vim-json'
 "Plug 'Konfekt/FastFold'
+
+" colorthemes
+Plug 'dracula/vim', { 'name': 'dracula' }
+Plug 'morhetz/gruvbox'
+Plug 'NLKNguyen/papercolor-theme'
 
 " zig
 Plug 'ziglang/zig.vim'
@@ -354,18 +358,6 @@ nmap <silent> <leader>gg tt<CR>tm0<CR>:G<CR><C-w><DOWN>:q<CR>
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
 set laststatus=2
-
-" dracula theme
-try
-    colorscheme dracula
-    hi Comment cterm=bold
-catch /^Vim\%((\a\+)\)\=:E185/
-    colorscheme default
-endtry
-hi Normal guibg=NONE ctermbg=NONE
-hi Pmenu guibg=#128060
-" not sure if needed?
-"highlight YcmErrorSection ctermfg=15 ctermbg=1
 
 " gh-line
 let g:gh_line_map = '<leader>gH'
@@ -529,3 +521,31 @@ command! -range=% JbzClangFormat call <sid>JbzClangFormat (<line1>, <line2>)
 
 au FileType c,cpp nnoremap <buffer><leader>lf :<C-u>JbzClangFormat<CR>
 au FileType c,cpp vnoremap <buffer><leader>lf :JbzClangFormat<CR>
+
+" colortheme
+try
+    " dracula theme
+    colorscheme dracula
+    ""hi Pmenu guibg=#128060
+
+    " gruvbox theme
+    "let g:gruvbox_contrast_dark = 'hard'
+    "colorscheme gruvbox
+
+    " PaperColor
+    "colorscheme PaperColor
+
+    hi Comment cterm=bold
+catch /^Vim\%((\a\+)\)\=:E185/
+    colorscheme default
+endtry
+
+hi Normal guibg=#070908 ctermbg=NONE
+" not sure if needed?
+"highlight YcmErrorSection ctermfg=15 ctermbg=1
+
+if &term =~ '256color'
+    " Disable Background Color Erase (BCE) so that color schemes
+    " work properly when Vim is used inside tmux and GNU screen.
+    set t_ut=
+endif
