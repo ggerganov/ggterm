@@ -33,6 +33,10 @@ alias gd="git difftool --no-symlinks --dir-diff"
 export HISTSIZE=100000
 export HISTFILESIZE=100000
 
+if [ -d ~/bin ]; then
+    export PATH=~/bin:$PATH
+fi
+
 source ~/.myenv.local
 
 alias mc="$(which mc) -u"
