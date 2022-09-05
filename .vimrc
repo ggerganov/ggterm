@@ -196,7 +196,6 @@ Plug 'luochen1990/rainbow'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'preservim/nerdcommenter'
 Plug 'puremourning/vimspector'
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'rhysd/clever-f.vim'
 Plug 'ruanyl/vim-gh-line'
 Plug 'scrooloose/nerdtree'
