@@ -33,6 +33,10 @@ set background=dark
 set termguicolors
 set colorcolumn=120
 
+" cursor
+set cursorline
+set cursorcolumn
+
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 if has("patch-8.1.1564")
@@ -394,9 +398,6 @@ autocmd FileType c,cpp :setlocal iskeyword-=]
 autocmd FileType c,cpp :setlocal iskeyword-=*
 autocmd FileType c,cpp :setlocal iskeyword-==
 
-" vim illuminate
-let g:Illuminate_delay = 500
-
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
@@ -548,3 +549,8 @@ if &term =~ '256color'
     " work properly when Vim is used inside tmux and GNU screen.
     set t_ut=
 endif
+
+" vim illuminate (after colortheme)
+let g:Illuminate_delay = 500
+highlight IlluminatedWordText guifg=#00FF00 guibg=#004060
+highlight CursorLine          guibg=#202020
