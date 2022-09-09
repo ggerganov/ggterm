@@ -541,8 +541,14 @@ catch /^Vim\%((\a\+)\)\=:E185/
 endtry
 
 hi Normal guibg=#070908 ctermbg=NONE
-" not sure if needed?
-"highlight YcmErrorSection ctermfg=15 ctermbg=1
+
+highlight YcmErrorSign    gui=bold cterm=bold ctermbg=lightred ctermfg=white guibg=#FF0000 guifg=#FFFFFF
+"highlight YcmErrorLine                        ctermbg=lightred               guibg=#660000
+"highlight YcmErrorSection                     ctermbg=lightred               guibg=#660000
+
+highlight YcmWarningSign    gui=bold cterm=bold ctermbg=cyan ctermfg=black guibg=#00FFFF guifg=#000000
+"highlight YcmWarningLine                        ctermbg=cyan               guibg=#006666
+"highlight YcmWarningSection                     ctermbg=cyan               guibg=#006666
 
 if &term =~ '256color'
     " Disable Background Color Erase (BCE) so that color schemes
