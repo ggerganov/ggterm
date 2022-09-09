@@ -33,9 +33,9 @@ set background=dark
 set termguicolors
 set colorcolumn=120
 
-" cursor
-set cursorline
-set cursorcolumn
+" cursor (these make rendering slow)
+"set cursorline
+"set cursorcolumn
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
@@ -146,8 +146,8 @@ au TabLeave * let g:lasttab = tabpagenr()
 
 " custom C++ indentation
 "set cino=j1,(0,ws,W8,N-s,g-0
-autocmd BufEnter *.h   :setlocal cindent cino=j1,(0,ws,W8,N-s,g-0
-autocmd BufEnter *.cpp :setlocal cindent cino=j1,(0,ws,W8,N-s,g-0
+autocmd BufEnter *.h   :setlocal cindent cino=j1,ws,W8,N-s,g-0
+autocmd BufEnter *.cpp :setlocal cindent cino=j1,ws,W8,N-s,g-0
 
 " OpenCL like C
 au BufRead,BufNewFile *.cl set filetype=c
