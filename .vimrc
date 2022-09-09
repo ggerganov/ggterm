@@ -552,5 +552,5 @@ endif
 
 " vim illuminate (after colortheme)
 let g:Illuminate_delay = 500
-highlight IlluminatedWordText guifg=#00FF00 guibg=#004060
+highlight IlluminatedWordText gui=bold cterm=bold guibg=#404030
 highlight CursorLine          guibg=#202020
