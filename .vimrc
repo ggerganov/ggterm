@@ -540,7 +540,8 @@ catch /^Vim\%((\a\+)\)\=:E185/
     colorscheme default
 endtry
 
-hi Normal guibg=#070908 ctermbg=NONE
+# background
+hi Normal guibg=#1F2227 ctermbg=NONE
 
 highlight YcmErrorSign    gui=bold cterm=bold ctermbg=lightred ctermfg=white guibg=#FF0000 guifg=#FFFFFF
 "highlight YcmErrorLine                        ctermbg=lightred               guibg=#660000
