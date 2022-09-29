@@ -179,6 +179,8 @@ augroup END
 au BufRead,BufNewFile *.log set syntax=messages
 au BufRead,BufNewFile *.dump set syntax=python
 
+au BufRead,BufNewFile *.metal set syntax=c
+
 "==============================
 " Plugins
 "==============================
@@ -541,7 +543,7 @@ catch /^Vim\%((\a\+)\)\=:E185/
 endtry
 
 " background
-hi Normal guibg=#1F2227 ctermbg=NONE
+hi Normal guibg=#0F1114 ctermbg=NONE
 
 highlight YcmErrorSign    gui=bold cterm=bold ctermbg=lightred ctermfg=white guibg=#FF0000 guifg=#FFFFFF
 "highlight YcmErrorLine                        ctermbg=lightred               guibg=#660000
