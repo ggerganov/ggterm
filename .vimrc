@@ -197,7 +197,6 @@ Plug 'gauteh/vim-cppman'
 "Plug 'ilyachur/cmake4vim'
 Plug 'ggerganov/cmake4vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'justinmk/vim-sneak'
 Plug 'luochen1990/rainbow'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'preservim/nerdcommenter'
@@ -230,6 +229,10 @@ Plug 'maxmellon/vim-jsx-pretty'
 
 if has('nvim')
     Plug 'github/copilot.vim'
+    "Plug 'ggandor/leap.nvim'
+    Plug 'ggandor/lightspeed.nvim'
+else
+    Plug 'justinmk/vim-sneak'
 endif
 
 " fzf - has to be before plug#end() ?
