@@ -573,3 +573,8 @@ inoremap <C-G>  <C-O>:!whisper.nvim<CR><C-O>:let @a = system("cat /tmp/whisper.n
 nnoremap <C-G>       :!whisper.nvim<CR>:let @a = system("cat /tmp/whisper.nvim \| tail -n 1 \| xargs -0 \| tr -d '\\n' \| sed -e 's/^[[:space:]]*//'")<CR>"ap
 vnoremap <C-G> c<C-O>:!whisper.nvim<CR><C-O>:let @a = system("cat /tmp/whisper.nvim \| tail -n 1 \| xargs -0 \| tr -d '\\n' \| sed -e 's/^[[:space:]]*//'")<CR><C-R>a
 
+"let g:copilot_enabled = v:false
+
+vnoremap <C-T> <ESC>:!whisper.nvim<CR>:let @y = system("cat /tmp/whisper.nvim \| tail -n 1 \| xargs -0 \| tr -d '\\n' \| sed -e 's/^[[:space:]]*//'")<CR>:set formatoptions-=cro<CR>`<kmajmck:r ~/bin/ggprompt-begin.txt<CR>`>mdo<ESC>:.-1r ~/bin/ggprompt-end.txt<CR>jjA<ESC>"yp<CR>mb`ajV`ckzf`bo
+nnoremap <C-Y> `ajV`djjjjd
+

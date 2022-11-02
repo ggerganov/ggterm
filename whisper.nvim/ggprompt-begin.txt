@@ -1,0 +1,30 @@
+/* Apply transformation rules to provided C++ code blocks:
+
+=== CODE BEGIN ===
+int someFunctionName(int argOne ?kb, int argTwo) {
+    return argOne + argTwo;
+}
+=== CODE END ===
+
+// >>> change to snake case
+
+int some_function_name(int arg_one, int arg_two) {
+    return arg_one + arg_two;
+}
+
+=== CODE BEGIN ===
+float do_something(float a, float b) {
+    const float aa = a;
+    const float bb = b;
+
+    return aa + bb;
+}
+=== CODE END ===
+
+// >>> simplify by removing unused variables
+
+float do_something(float a, float b) {
+    return a + b;
+}
+
+=== CODE BEGIN ===
