@@ -573,6 +573,7 @@ endif
 " vim illuminate (after colortheme)
 let g:Illuminate_delay = 500
 highlight IlluminatedWordText gui=bold cterm=bold guibg=#404030
+highlight IlluminatedWord     gui=bold cterm=bold guibg=#404030
 highlight CursorLine          guibg=#202020
 
 " whisper.nvim
