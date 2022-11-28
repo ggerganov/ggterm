@@ -1,5 +1,7 @@
 #!/bin/bash
 
+if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
+
 PS1='\[\033[01;31m\]\t ${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\[\033[33m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 function _update_ps1() {
@@ -9,6 +11,8 @@ function _update_ps1() {
 if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
     PROMPT_COMMAND='echo -en "\033]0;$(pwd)\a"'
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+fi
+
 fi
 
 export CUDA_CACHE_DISABLE=1
