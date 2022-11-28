@@ -561,6 +561,9 @@ highlight YcmWarningSign    gui=bold cterm=bold ctermbg=cyan ctermfg=black guibg
 "highlight YcmWarningLine                        ctermbg=cyan               guibg=#006666
 "highlight YcmWarningSection                     ctermbg=cyan               guibg=#006666
 
+" YCM inlay hint gray
+hi YCMInlayHint guifg=#888888 ctermfg=8
+
 if &term =~ '256color'
     " Disable Background Color Erase (BCE) so that color schemes
     " work properly when Vim is used inside tmux and GNU screen.
@@ -578,8 +581,7 @@ inoremap <C-G>  <C-O>:!whisper.nvim<CR><C-O>:let @a = system("cat /tmp/whisper.n
 nnoremap <C-G>       :!whisper.nvim<CR>:let @a = system("cat /tmp/whisper.nvim \| tail -n 1 \| xargs -0 \| tr -d '\\n' \| sed -e 's/^[[:space:]]*//'")<CR>"ap
 vnoremap <C-G> c<C-O>:!whisper.nvim<CR><C-O>:let @a = system("cat /tmp/whisper.nvim \| tail -n 1 \| xargs -0 \| tr -d '\\n' \| sed -e 's/^[[:space:]]*//'")<CR><C-R>a
 
-"let g:copilot_enabled = v:false
-
 vnoremap <C-T> <ESC>:!whisper.nvim<CR>:let @y = system("cat /tmp/whisper.nvim \| tail -n 1 \| xargs -0 \| tr -d '\\n' \| sed -e 's/^[[:space:]]*//'")<CR>:set formatoptions-=cro<CR>`<kmajmck:r ~/bin/ggprompt-begin.txt<CR>`>mdo<ESC>:.-1r ~/bin/ggprompt-end.txt<CR>jjA<ESC>"yp<CR>mb`ajV`ckzf`bo
 nnoremap <C-Y> `ajV`djjjjd
 
+"let g:copilot_enabled = v:false
