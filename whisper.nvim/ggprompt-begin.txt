@@ -1,7 +1,7 @@
 /* Apply transformation rules to provided C++ code blocks:
 
 === CODE BEGIN ===
-int someFunctionName(int argOne ?kb, int argTwo) {
+int someFunctionName(int argOne, int argTwo) {
     return argOne + argTwo;
 }
 === CODE END ===

@@ -276,6 +276,10 @@ let g:ycm_goto_buffer_command = 'split-or-existing-window'
 "let g:ycm_clangd_binary_path = exepath("clangd")
 let g:ycm_clangd_args=['--header-insertion=never']
 
+" Experimental
+let g:ycm_enable_semantic_highlighting=1
+let g:ycm_enable_inlay_hints=1
+
 nnoremap <F5>        :YcmForceCompileAndDiagnostics<CR>
 nnoremap <leader>gic :rightbelow vertical YcmCompleter GoToInclude<CR>
 nnoremap <leader>gdc :rightbelow vertical YcmCompleter GoToDeclaration<CR>
