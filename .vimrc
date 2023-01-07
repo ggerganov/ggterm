@@ -551,7 +551,8 @@ endtry
 
 " background
 "hi Normal guibg=#0F1114 ctermbg=NONE
-hi Normal guibg=#282A31 ctermbg=NONE
+"hi Normal guibg=#282A31 ctermbg=NONE
+hi Normal guibg=#191A20 ctermbg=NONE
 
 highlight YcmErrorSign    gui=bold cterm=bold ctermbg=lightred ctermfg=white guibg=#FF0000 guifg=#FFFFFF
 "highlight YcmErrorLine                        ctermbg=lightred               guibg=#660000
