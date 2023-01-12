@@ -34,7 +34,7 @@ set termguicolors
 set colorcolumn=120
 
 " cursor (these make rendering slow)
-"set cursorline
+set cursorline
 "set cursorcolumn
 
 " Always show the signcolumn, otherwise it would shift the text each time
@@ -573,8 +573,8 @@ endif
 
 " vim illuminate (after colortheme)
 let g:Illuminate_delay = 500
-highlight IlluminatedWordText gui=bold cterm=bold guibg=#404030
-highlight IlluminatedWord     gui=bold cterm=bold guibg=#404030
+highlight IlluminatedWordText gui=bold,underline cterm=bold,underline guibg=#404030
+highlight IlluminatedWord     gui=bold,underline cterm=bold,underline guibg=#404030
 highlight CursorLine          guibg=#202020
 
 " whisper.nvim
