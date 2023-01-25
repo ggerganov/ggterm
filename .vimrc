@@ -149,6 +149,9 @@ au TabLeave * let g:lasttab = tabpagenr()
 autocmd BufEnter *.h   :setlocal cindent cino=j1,ws,W8,N-s,g-0
 autocmd BufEnter *.cpp :setlocal cindent cino=j1,ws,W8,N-s,g-0
 
+" YAML (not perfect)
+autocmd FileType yml,yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=<:>
+
 " OpenCL like C
 au BufRead,BufNewFile *.cl set filetype=c
 
