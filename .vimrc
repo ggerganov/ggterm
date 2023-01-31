@@ -580,6 +580,9 @@ highlight IlluminatedWordText gui=bold,underline cterm=bold,underline guibg=#404
 highlight IlluminatedWord     gui=bold,underline cterm=bold,underline guibg=#404030
 highlight CursorLine          guibg=#202020
 
+" write file using Ctrl-S
+nnoremap <C-s> :w<CR>
+
 " whisper.nvim
 " TODO: refactor this into a function
 inoremap <C-G>  <C-O>:!whisper.nvim<CR><C-O>:let @a = system("cat /tmp/whisper.nvim \| tail -n 1 \| xargs -0 \| tr -d '\\n' \| sed -e 's/^[[:space:]]*//'")<CR><C-R>a
