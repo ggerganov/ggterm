@@ -34,8 +34,8 @@ alias icat="kitty +kitten icat"
 #alias diff="kitty +kitten diff"
 alias gd="git difftool --no-symlinks --dir-diff"
 
-export HISTSIZE=100000
-export HISTFILESIZE=100000
+export HISTSIZE=1000000
+export HISTFILESIZE=10000000
 
 if [ -d ~/bin ]; then
     export PATH=~/bin:$PATH
