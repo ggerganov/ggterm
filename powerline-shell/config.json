@@ -13,7 +13,7 @@
     "set_term_title",
     "root"
   ],
-  "mode": "flat",
+  "mode": "compatible",
   "cwd": {
     "mode": "plain",
 	"full_cwd": "true"
