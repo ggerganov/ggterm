@@ -215,7 +215,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'elzr/vim-json'
 "Plug 'Konfekt/FastFold'
-Plug 'mg979/vim-visual-multi'
+"Plug 'mg979/vim-visual-multi'
 
 " colorthemes
 Plug 'dracula/vim', { 'name': 'dracula' }
