@@ -594,3 +594,10 @@ vnoremap <C-T> <ESC>:!whisper.nvim<CR>:let @y = system("cat /tmp/whisper.nvim \|
 nnoremap <C-Y> `ajV`djjjjd
 
 "let g:copilot_enabled = v:false
+
+" load Lua config
+if has('nvim')
+    if filereadable(expand('~/.config/nvim/lua/init.lua'))
+        lua require('init')
+    endif
+endif
