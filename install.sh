@@ -31,7 +31,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 fi
 
 cd ./submodules/powerline-shell
-sudo python setup.py install
+sudo python3 setup.py install
 cd ../../
 #ln -f -s ${PWD}/submodules/powerline-shell/powerline-shell.py ~/.powerline-shell.py
 
