@@ -1,29 +1,24 @@
 #!/bin/bash
 
 if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
+    PS1='\[\033[01;31m\]\t ${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\[\033[33m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
-PS1='\[\033[01;31m\]\t ${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\[\033[33m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    function _update_ps1() {
+        PS1=$(powerline-shell $?)
+    }
 
-function _update_ps1() {
-    PS1=$(powerline-shell $?)
-}
-
-if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
-    PROMPT_COMMAND='echo -en "\033]0;$(pwd)\a"'
-    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+    if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
+        #PROMPT_COMMAND='echo -en "\033]0;$(pwd)\a"'
+        PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+    fi
 fi
-
-fi
-
-export CUDA_CACHE_DISABLE=1
-export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
 
 # ls colors
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
 # shell integration
-if [ "$TERM_PROGRAM" == "iTerm.app" ] ; then
+if [[ "$TERM_PROGRAM" == "iTerm.app" ]] ; then
     echo "[+] Enabling shell integration for iTerm ..."
     source ~/.iterm2_shell_integration.`basename $SHELL`
 fi
@@ -35,13 +30,14 @@ alias icat="kitty +kitten icat"
 #alias diff="kitty +kitten diff"
 alias gd="git difftool --no-symlinks --dir-diff"
 
-export HISTSIZE=1000000
-export HISTFILESIZE=10000000
-
+# home bin
 if [ -d ~/bin ]; then
     export PATH=~/bin:$PATH
 fi
 
-source ~/.myenv.local
+export HISTSIZE=1000000
+export HISTFILESIZE=10000000
 
 alias mc="$(which mc) -u"
+
+source ~/.myenv.local
