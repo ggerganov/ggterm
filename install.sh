@@ -51,7 +51,8 @@ else
     ln -s ${PWD}/kitty ~/.config/kitty
 fi
 
-if [[ "$OSTYPE" == "darwin" ]]; then
+# if $OSTYPE contains the word "darwin"
+if [[ "$OSTYPE" == "darwin"* ]]; then
     ln -sf ${PWD}/kitty/kitty-macos.conf ${PWD}/kitty/local.conf
 else
     ln -sf ${PWD}/kitty/kitty-linux.conf ${PWD}/kitty/local.conf
