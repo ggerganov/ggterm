@@ -21,7 +21,7 @@ set wildmenu
 set textwidth=0
 set wrapmargin=1
 set hlsearch
-set tw=120
+set tw=800
 set wrap
 set cin
 set guicursor=
