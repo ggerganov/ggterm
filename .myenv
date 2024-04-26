@@ -35,11 +35,12 @@ if [ -d ~/bin ]; then
     export PATH=~/bin:$PATH
 fi
 
+export HISTCONTROL=erasedups:ignorespace
 export HISTSIZE=10000000
 export HISTFILESIZE=100000000
 
 shopt -s histappend
-PROMPT_COMMAND="history -a; history -r; $PROMPT_COMMAND"
+#PROMPT_COMMAND="history -a; history -r; $PROMPT_COMMAND"
 
 alias mc="$(which mc) -u"
 
