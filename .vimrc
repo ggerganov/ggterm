@@ -216,6 +216,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'elzr/vim-json'
 "Plug 'Konfekt/FastFold'
 "Plug 'mg979/vim-visual-multi'
+"Plug 'TabbyML/tabby', {'rtp': 'clients/vim'}
 
 " colorthemes
 Plug 'dracula/vim', { 'name': 'dracula' }
@@ -251,6 +252,9 @@ let g:echodoc#enable_at_startup = 1
 let g:echodoc#type = 'popup'
 
 " gitgutter
+if !has('nvim')
+let g:gitgutter_enabled = 0
+endif
 let g:gitgutter_sign_allow_clobber = 1
 let g:gitgutter_sign_priority = 5
 
@@ -594,6 +598,9 @@ vnoremap <C-T> <ESC>:!whisper.nvim<CR>:let @y = system("cat /tmp/whisper.nvim \|
 nnoremap <C-Y> `ajV`djjjjd
 
 "let g:copilot_enabled = v:false
+
+" Tabby
+"let g:tabby_server_url = 'http://127.0.0.1:8080'
 
 " load Lua config
 if has('nvim')
