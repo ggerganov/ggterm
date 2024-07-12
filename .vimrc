@@ -216,7 +216,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'elzr/vim-json'
 "Plug 'Konfekt/FastFold'
 "Plug 'mg979/vim-visual-multi'
-"Plug 'TabbyML/tabby', {'rtp': 'clients/vim'}
+Plug 'TabbyML/vim-tabby'
 
 " colorthemes
 Plug 'dracula/vim', { 'name': 'dracula' }
@@ -600,7 +600,10 @@ nnoremap <C-Y> `ajV`djjjjd
 "let g:copilot_enabled = v:false
 
 " Tabby
-"let g:tabby_server_url = 'http://127.0.0.1:8080'
+"let g:tabby_trigger_mode = 'manual'
+
+"let g:tabby_keybinding_accept = '<Tab>'
+"let g:tabby_keybinding_trigger_or_dismiss = '<C-\>'
 
 " load Lua config
 if has('nvim')
