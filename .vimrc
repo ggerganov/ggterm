@@ -600,9 +600,10 @@ nnoremap <C-Y> `ajV`djjjjd
 "let g:copilot_enabled = v:false
 
 " Tabby
-"let g:tabby_trigger_mode = 'manual'
+let g:tabby_trigger_mode = 'manual'
 
-"let g:tabby_keybinding_accept = '<Tab>'
+" accept with Ctrl+Tab
+let g:tabby_keybinding_accept = '<C-Tab>'
 "let g:tabby_keybinding_trigger_or_dismiss = '<C-\>'
 
 " load Lua config
