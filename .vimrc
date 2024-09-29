@@ -26,7 +26,7 @@ set wrap
 set cin
 set guicursor=
 set backspace=2
-set mouse=a
+set mouse=i
 set undofile
 set undodir=~/.vim/undodir
 set background=dark
@@ -597,13 +597,18 @@ vnoremap <C-G> c<C-O>:!whisper.nvim<CR><C-O>:let @a = system("cat /tmp/whisper.n
 vnoremap <C-T> <ESC>:!whisper.nvim<CR>:let @y = system("cat /tmp/whisper.nvim \| tail -n 1 \| xargs -0 \| tr -d '\\n' \| sed -e 's/^[[:space:]]*//'")<CR>:set formatoptions-=cro<CR>`<kmajmck:r ~/bin/ggprompt-begin.txt<CR>`>mdo<ESC>:.-1r ~/bin/ggprompt-end.txt<CR>jjA<ESC>"yp<CR>mb`ajV`ckzf`bo
 nnoremap <C-Y> `ajV`djjjjd
 
-"let g:copilot_enabled = v:false
+let g:copilot_enabled = v:false
+
+let g:copilot_no_tab_map = v:true
+imap <silent><script><expr> <C-Tab> copilot#Accept("\<CR>")
+
+imap <D-]> <Plug>(copilot-accept-word)
 
 " Tabby
 let g:tabby_trigger_mode = 'manual'
 
 " accept with Ctrl+Tab
-let g:tabby_keybinding_accept = '<C-Tab>'
+"let g:tabby_keybinding_accept = '<C-Tab>'
 "let g:tabby_keybinding_trigger_or_dismiss = '<C-\>'
 
 " load Lua config
