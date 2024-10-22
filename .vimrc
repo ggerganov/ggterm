@@ -218,7 +218,9 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'elzr/vim-json'
 "Plug 'Konfekt/FastFold'
 "Plug 'mg979/vim-visual-multi'
-Plug 'TabbyML/vim-tabby'
+"Plug 'TabbyML/vim-tabby'
+Plug 'NStefan002/screenkey.nvim'
+"Plug 'nvchad/showkeys'
 
 " colorthemes
 Plug 'dracula/vim', { 'name': 'dracula' }
@@ -288,7 +290,7 @@ let g:ycm_clangd_args=['--header-insertion=never']
 
 " Experimental
 let g:ycm_enable_semantic_highlighting=1
-let g:ycm_enable_inlay_hints=1
+"let g:ycm_enable_inlay_hints=1
 
 nnoremap <F5>        :YcmForceCompileAndDiagnostics<CR>
 nnoremap <leader>gic :rightbelow vertical YcmCompleter GoToInclude<CR>
@@ -599,7 +601,7 @@ vnoremap <C-G> c<C-O>:!whisper.nvim<CR><C-O>:let @a = system("cat /tmp/whisper.n
 vnoremap <C-T> <ESC>:!whisper.nvim<CR>:let @y = system("cat /tmp/whisper.nvim \| tail -n 1 \| xargs -0 \| tr -d '\\n' \| sed -e 's/^[[:space:]]*//'")<CR>:set formatoptions-=cro<CR>`<kmajmck:r ~/bin/ggprompt-begin.txt<CR>`>mdo<ESC>:.-1r ~/bin/ggprompt-end.txt<CR>jjA<ESC>"yp<CR>mb`ajV`ckzf`bo
 nnoremap <C-Y> `ajV`djjjjd
 
-if 1
+if 0
     " Github copilot
     let g:copilot_enabled = v:true
 
@@ -623,4 +625,8 @@ if has('nvim')
     if filereadable(expand('~/.config/nvim/lua/init.lua'))
         lua require('init')
     endif
+endif
+
+if has('nvim')
+    call llama#init()
 endif
