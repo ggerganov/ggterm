@@ -244,6 +244,8 @@ else
     Plug 'justinmk/vim-sneak'
 endif
 
+Plug 'ggml-org/llama.vim'
+
 " fzf - has to be before plug#end() ?
 set rtp+=~/.fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -625,8 +627,4 @@ if has('nvim')
     if filereadable(expand('~/.config/nvim/lua/init.lua'))
         lua require('init')
     endif
-endif
-
-if has('nvim')
-    call llama#init()
 endif
