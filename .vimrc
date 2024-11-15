@@ -154,8 +154,9 @@ let g:vim_indent_cont = 4
 " YAML (not perfect)
 autocmd FileType yml,yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=<:>
 
-" OpenCL like C
-au BufRead,BufNewFile *.cl set filetype=c
+" custom syntax
+au BufRead,BufNewFile *.cl    set filetype=c
+au BufRead,BufNewFile *.metal set filetype=c
 
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
