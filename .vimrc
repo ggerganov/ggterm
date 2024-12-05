@@ -2,6 +2,8 @@
 " General
 "==============================
 
+let g:python3_host_prog = '/Users/ggerganov/.pyenv/versions/py3nvim/bin/python'
+
 " should be at the start of .vimrc
 set nocompatible
 

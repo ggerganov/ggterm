@@ -25,4 +25,7 @@ export HISTFILESIZE=100000000
 
 alias mc="$(which mc) -u"
 
+bindkey "\e[1;3C" forward-word
+bindkey "\e[1;3D" backward-word
+
 source ~/.myenv.local
