@@ -6,8 +6,6 @@ PWD=`pwd`
 echo "[+] Updating submodules"
 git submodule update --init
 
-echo "[+] Installing powerline-shell"
-
 function require_pkg {
     if [ ! command -v $1 &> /dev/null ] && [ "`dpkg -l $1 | grep $1 | grep -v none`" == "" ] ; then
         echo "Please install '$1' first:"
@@ -28,19 +26,6 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     require_pkg python3
     require_pkg python3-dev
     require_pkg python3-pip
-fi
-
-cd ./submodules/powerline-shell
-sudo python3 setup.py install
-cd ../../
-#ln -f -s ${PWD}/submodules/powerline-shell/powerline-shell.py ~/.powerline-shell.py
-
-echo "[+] Checking if ~/.config/powerline-shell exists"
-if [ -e ~/.config/powerline-shell ] ; then
-    echo "~/.config/powerline-shell already exists. Nothing to do"
-else
-    echo "[+] Creating ~/.config/powerline-shell symlink"
-    ln -s ${PWD}/powerline-shell ~/.config/powerline-shell
 fi
 
 echo "[+] Checking if ~/.config/kitty exists"
