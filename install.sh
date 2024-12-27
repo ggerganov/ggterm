@@ -10,7 +10,9 @@ function require_pkg {
     if [ ! command -v $1 &> /dev/null ] && [ "`dpkg -l $1 | grep $1 | grep -v none`" == "" ] ; then
         echo "Please install '$1' first:"
         echo ""
-        echo "        $ sudo apt-get install $1"
+        echo "    Linux: sudo apt-get install $1"
+        echo "    Mac    brew install $1"
+        echo ""
 
         exit 1
     fi
@@ -26,6 +28,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     require_pkg python3
     require_pkg python3-dev
     require_pkg python3-pip
+    require_pkg starship
 fi
 
 echo "[+] Checking if ~/.config/kitty exists"
@@ -49,14 +52,11 @@ ln -f -s ${PWD}/.gvimrc ~/.gvimrc
 ln -f -s ${PWD}/.myenv ~/.myenv
 ln -f -s ${PWD}/.gdbinit ~/.gdbinit
 ln -f -s ${PWD}/.gitconfig ~/.gitconfig
+ln -f -s ${PWD}/starship.toml ~/.config/starship.toml
 
 mkdir ~/.vim/swapfiles
 mkdir ~/.vim/undodir
 
 git update-index --assume-unchanged .gitconfig
-
-echo "[+] Language server 'clangd' installation instructions"
-echo "    sudo apt-get install clangd-10"
-echo "    sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-10 100"
 
 echo "[+] Done"
