@@ -34,6 +34,9 @@ set undodir=~/.vim/undodir
 set background=dark
 set termguicolors
 set colorcolumn=120
+set list
+
+set listchars=tab:🡒\ ,space:·,nbsp:␣,extends:⟩,precedes:⟨
 
 " cursor (these make rendering slow)
 set cursorline
