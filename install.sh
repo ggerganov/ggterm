@@ -6,31 +6,6 @@ PWD=`pwd`
 echo "[+] Updating submodules"
 git submodule update --init
 
-function require_pkg {
-    if [ ! command -v $1 &> /dev/null ] && [ "`dpkg -l $1 | grep $1 | grep -v none`" == "" ] ; then
-        echo "Please install '$1' first:"
-        echo ""
-        echo "    Linux: sudo apt-get install $1"
-        echo "    Mac    brew install $1"
-        echo ""
-
-        exit 1
-    fi
-}
-
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    require_pkg vim
-    require_pkg vim-gtk3
-    require_pkg g++
-    require_pkg git
-    require_pkg cmake
-    require_pkg python-setuptools
-    require_pkg python3
-    require_pkg python3-dev
-    require_pkg python3-pip
-    require_pkg starship
-fi
-
 echo "[+] Checking if ~/.config/kitty exists"
 if [ -e ~/.config/kitty ] ; then
     echo "~/.config/kitty already exists. Nothing to do"
