@@ -5,7 +5,10 @@ if [ ! -d ~/.config/nvim ] ; then
     exit 1
 fi
 
+cd `dirname $0`
+PWD=`pwd`
+
 cat ~/.vimrc | sed -e "s/\/\.vim/\/.config\/nvim/g" > ~/.config/nvim/init.vim
 
 mkdir -p ~/.config/nvim/lua
-cp -v ./init.lua ~/.config/nvim/lua/init.lua
+ln -sfn ${PWD}/init.lua ~/.config/nvim/lua/init.lua

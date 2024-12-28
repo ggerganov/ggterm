@@ -1,3 +1,15 @@
+vim.g.clipboard = {
+    name = 'OSC 52',
+    copy = {
+        ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+        ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+    },
+    paste = {
+        ['+'] = function () end,
+        ['*'] = function () end,
+    },
+}
+
 local ensure_packer = function()
     local fn = vim.fn
     local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
