@@ -2,11 +2,9 @@
 
 format = """
 $hostname\
-[█](color_orange)\
-$os\
-$username\
 $git_branch\
 $git_status\
+$git_metrics\
 $c\
 $directory\
 $line_break\
@@ -31,108 +29,125 @@ color_yellow = '#d79921'
 [hostname]
 disabled = false
 ssh_only = true
-format = '[🌐$hostname]($style) '
+style = 'bg:color_orange fg:color_fg0'
+format = '[📡 $hostname ]($style)'
 
 [os]
 disabled = false
-style = "bg:color_orange fg:color_fg0"
+style = 'bg:color_orange fg:color_fg0'
 
 [os.symbols]
-Windows = "󰍲"
-Ubuntu = "󰕈"
-SUSE = ""
-Raspbian = "󰐿"
-Mint = "󰣭"
-Macos = "󰀵"
-Manjaro = ""
-Linux = "󰌽"
-Gentoo = "󰣨"
-Fedora = "󰣛"
-Alpine = ""
-Amazon = ""
-Android = ""
-Arch = "󰣇"
-Artix = "󰣇"
-EndeavourOS = ""
-CentOS = ""
-Debian = "󰣚"
-Redhat = "󱄛"
-RedHatEnterprise = "󱄛"
-Pop = ""
+Windows = '󰍲'
+Ubuntu = '󰕈'
+SUSE = ''
+Raspbian = '󰐿'
+Mint = '󰣭'
+Macos = '󰀵'
+Manjaro = ''
+Linux = '󰌽'
+Gentoo = '󰣨'
+Fedora = '󰣛'
+Alpine = ''
+Amazon = ''
+Android = ''
+Arch = '󰣇'
+Artix = '󰣇'
+EndeavourOS = ''
+CentOS = ''
+Debian = '󰣚'
+Redhat = '󱄛'
+RedHatEnterprise = '󱄛'
+Pop = ''
 
 [username]
 show_always = true
-style_user = "bg:color_orange fg:color_fg0"
-style_root = "bg:color_orange fg:color_fg0"
+style_user = 'bg:color_orange fg:color_fg0'
+style_root = 'bg:color_red    fg:color_fg0'
 format = '[ $user ]($style)'
 
 [directory]
-style = "fg:color_fg0 bg:color_bg1"
-format = "[ $path ]($style)"
+style = 'fg:color_fg0 bg:color_bg1'
+format = '[ $path ]($style)'
 truncate_to_repo = false
 truncation_length = 0
-truncation_symbol = "…/"
+truncation_symbol = '…/'
 
 [directory.substitutions]
-"Documents" = "󰈙 "
-"Downloads" = " "
-"Music" = "󰝚 "
-"Pictures" = " "
-"Developer" = "󰲋 "
+'Documents' = '󰈙 '
+'Downloads' = ' '
+'Music' = '󰝚 '
+'Pictures' = ' '
+'Developer' = '󰲋 '
 
 [git_branch]
-symbol = ""
-style = "bg:color_aqua_dark"
+symbol = ''
+style = 'bg:color_aqua_dark'
 format = '[[ $symbol $branch ](fg:color_fg0 bg:color_aqua_dark)]($style)'
 
 [git_status]
-style = "bg:color_aqua_dark"
-format = '[[($all_status$ahead_behind )](fg:color_red bg:color_aqua_dark)]($style)'
+style = 'bg:color_aqua_dark red bold'
+format = '([\[$all_status$ahead_behind\] ]($style))'
+stashed = '\$${count}'
+ahead = '⇡${count}'
+behind = '⇣${count}'
+diverged = '⇕${count}'
+conflicted = '=${count}'
+deleted = '✘${count}'
+renamed = '»${count}'
+modified = '\!${count}'
+staged = '+${count}'
+untracked = '?${count}'
+
+[git_metrics]
+disabled = false
+added_style = 'bg:color_bg1 bold green'
+deleted_style = 'bg:color_bg1 bold red'
+format = '[( [+$added]($added_style) )([-$deleted]($deleted_style) )](bg:color_bg1)'
 
 [nodejs]
-symbol = ""
-style = "bg:color_blue"
+symbol = ''
+style = 'bg:color_blue'
 format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
 
 [c]
-symbol = " "
-style = "bg:color_blue"
+symbol = ' '
+style = 'bg:color_blue'
 format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
 
 [rust]
-symbol = ""
-style = "bg:color_blue"
+symbol = ''
+style = 'bg:color_blue'
 format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
 
 [golang]
-symbol = ""
-style = "bg:color_blue"
+symbol = ''
+style = 'bg:color_blue'
 format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
 
 [php]
-symbol = ""
-style = "bg:color_blue"
+symbol = ''
+style = 'bg:color_blue'
 format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
 
 [java]
-symbol = ""
-style = "bg:color_blue"
+symbol = ''
+style = 'bg:color_blue'
 format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
 
 [kotlin]
-symbol = ""
-style = "bg:color_blue"
+symbol = ''
+style = 'bg:color_blue'
 format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
 
 [haskell]
-symbol = ""
-style = "bg:color_blue"
+symbol = ''
+style = 'bg:color_blue'
 format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
 
 [time]
 disabled = false
-time_format = "%H:%M:%S"
-style = "bg:color_bg1"
+time_format = '%H:%M:%S'
+style = 'bg:color_bg1'
 format = '[[ $time ](fg:color_fg0 bg:color_bg1)]($style)'
 
 [line_break]
