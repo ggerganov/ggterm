@@ -94,7 +94,7 @@ diverged = '⇕${count}'
 conflicted = '=${count}'
 deleted = '✘${count}'
 renamed = '»${count}'
-modified = '\!${count}'
+modified = '¡${count}'
 staged = '+${count}'
 untracked = '?${count}'
 

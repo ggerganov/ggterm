@@ -2,6 +2,15 @@
 " General
 "==============================
 
+if has('nvim')
+    let g:path_base = '~/.config/nvim/'
+else
+    let g:path_base = '~/.vim/'
+endif
+
+" pyenv virtualenv 3.11.4 py3nvim
+" pyenv activate py3nvim
+" pip install neovim
 let g:python3_host_prog = '/Users/ggerganov/.pyenv/versions/py3nvim/bin/python'
 
 " should be at the start of .vimrc
@@ -30,12 +39,17 @@ set guicursor=
 set backspace=2
 set mouse=i
 set undofile
-set undodir=~/.vim/undodir
+let g:path_undodir = g:path_base . 'undodir'
+execute 'set undodir=' . g:path_undodir
 set background=dark
 set termguicolors
 set colorcolumn=120
-set list
 
+" store swap files
+let g:path_swapfiles = g:path_base . 'swapfiles'
+execute 'set directory=' . g:path_swapfiles
+
+set list
 set listchars=tab:🡒\ ,space:·,nbsp:␣,extends:⟩,precedes:⟨
 
 " cursor (these make rendering slow)
@@ -88,11 +102,8 @@ set exrc
 set secure
 
 " share system clipboard
-autocmd VimLeave * call system("xsel -ib", getreg("+"))
+"autocmd VimLeave * call system("xsel -ib", getreg("+"))
 vnoremap Y "+y
-
-" store swap files
-set directory=~/.vim/swapfiles/
 
 " edit json
 let g:vim_json_conceal=0
@@ -163,10 +174,10 @@ autocmd FileType yml,yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=<:>
 au BufRead,BufNewFile *.cl    set filetype=c
 au BufRead,BufNewFile *.metal set filetype=c
 
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    "autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+let g:path_plug = g:path_base . 'autoload/plug.vim'
+if empty(glob(g:path_plug))
+    let curl_command = 'curl -fLo ' . g:path_plug . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    execute '!' . curl_command
 endif
 
 "au Syntax cpp setlocal foldmethod=indent
@@ -196,7 +207,7 @@ au BufRead,BufNewFile *.metal set syntax=c
 " Plugins
 "==============================
 
-call plug#begin('~/.vim/plugged')
+call plug#begin(g:path_base . 'plugged')
 
 Plug 'RRethy/vim-illuminate'
 Plug 'Shougo/echodoc.vim'
@@ -279,7 +290,6 @@ map <C-l> :NERDTreeFind<CR>
 let g:NERDTreeDirArrows=0
 
 " YCM plugin options
-"let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 "let g:loaded_youcompleteme = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_always_populate_location_list = 1

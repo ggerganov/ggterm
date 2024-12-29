@@ -32,6 +32,11 @@ ln -f -s ${PWD}/starship.toml ~/.config/starship.toml
 mkdir ~/.vim/swapfiles
 mkdir ~/.vim/undodir
 
+mkdir -p ~/.config/nvim/lua
+
+ln -f -s ${PWD}/.vimrc   ~/.config/nvim/init.vim
+ln -f -s ${PWD}/init.lua ~/.config/nvim/lua/init.lua
+
 git update-index --assume-unchanged .gitconfig
 
 echo "[+] Done"
