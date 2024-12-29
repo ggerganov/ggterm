@@ -1,18 +1,25 @@
 # ggterm
 
-My terminal configuration for C++ development with Vim.
+My terminal configuration for C++ development with Vim/Neovim.
 
-**Warning: use at your own risk. Using this repo can mess up your existing environment! It is highly recommended to first try it out in a fresh VM!**
+> [!WARNING] 
+> Using this repo can mess up your existing environment!
+> 
+> It is highly recommended to first try it out in a fresh VM!
 
-<a href="https://i.imgur.com/wHmDf5N.png" target="_blank">![screenshot-0](https://i.imgur.com/wHmDf5N.png)</a>
+<img width="2560" alt="image" src="https://github.com/user-attachments/assets/f798a0f5-ac0a-40cd-b32d-272104745b88" />
 
 ## Quick start
 
-The repo is meant to be used on Ubuntu 18.04+ but could also work on Mac OS with some adaptations.
+The repo is meant to be used on Mac OS but could also work on Linux with some adaptations.
 
 ```bash
-sudo apt-get install vim g++ cmake python-setuptools python3-pip clangd-10
-sudo update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-10 100
+brew install vim neovim git cmake starship pyenv pyenv-virtualenv
+
+pyenv install 3.11.4
+pyenv virtualenv 3.11.4 py3nvim
+pyenv activate py3nvim
+pip install neovim
 
 git clone https://github.com/ggerganov/ggterm --recursive
 cd ggterm
@@ -22,24 +29,7 @@ cd ggterm
 # optionally add "source ~/.myenv" at the end of your ~/.bashrc
 ```
 
-## Vim C++ features
-
-Vim is configured with the following plugins:
-
-- YouCompleteMe
-- NERDTree
-- Fugitive
-- fzf
-- vimspector
-- etc.
-
-To enable all features make sure to have a `compile_commands.json` file in the root source directory of your project.
-When using CMake, I usually create it like this:
-
-```
-cd /path/to/project
-ln -sf ./build/compile_commands.json
-```
+## Usage
 
 My Vim usage is tab-oriented. Check the [.vimrc](.vimrc) file for all available shortcuts. Here is a partial list for convenience:
 
