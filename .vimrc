@@ -283,6 +283,11 @@ let g:gitgutter_sign_priority = 5
 
 " rainbow
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
+let g:rainbow_conf = {
+\   'separately': {
+\       'cmake': 0,
+\   }
+\}
 
 " Open NERD Tree with Ctrl-n
 map <C-n> :NERDTreeToggle<CR>
