@@ -20,7 +20,7 @@ export HISTCONTROL=erasedups:ignorespace
 export HISTSIZE=10000000
 export HISTFILESIZE=100000000
 
-PROMPT_COMMAND='printf "\033]0; $("pwd") \a"'
+PROMPT_COMMAND="printf \"\033]0; $(pwd) \a\"; $PROMPT_COMMAND"
 
 #shopt -s histappend
 #PROMPT_COMMAND="history -a; history -r; $PROMPT_COMMAND"
