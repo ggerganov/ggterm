@@ -276,7 +276,7 @@ let g:echodoc#type = 'popup'
 
 " gitgutter
 if !has('nvim')
-let g:gitgutter_enabled = 0
+    let g:gitgutter_enabled = 0
 endif
 let g:gitgutter_sign_allow_clobber = 1
 let g:gitgutter_sign_priority = 5
