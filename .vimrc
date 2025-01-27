@@ -650,3 +650,7 @@ if has('nvim')
         lua require('init')
     endif
 endif
+
+let g:llama_config = {
+    \ 'show_info': 2,
+    \ }
