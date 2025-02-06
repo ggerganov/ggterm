@@ -300,7 +300,7 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_always_populate_location_list = 1
 let g:ycm_max_diagnostics_to_display = 16
 let g:ycm_enable_diagnostic_highlighting = 0
-let g:ycm_auto_trigger = 0
+let g:ycm_auto_trigger = 1
 let g:ycm_auto_hover = ''
 let g:ycm_goto_buffer_command = 'split-or-existing-window'
 "let g:ycm_min_num_of_chars_for_completion = 0
@@ -652,5 +652,6 @@ if has('nvim')
 endif
 
 let g:llama_config = {
+    \ 'endpoint': 'http://127.0.0.1:8012/infill',
     \ 'show_info': 2,
     \ }
