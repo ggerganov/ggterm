@@ -209,7 +209,6 @@ au BufRead,BufNewFile *.metal set syntax=c
 
 call plug#begin(g:path_base . 'plugged')
 
-Plug 'RRethy/vim-illuminate'
 Plug 'Shougo/echodoc.vim'
 Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --clangd-completer --ts-completer' }
 Plug 'airblade/vim-gitgutter'
@@ -435,6 +434,7 @@ xmap <F7> <Plug>VimspectorBalloonEval
 let g:sneak#s_next = 1
 
 " conflicts with the vim-illuminate plugin
+" TODO: not sure if needed any more
 autocmd FileType c,cpp :setlocal iskeyword-=:
 autocmd FileType c,cpp :setlocal iskeyword-=>
 autocmd FileType c,cpp :setlocal iskeyword-=<
@@ -608,8 +608,6 @@ if &term =~ '256color'
     set t_ut=
 endif
 
-" vim illuminate (after colortheme)
-let g:Illuminate_delay = 500
 highlight IlluminatedWordText gui=bold,underline cterm=bold,underline guibg=#404030
 highlight IlluminatedWord     gui=bold,underline cterm=bold,underline guibg=#404030
 highlight CursorLine          guibg=#202020
