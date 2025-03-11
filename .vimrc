@@ -79,6 +79,9 @@ augroup numbertoggle
   autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
 augroup END
 
+" disable comment continuation
+autocmd FileType * set formatoptions-=cro
+
 " fix copy-paste
 set t_BE=
 
