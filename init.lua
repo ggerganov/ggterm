@@ -24,6 +24,7 @@ end
 local packer_bootstrap = ensure_packer()
 
 vim.cmd('hi! link CurSearch Search')
+vim.g.editorconfig = false
 
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
