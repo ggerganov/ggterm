@@ -592,7 +592,7 @@ endtry
 " background
 "hi Normal guibg=#0F1114 ctermbg=NONE
 "hi Normal guibg=#282A31 ctermbg=NONE
-hi Normal guibg=#191A20 ctermbg=NONE
+hi Normal guibg=#181A21 ctermbg=NONE
 
 highlight YcmErrorSign    gui=bold cterm=bold ctermbg=lightred ctermfg=white guibg=#FF0000 guifg=#FFFFFF
 "highlight YcmErrorLine                        ctermbg=lightred               guibg=#660000
@@ -656,4 +656,5 @@ endif
 let g:llama_config = {
     \ 'endpoint': 'http://127.0.0.1:8012/infill',
     \ 'show_info': 2,
+    \ 'ring_n_chunks': 32,
     \ }
