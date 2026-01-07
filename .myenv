@@ -32,5 +32,5 @@ alias mc="$(which mc) -u"
 
 source ~/.myenv.local
 
-alias  llama-vim="pgrep -f 'ssh -fNL 8012:localhost:8012 ggerganov@gg-studio' || ssh -fNL 8012:localhost:8012 ggerganov@gg-studio"
-alias llama-chat="pgrep -f 'ssh -fNL 8013:localhost:8013 ggerganov@gg-studio' || ssh -fNL 8013:localhost:8013 ggerganov@gg-studio"
+alias llama-mac="pgrep -f 'ssh -fNL 8013:localhost:8013 ggerganov@gg-studio' || ssh -fNL 8013:localhost:8013 ggerganov@gg-studio"
+alias llama-dgx="pgrep -f 'ssh -fNL 8023:localhost:8023 ggml@gg-spark'       || ssh -fNL 8023:localhost:8023 ggml@gg-spark"
