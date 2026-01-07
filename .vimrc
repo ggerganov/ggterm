@@ -654,7 +654,8 @@ if has('nvim')
 endif
 
 let g:llama_config = {
-    \ 'endpoint': 'http://127.0.0.1:8012/infill',
+    \ 'model': 'fim',
+    \ 'endpoint': 'http://127.0.0.1:8013/infill',
     \ 'show_info': 2,
     \ 'ring_n_chunks': 32,
     \ }
