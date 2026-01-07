@@ -9,6 +9,7 @@ $c\
 $directory\
 $line_break\
 $time\
+$status\
 $character"""
 
 palette = 'gruvbox_dark'
@@ -78,6 +79,11 @@ truncation_symbol = '…/'
 'Music' = '󰝚 '
 'Pictures' = ' '
 'Developer' = '󰲋 '
+
+[status]
+style = "bold red"
+format = "[\\[$status\\]]($style) "
+disabled = false
 
 [git_branch]
 symbol = ''
