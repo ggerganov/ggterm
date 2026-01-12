@@ -28,6 +28,7 @@ ln -f -s ${PWD}/.myenv ~/.myenv
 ln -f -s ${PWD}/.gdbinit ~/.gdbinit
 ln -f -s ${PWD}/.gitconfig ~/.gitconfig
 ln -f -s ${PWD}/starship.toml ~/.config/starship.toml
+ln -f -s ${PWD}/opencode.json ~/.config/opencode/opencode.json
 
 mkdir ~/.vim/swapfiles
 mkdir ~/.vim/undodir

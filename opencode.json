@@ -1,0 +1,107 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "provider": {
+        "llama.cpp-mac": {
+            "npm": "@ai-sdk/openai-compatible",
+            "name": "llama-server (local, mac)",
+            "options": {
+                "baseURL": "http://127.0.0.1:8013/v1"
+            },
+            "models": {
+                "gpt-oss-20b-hf-low": {
+                    "name": "gpt-oss-20b-hf-low",
+                    "limit": {
+                        "context": 131072,
+                        "output": 65536
+                    }
+                },
+                "gpt-oss-20b-hf-medium": {
+                    "name": "gpt-oss-20b-hf-medium",
+                    "limit": {
+                        "context": 131072,
+                        "output": 65536
+                    }
+                },
+                "gpt-oss-20b-hf-high": {
+                    "name": "gpt-oss-20b-hf-high",
+                    "limit": {
+                        "context": 131072,
+                        "output": 65536
+                    }
+                },
+                "gpt-oss-120b-hf-low": {
+                    "name": "gpt-oss-120b-hf-low",
+                    "limit": {
+                        "context": 131072,
+                        "output": 65536
+                    }
+                },
+                "gpt-oss-120b-hf-medium": {
+                    "name": "gpt-oss-120b-hf-medium",
+                    "limit": {
+                        "context": 131072,
+                        "output": 65536
+                    }
+                },
+                "gpt-oss-120b-hf-high": {
+                    "name": "gpt-oss-120b-hf-high",
+                    "limit": {
+                        "context": 131072,
+                        "output": 65536
+                    }
+                }
+            }
+        },
+        "llama.cpp-dgx": {
+            "npm": "@ai-sdk/openai-compatible",
+            "name": "llama-server (local, dgx)",
+            "options": {
+                "baseURL": "http://127.0.0.1:8023/v1"
+            },
+            "models": {
+                "gpt-oss-20b-hf-low": {
+                    "name": "gpt-oss-20b-hf-low",
+                    "limit": {
+                        "context": 131072,
+                        "output": 65536
+                    }
+                },
+                "gpt-oss-20b-hf-medium": {
+                    "name": "gpt-oss-20b-hf-medium",
+                    "limit": {
+                        "context": 131072,
+                        "output": 65536
+                    }
+                },
+                "gpt-oss-20b-hf-high": {
+                    "name": "gpt-oss-20b-hf-high",
+                    "limit": {
+                        "context": 131072,
+                        "output": 65536
+                    }
+                },
+                "gpt-oss-120b-hf-low": {
+                    "name": "gpt-oss-120b-hf-low",
+                    "limit": {
+                        "context": 131072,
+                        "output": 65536
+                    }
+                },
+                "gpt-oss-120b-hf-medium": {
+                    "name": "gpt-oss-120b-hf-medium",
+                    "limit": {
+                        "context": 131072,
+                        "output": 65536
+                    }
+                },
+                "gpt-oss-120b-hf-high": {
+                    "name": "gpt-oss-120b-hf-high",
+                    "limit": {
+                        "context": 131072,
+                        "output": 65536
+                    }
+                }
+            }
+        }
+    }
+}
