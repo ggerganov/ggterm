@@ -658,4 +658,5 @@ let g:llama_config = {
     \ 'endpoint': 'http://127.0.0.1:8013/infill',
     \ 'show_info': 2,
     \ 'ring_n_chunks': 32,
+    \ 'keymap_debug': '<C-D>',
     \ }

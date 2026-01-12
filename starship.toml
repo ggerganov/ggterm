@@ -1,5 +1,8 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
+# Timeout for commands executed by starship (in milliseconds).
+command_timeout = 5000
+
 format = """
 $hostname\
 $git_branch\
