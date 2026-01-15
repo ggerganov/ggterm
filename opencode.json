@@ -64,18 +64,32 @@
                         "output": 65536
                     }
                 },
-                "glm-4.6V": {
-                    "name": "glm-4.6V",
+                "devstral-small-2-24b-hf": {
+                    "name": "devstral-small-2-24b-hf",
                     "limit": {
                         "context": 131072,
                         "output": 32768
                     }
                 },
-                "glm-4.6V-flash": {
-                    "name": "glm-4.6V-flash",
+                "glm-4.6V-hf": {
+                    "name": "glm-4.6V-hf",
+                    "limit": {
+                        "context": 131072,
+                        "output": 32768
+                    }
+                },
+                "glm-4.6V-flash-hf": {
+                    "name": "glm-4.6V-flash-hf",
                     "limit": {
                         "context": 262144,
-                        "output": 32768
+                        "output": 65536
+                    }
+                },
+                "nemotron-nano-3-30b-hf": {
+                    "name": "nemotron-nano-3-30b-hf",
+                    "limit": {
+                        "context": 262144,
+                        "output": 65536
                     }
                 }
             }
