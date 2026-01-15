@@ -49,6 +49,34 @@
                         "context": 131072,
                         "output": 65536
                     }
+                },
+                "qwen3-coder-30b-hf": {
+                    "name": "qwen3-coder-30b-hf",
+                    "limit": {
+                        "context": 262144,
+                        "output": 65536
+                    }
+                },
+                "qwen3-vl-30b-hf": {
+                    "name": "qwen3-vl-30b-hf",
+                    "limit": {
+                        "context": 262144,
+                        "output": 65536
+                    }
+                },
+                "glm-4.6V": {
+                    "name": "glm-4.6V",
+                    "limit": {
+                        "context": 131072,
+                        "output": 32768
+                    }
+                },
+                "glm-4.6V-flash": {
+                    "name": "glm-4.6V-flash",
+                    "limit": {
+                        "context": 262144,
+                        "output": 32768
+                    }
                 }
             }
         },
