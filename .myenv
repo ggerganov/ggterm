@@ -37,8 +37,15 @@ alias llama-dgx="pgrep -f 'ssh -fNL 8023:localhost:8023 ggml@gg-spark'       || 
 
 pr2wt() {
     if [[ $# -gt 1 ]]; then
-        ./scripts/pr2wt.sh "$1" "cmake -B build && cmake --build build -j && $2"
+        #./scripts/pr2wt.sh "$1" "cmake -B build && cmake --build build -j && $2"
+        if [[ "$2" == "build" ]]; then
+            ./scripts/pr2wt.sh "$1" "cmake -B build && cmake --build build -j && cd build"
+        elif [[ "$2" == "debug" ]]; then
+            ./scripts/pr2wt.sh "$1" "cmake -B build-debug -DCMAKE_BUILD_TYPE=Debug && cmake --build build-debug -j && cd build-debug"
+        else
+            ./scripts/pr2wt.sh "$1" "cmake -B build && cmake --build build -j && $2"
+        fi
     else
-        ./scripts/pr2wt.sh "$1" "cmake -B build && cmake --build build -j && bash -l"
+        ./scripts/pr2wt.sh "$1" "bash -l"
     fi
 }
