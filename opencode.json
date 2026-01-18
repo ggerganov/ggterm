@@ -64,6 +64,13 @@
                         "output": 65536
                     }
                 },
+                "qwen3-next-80b-hf": {
+                    "name": "qwen3-next-80b-hf",
+                    "limit": {
+                        "context": 262144,
+                        "output": 65536
+                    }
+                },
                 "devstral-small-2-24b-hf": {
                     "name": "devstral-small-2-24b-hf",
                     "limit": {
