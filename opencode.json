@@ -53,7 +53,7 @@
                 "qwen3-coder-30b-hf": {
                     "name": "qwen3-coder-30b-hf",
                     "limit": {
-                        "context": 262144,
+                        "context": 98304,
                         "output": 65536
                     }
                 },

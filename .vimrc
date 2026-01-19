@@ -654,9 +654,14 @@ if has('nvim')
 endif
 
 let g:llama_config = {
-    \ 'model': 'fim',
-    \ 'endpoint': 'http://127.0.0.1:8013/infill',
+    \ 'model_fim': 'fim',
+    \ 'endpoint_fim': 'http://127.0.0.1:8013/infill',
     \ 'show_info': 2,
     \ 'ring_n_chunks': 32,
+    \
+    \ 'model_inst': 'gpt-oss-120b-hf-medium',
+    \ 'endpoint_inst': 'http://127.0.0.1:8013/v1/chat/completions',
+    \ 'keymap_inst_trigger': '<C-I>',
+    \
     \ 'keymap_debug_toggle': '<C-D>',
     \ }
