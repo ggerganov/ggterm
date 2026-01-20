@@ -92,6 +92,13 @@
                         "output": 65536
                     }
                 },
+                "glm-4.7-flash-hf": {
+                    "name": "glm-4.7-flash-hf",
+                    "limit": {
+                        "context": 202752,
+                        "output": 65536
+                    }
+                },
                 "nemotron-nano-3-30b-hf": {
                     "name": "nemotron-nano-3-30b-hf",
                     "limit": {
