@@ -661,5 +661,8 @@ let g:llama_config = {
     \
     \ 'model_inst': 'gpt-oss-120b-hf-medium',
     \ 'endpoint_inst': 'http://127.0.0.1:8013/v1/chat/completions',
-    \ 'keymap_inst_trigger': '<leader>lli',
+    \
+    \ 'keymap_fim_trigger': '<C-F>',
+    \ 'keymap_fim_accept_word': '<C-B>',
+    \ 'keymap_inst_trigger': '<C-I>',
     \ }
