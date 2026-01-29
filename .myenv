@@ -39,9 +39,9 @@ pr2wt() {
     if [[ $# -gt 1 ]]; then
         #./scripts/pr2wt.sh "$1" "cmake -B build && cmake --build build -j && $2"
         if [[ "$2" == "build" ]]; then
-            ./scripts/pr2wt.sh "$1" "cmake -B build && cmake --build build -j && cd build"
+            ./scripts/pr2wt.sh "$1" "cmake -B build && cmake --build build -j && cd build && bash -l"
         elif [[ "$2" == "debug" ]]; then
-            ./scripts/pr2wt.sh "$1" "cmake -B build-debug -DCMAKE_BUILD_TYPE=Debug && cmake --build build-debug -j && cd build-debug"
+            ./scripts/pr2wt.sh "$1" "cmake -B build-debug -DCMAKE_BUILD_TYPE=Debug && cmake --build build-debug -j && cd build-debug && bash -l"
         else
             ./scripts/pr2wt.sh "$1" "cmake -B build && cmake --build build -j && $2"
         fi
