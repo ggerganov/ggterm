@@ -49,9 +49,6 @@ set colorcolumn=120
 let g:path_swapfiles = g:path_base . 'swapfiles'
 execute 'set directory=' . g:path_swapfiles
 
-set list
-set listchars=tab:🡒\ ,space:·,nbsp:␣,extends:⟩,precedes:⟨
-
 " cursor (these make rendering slow)
 set cursorline
 "set cursorcolumn
@@ -666,3 +663,11 @@ let g:llama_config = {
     \ 'keymap_fim_accept_word': '<C-B>',
     \ 'keymap_inst_trigger': '<C-I>',
     \ }
+
+" show whitespace chars
+set list
+set listchars=tab:🡒\ ,space:·,nbsp:␣,extends:⟩,precedes:⟨
+
+if !has('nvim')
+    highlight SpecialKey guifg=#444444
+endif
