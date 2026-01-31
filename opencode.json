@@ -95,8 +95,8 @@
                 "glm-4.7-flash-hf": {
                     "name": "glm-4.7-flash-hf",
                     "limit": {
-                        "context": 202752,
-                        "output": 65536
+                        "context": 131072,
+                        "output": 32768
                     }
                 },
                 "nemotron-nano-3-30b-hf": {
@@ -154,6 +154,62 @@
                     "name": "gpt-oss-120b-hf-high",
                     "limit": {
                         "context": 131072,
+                        "output": 65536
+                    }
+                },
+                "qwen3-coder-30b-hf": {
+                    "name": "qwen3-coder-30b-hf",
+                    "limit": {
+                        "context": 98304,
+                        "output": 65536
+                    }
+                },
+                "qwen3-vl-30b-hf": {
+                    "name": "qwen3-vl-30b-hf",
+                    "limit": {
+                        "context": 262144,
+                        "output": 65536
+                    }
+                },
+                "qwen3-next-80b-hf": {
+                    "name": "qwen3-next-80b-hf",
+                    "limit": {
+                        "context": 262144,
+                        "output": 65536
+                    }
+                },
+                "devstral-small-2-24b-hf": {
+                    "name": "devstral-small-2-24b-hf",
+                    "limit": {
+                        "context": 131072,
+                        "output": 32768
+                    }
+                },
+                "glm-4.6V-hf": {
+                    "name": "glm-4.6V-hf",
+                    "limit": {
+                        "context": 131072,
+                        "output": 32768
+                    }
+                },
+                "glm-4.6V-flash-hf": {
+                    "name": "glm-4.6V-flash-hf",
+                    "limit": {
+                        "context": 262144,
+                        "output": 65536
+                    }
+                },
+                "glm-4.7-flash-hf": {
+                    "name": "glm-4.7-flash-hf",
+                    "limit": {
+                        "context": 131072,
+                        "output": 32768
+                    }
+                },
+                "nemotron-nano-3-30b-hf": {
+                    "name": "nemotron-nano-3-30b-hf",
+                    "limit": {
+                        "context": 262144,
                         "output": 65536
                     }
                 }
