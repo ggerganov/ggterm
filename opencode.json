@@ -105,6 +105,13 @@
                         "context": 262144,
                         "output": 65536
                     }
+                },
+                "qwen3-coder-next-hf": {
+                    "name": "qwen3-coder-next-hf",
+                    "limit": {
+                        "context": 262144,
+                        "output": 65536
+                    }
                 }
             }
         },
@@ -208,6 +215,13 @@
                 },
                 "nemotron-nano-3-30b-hf": {
                     "name": "nemotron-nano-3-30b-hf",
+                    "limit": {
+                        "context": 262144,
+                        "output": 65536
+                    }
+                },
+                "qwen3-coder-next-hf": {
+                    "name": "qwen3-coder-next-hf",
                     "limit": {
                         "context": 262144,
                         "output": 65536
