@@ -112,6 +112,13 @@
                         "context": 262144,
                         "output": 65536
                     }
+                },
+                "minimax-2.5": {
+                    "name": "minimax-2.5",
+                    "limit": {
+                        "context": 131072,
+                        "output": 32768
+                    }
                 }
             }
         },
@@ -225,6 +232,13 @@
                     "limit": {
                         "context": 262144,
                         "output": 65536
+                    }
+                },
+                "minimax-2.5": {
+                    "name": "minimax-2.5",
+                    "limit": {
+                        "context": 131072,
+                        "output": 32768
                     }
                 }
             }
