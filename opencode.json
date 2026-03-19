@@ -113,6 +113,20 @@
                         "output": 65536
                     }
                 },
+                "qwen3.5-35b-a3b-hf": {
+                    "name": "qwen3.5-35b-a3b-hf",
+                    "limit": {
+                        "context": 262144,
+                        "output": 65536
+                    }
+                },
+                "ai-review-issues-find-similar": {
+                    "name": "ai-review-issues-find-similar",
+                    "limit": {
+                        "context": 262144,
+                        "output": 65536
+                    }
+                },
                 "minimax-2.5": {
                     "name": "minimax-2.5",
                     "limit": {
@@ -229,6 +243,20 @@
                 },
                 "qwen3-coder-next-hf": {
                     "name": "qwen3-coder-next-hf",
+                    "limit": {
+                        "context": 262144,
+                        "output": 65536
+                    }
+                },
+                "qwen3.5-35b-a3b-hf": {
+                    "name": "qwen3.5-35b-a3b-hf",
+                    "limit": {
+                        "context": 262144,
+                        "output": 65536
+                    }
+                },
+                "ai-review-issues-find-similar": {
+                    "name": "ai-review-issues-find-similar",
                     "limit": {
                         "context": 262144,
                         "output": 65536
