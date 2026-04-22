@@ -1,0 +1,15 @@
+{
+    "providers": {
+        "llama-cpp": {
+            "baseUrl": "http://127.0.0.1:8013/v1",
+            "api": "openai-completions",
+            "apiKey": "none",
+            "models": [
+                {
+                    "id": "pi",
+                    "input": ["text", "image"]
+                }
+            ]
+        }
+    }
+}

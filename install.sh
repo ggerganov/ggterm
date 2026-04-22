@@ -29,6 +29,8 @@ ln -f -s ${PWD}/.gdbinit ~/.gdbinit
 ln -f -s ${PWD}/.gitconfig ~/.gitconfig
 ln -f -s ${PWD}/starship.toml ~/.config/starship.toml
 ln -f -s ${PWD}/opencode.json ~/.config/opencode/opencode.json
+ln -f -s ${PWD}/pi/models.json ~/.pi/agent/models.json
+ln -f -s ${PWD}/pi/SYSTEM.md ~/.pi/agent/SYSTEM.md
 
 mkdir ~/.vim/swapfiles
 mkdir ~/.vim/undodir
