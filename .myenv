@@ -49,3 +49,7 @@ pr2wt() {
         ./scripts/pr2wt.sh "$1" "bash -l"
     fi
 }
+
+ggpi() {
+    pi --offline -nc
+}
