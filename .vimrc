@@ -656,7 +656,7 @@ let g:llama_config = {
     \ 'show_info': 2,
     \ 'ring_n_chunks': 32,
     \
-    \ 'model_inst': 'gpt-oss-120b-hf-medium',
+    \ 'model_inst': 'qwen3.6-35b-a3b-hf-think',
     \ 'endpoint_inst': 'http://127.0.0.1:8013/v1/chat/completions',
     \
     \ 'keymap_fim_trigger': '<C-F>',
