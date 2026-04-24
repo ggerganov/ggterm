@@ -8,7 +8,7 @@ else
     let g:path_base = '~/.vim/'
 endif
 
-" pyenv virtualenv 3.11.4 py3nvim
+" pyenv virtualenv 3.12.13 py3nvim
 " pyenv activate py3nvim
 " pip install neovim
 let g:python3_host_prog = '/Users/ggerganov/.pyenv/versions/py3nvim/bin/python'
@@ -656,7 +656,7 @@ let g:llama_config = {
     \ 'show_info': 2,
     \ 'ring_n_chunks': 32,
     \
-    \ 'model_inst': 'qwen3.6-35b-a3b-hf-think',
+    \ 'model_inst': 'qwen3.6-27b-hf-think',
     \ 'endpoint_inst': 'http://127.0.0.1:8013/v1/chat/completions',
     \
     \ 'keymap_fim_trigger': '<C-F>',

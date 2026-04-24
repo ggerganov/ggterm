@@ -16,8 +16,8 @@ The repo is meant to be used on Mac OS but could also work on Linux with some ad
 ```bash
 brew install vim neovim git cmake starship pyenv pyenv-virtualenv
 
-pyenv install 3.11.4
-pyenv virtualenv 3.11.4 py3nvim
+pyenv install 3.12.13
+pyenv virtualenv 3.12.13 py3nvim
 pyenv activate py3nvim
 pip install neovim
 
