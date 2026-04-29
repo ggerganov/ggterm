@@ -678,3 +678,8 @@ set listchars=tab:🡒\ ,space:·,nbsp:␣,extends:⟩,precedes:⟨
 if !has('nvim')
     highlight SpecialKey guifg=#444444
 endif
+
+" if ~/.vimrc.local exists, source it
+if filereadable(expand('~/.vimrc.local'))
+    source ~/.vimrc.local
+endif
