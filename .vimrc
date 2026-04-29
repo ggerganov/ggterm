@@ -668,6 +668,9 @@ let g:llama_config = {
 
 highlight llama_hl_fim_info guifg=grey ctermfg=119
 
+highlight llama_hl_inst_virt_proc  guifg=grey ctermfg=119
+highlight llama_hl_inst_virt_gen   guifg=grey ctermfg=119
+
 " show whitespace chars
 set list
 set listchars=tab:🡒\ ,space:·,nbsp:␣,extends:⟩,precedes:⟨
