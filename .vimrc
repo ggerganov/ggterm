@@ -26,7 +26,6 @@ filetype indent on
 set ts=4
 set sw=4
 set expandtab
-set background=dark
 set wildmode=longest:full
 set wildmenu
 set textwidth=0
@@ -239,8 +238,8 @@ Plug 'NStefan002/screenkey.nvim'
 "Plug 'nvchad/showkeys'
 
 " colorthemes
-Plug 'dracula/vim', { 'name': 'dracula' }
-Plug 'morhetz/gruvbox'
+"Plug 'dracula/vim', { 'name': 'dracula' }
+"Plug 'morhetz/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
 
 " zig
@@ -571,25 +570,32 @@ au FileType c,cpp vnoremap <buffer><leader>lf :JbzClangFormat<CR>
 " colortheme
 try
     " dracula theme
-    colorscheme dracula
+    "colorscheme dracula
     ""hi Pmenu guibg=#128060
+
+    "highlight IlluminatedWordText gui=bold,underline cterm=bold,underline guibg=#404030
+    "highlight IlluminatedWord     gui=bold,underline cterm=bold,underline guibg=#404030
+    "highlight CursorLine          guibg=#202020
+
+    " background
+    "hi Normal guibg=#0F1114 ctermbg=NONE
+    "hi Normal guibg=#282A31 ctermbg=NONE
+    "hi Normal guibg=#181A21 ctermbg=NONE
+    "hi Normal guibg=#000000 ctermbg=NONE
 
     " gruvbox theme
     "let g:gruvbox_contrast_dark = 'hard'
     "colorscheme gruvbox
 
     " PaperColor
-    "colorscheme PaperColor
+    colorscheme PaperColor
 
     hi Comment cterm=bold
+
+    set background=light
 catch /^Vim\%((\a\+)\)\=:E185/
     colorscheme default
 endtry
-
-" background
-"hi Normal guibg=#0F1114 ctermbg=NONE
-"hi Normal guibg=#282A31 ctermbg=NONE
-hi Normal guibg=#181A21 ctermbg=NONE
 
 highlight YcmErrorSign    gui=bold cterm=bold ctermbg=lightred ctermfg=white guibg=#FF0000 guifg=#FFFFFF
 "highlight YcmErrorLine                        ctermbg=lightred               guibg=#660000
@@ -607,10 +613,6 @@ if &term =~ '256color'
     " work properly when Vim is used inside tmux and GNU screen.
     set t_ut=
 endif
-
-highlight IlluminatedWordText gui=bold,underline cterm=bold,underline guibg=#404030
-highlight IlluminatedWord     gui=bold,underline cterm=bold,underline guibg=#404030
-highlight CursorLine          guibg=#202020
 
 " write file using Ctrl-S
 nnoremap <C-s> :w<CR>
@@ -663,6 +665,8 @@ let g:llama_config = {
     \ 'keymap_fim_accept_word': '<C-B>',
     \ 'keymap_inst_trigger': '<C-I>',
     \ }
+
+highlight llama_hl_fim_info guifg=grey ctermfg=119
 
 " show whitespace chars
 set list
