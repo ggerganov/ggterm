@@ -567,6 +567,11 @@ command! -range=% JbzClangFormat call <sid>JbzClangFormat (<line1>, <line2>)
 au FileType c,cpp nnoremap <buffer><leader>lf :<C-u>JbzClangFormat<CR>
 au FileType c,cpp vnoremap <buffer><leader>lf :JbzClangFormat<CR>
 
+" if ~/.vimrc.local exists, source it
+if filereadable(expand('~/.vimrc.local'))
+    source ~/.vimrc.local
+endif
+
 " colortheme
 try
     " dracula theme
@@ -677,9 +682,4 @@ set listchars=tab:🡒\ ,space:·,nbsp:␣,extends:⟩,precedes:⟨
 
 if !has('nvim')
     highlight SpecialKey guifg=#444444
-endif
-
-" if ~/.vimrc.local exists, source it
-if filereadable(expand('~/.vimrc.local'))
-    source ~/.vimrc.local
 endif
