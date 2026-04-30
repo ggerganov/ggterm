@@ -20,7 +20,7 @@ export HISTCONTROL=erasedups:ignorespace
 export HISTSIZE=10000000
 export HISTFILESIZE=100000000
 
-PROMPT_COMMAND='echo -ne "\033]0;${PWD/#$HOME/~}\007"'
+PROMPT_COMMAND='echo "\033]0;${PWD/#$HOME/~}\007"'
 #PROMPT_COMMAND="printf \"\033]0; $(pwd) \a\"; $PROMPT_COMMAND"
 
 #shopt -s histappend

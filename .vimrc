@@ -567,58 +567,6 @@ command! -range=% JbzClangFormat call <sid>JbzClangFormat (<line1>, <line2>)
 au FileType c,cpp nnoremap <buffer><leader>lf :<C-u>JbzClangFormat<CR>
 au FileType c,cpp vnoremap <buffer><leader>lf :JbzClangFormat<CR>
 
-" if ~/.vimrc.local exists, source it
-if filereadable(expand('~/.vimrc.local'))
-    source ~/.vimrc.local
-endif
-
-" colortheme
-try
-    " dracula theme
-    "colorscheme dracula
-    ""hi Pmenu guibg=#128060
-
-    "highlight IlluminatedWordText gui=bold,underline cterm=bold,underline guibg=#404030
-    "highlight IlluminatedWord     gui=bold,underline cterm=bold,underline guibg=#404030
-    "highlight CursorLine          guibg=#202020
-
-    " background
-    "hi Normal guibg=#0F1114 ctermbg=NONE
-    "hi Normal guibg=#282A31 ctermbg=NONE
-    "hi Normal guibg=#181A21 ctermbg=NONE
-    "hi Normal guibg=#000000 ctermbg=NONE
-
-    " gruvbox theme
-    "let g:gruvbox_contrast_dark = 'hard'
-    "colorscheme gruvbox
-
-    " PaperColor
-    colorscheme PaperColor
-
-    hi Comment cterm=bold
-
-    set background=light
-catch /^Vim\%((\a\+)\)\=:E185/
-    colorscheme default
-endtry
-
-highlight YcmErrorSign    gui=bold cterm=bold ctermbg=lightred ctermfg=white guibg=#FF0000 guifg=#FFFFFF
-"highlight YcmErrorLine                        ctermbg=lightred               guibg=#660000
-"highlight YcmErrorSection                     ctermbg=lightred               guibg=#660000
-
-highlight YcmWarningSign    gui=bold cterm=bold ctermbg=cyan ctermfg=black guibg=#00FFFF guifg=#000000
-"highlight YcmWarningLine                        ctermbg=cyan               guibg=#006666
-"highlight YcmWarningSection                     ctermbg=cyan               guibg=#006666
-
-" YCM inlay hint gray
-hi YCMInlayHint guifg=#888888 ctermfg=8
-
-if &term =~ '256color'
-    " Disable Background Color Erase (BCE) so that color schemes
-    " work properly when Vim is used inside tmux and GNU screen.
-    set t_ut=
-endif
-
 " write file using Ctrl-S
 nnoremap <C-s> :w<CR>
 
@@ -671,15 +619,65 @@ let g:llama_config = {
     \ 'keymap_inst_trigger': '<C-I>',
     \ }
 
-highlight llama_hl_fim_info guifg=grey ctermfg=119
-
-highlight llama_hl_inst_virt_proc  guifg=grey ctermfg=119
-highlight llama_hl_inst_virt_gen   guifg=grey ctermfg=119
-
 " show whitespace chars
 set list
 set listchars=tab:🡒\ ,space:·,nbsp:␣,extends:⟩,precedes:⟨
 
 if !has('nvim')
     highlight SpecialKey guifg=#444444
+endif
+
+" colortheme
+try
+    " dracula theme
+    "colorscheme dracula
+    ""hi Pmenu guibg=#128060
+
+    "highlight IlluminatedWordText gui=bold,underline cterm=bold,underline guibg=#404030
+    "highlight IlluminatedWord     gui=bold,underline cterm=bold,underline guibg=#404030
+    "highlight CursorLine          guibg=#202020
+
+    " background
+    "hi Normal guibg=#0F1114 ctermbg=NONE
+    "hi Normal guibg=#282A31 ctermbg=NONE
+    "hi Normal guibg=#181A21 ctermbg=NONE
+    "hi Normal guibg=#000000 ctermbg=NONE
+
+    " gruvbox theme
+    "let g:gruvbox_contrast_dark = 'hard'
+    "colorscheme gruvbox
+
+    " PaperColor
+    colorscheme PaperColor
+
+    hi Comment cterm=bold
+catch /^Vim\%((\a\+)\)\=:E185/
+    colorscheme default
+endtry
+
+" if ~/.vimrc.local exists, source it
+if filereadable(expand('~/.vimrc.local'))
+    source ~/.vimrc.local
+endif
+
+highlight llama_hl_fim_info guifg=grey ctermfg=119
+
+highlight llama_hl_inst_virt_proc  guifg=grey ctermfg=119
+highlight llama_hl_inst_virt_gen   guifg=grey ctermfg=119
+
+highlight YcmErrorSign    gui=bold cterm=bold ctermbg=lightred ctermfg=white guibg=#FF0000 guifg=#FFFFFF
+"highlight YcmErrorLine                        ctermbg=lightred               guibg=#660000
+"highlight YcmErrorSection                     ctermbg=lightred               guibg=#660000
+
+highlight YcmWarningSign    gui=bold cterm=bold ctermbg=cyan ctermfg=black guibg=#00FFFF guifg=#000000
+"highlight YcmWarningLine                        ctermbg=cyan               guibg=#006666
+"highlight YcmWarningSection                     ctermbg=cyan               guibg=#006666
+
+" YCM inlay hint gray
+hi YCMInlayHint guifg=#888888 ctermfg=8
+
+if &term =~ '256color'
+    " Disable Background Color Erase (BCE) so that color schemes
+    " work properly when Vim is used inside tmux and GNU screen.
+    set t_ut=
 endif
