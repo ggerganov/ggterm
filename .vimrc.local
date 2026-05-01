@@ -1,0 +1,4 @@
+"set background=dark
+"set background=light
+
+"highlight llama_hl_fim_hint guifg=darkblue ctermfg=202
