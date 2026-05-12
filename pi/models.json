@@ -1,7 +1,18 @@
 {
     "providers": {
-        "llama-cpp": {
+        "llama-cpp-mac": {
             "baseUrl": "http://127.0.0.1:8013/v1",
+            "api": "openai-completions",
+            "apiKey": "none",
+            "models": [
+                {
+                    "id": "pi",
+                    "input": ["text", "image"]
+                }
+            ]
+        },
+        "llama-cpp-dgx": {
+            "baseUrl": "http://127.0.0.1:8023/v1",
             "api": "openai-completions",
             "apiKey": "none",
             "models": [
