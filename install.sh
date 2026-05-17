@@ -32,6 +32,11 @@ ln -f -s ${PWD}/opencode.json ~/.config/opencode/opencode.json
 ln -f -s ${PWD}/pi/models.json ~/.pi/agent/models.json
 ln -f -s ${PWD}/pi/SYSTEM.md ~/.pi/agent/SYSTEM.md
 
+if [ -d ~/.pi/agent ]; then
+    mkdir -p ~/.pi/agent/extensions
+    ln -f -s ${PWD}/pi/extensions/confirm.ts ~/.pi/agent/extensions/confirm.ts
+fi
+
 mkdir ~/.vim/swapfiles
 mkdir ~/.vim/undodir
 
