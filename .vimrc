@@ -612,7 +612,7 @@ let g:llama_config = {
     \ 'ring_n_chunks': 32,
     \ 'n_cmpl': 3,
     \
-    \ 'model_inst': 'qwen3.6-35b-a3b-hf-think',
+    \ 'model_inst': 'pi',
     \ 'endpoint_inst': 'http://127.0.0.1:8013/v1/chat/completions',
     \
     \ 'keymap_fim_trigger': '<C-F>',
