@@ -71,3 +71,8 @@ wc2wt() {
 ggpi() {
     pi --offline -nc
 }
+
+# show most recent branches
+ggbr() {
+    git for-each-ref --sort=-committerdate --format='%(refname:short) %(committerdate:relative)' refs/remotes/origin/ | grep origin/gg | head -n 30
+}
