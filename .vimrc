@@ -233,7 +233,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'elzr/vim-json'
 "Plug 'Konfekt/FastFold'
 "Plug 'mg979/vim-visual-multi'
-"Plug 'TabbyML/vim-tabby'
 Plug 'NStefan002/screenkey.nvim'
 "Plug 'nvchad/showkeys'
 
@@ -252,7 +251,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'maxmellon/vim-jsx-pretty'
 
 if has('nvim')
-    Plug 'github/copilot.vim'
+    "Plug 'github/copilot.vim'
     "Plug 'ggandor/leap.nvim'
     Plug 'ggandor/lightspeed.nvim'
 else
@@ -471,7 +470,7 @@ let g:easy_align_delimiters = {
 let g:NERDDefaultAlign = 'left'
 
 " copilot
-highlight CopilotSuggestion guifg=#00aaaa ctermfg=8
+"highlight CopilotSuggestion guifg=#00aaaa ctermfg=8
 
 " cmake4vim
 let g:make_arguments = '-j$(($(getconf _NPROCESSORS_ONLN) - 2))'
@@ -581,22 +580,16 @@ nnoremap <C-Y> `ajV`djjjjd
 
 if 0
     " Github copilot
-    let g:copilot_enabled = v:true
-
-    let g:tabby_keybinding_accept = '<C-Tab>'
-    let g:tabby_keybinding_trigger_or_dismiss = '<C-\>'
+    "let g:copilot_enabled = v:true
 else
     " local copilot
-    let g:copilot_enabled = v:false
-    let g:copilot_no_tab_map = v:true
+    "let g:copilot_enabled = v:false
+    "let g:copilot_no_tab_map = v:true
 
-    imap <silent><script><expr> <C-Tab> copilot#Accept("\<CR>")
+    "imap <silent><script><expr> <C-Tab> copilot#Accept("\<CR>")
 endif
 
-imap <D-]> <Plug>(copilot-accept-word)
-
-" Tabby
-let g:tabby_trigger_mode = 'manual'
+"imap <D-]> <Plug>(copilot-accept-word)
 
 " load Lua config
 if has('nvim')
