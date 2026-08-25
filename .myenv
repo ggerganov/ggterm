@@ -36,7 +36,7 @@ alias mc="$(which mc) -u"
 source ~/.myenv.local
 
 alias llama-mac="pgrep -f 'ssh -fNL 8013:localhost:8013 ggerganov@gg-studio' || ssh -fNL 8013:localhost:8013 ggerganov@gg-studio"
-alias llama-dgx="pgrep -f 'ssh -fNL 8023:localhost:8023 ggml@gg-spark'       || ssh -fNL 8023:localhost:8023 ggml@gg-spark"
+alias llama-dgx="pgrep -f 'ssh -fNL 8023:localhost:8023 ggml@gg-spark-0'     || ssh -fNL 8023:localhost:8023 ggml@gg-spark-0"
 
 pr2wt() {
     if [[ $# -gt 1 ]]; then

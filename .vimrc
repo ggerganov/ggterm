@@ -613,6 +613,14 @@ let g:llama_config = {
     \ 'keymap_inst_trigger': '<C-I>',
     \ }
 
+let g:llama_config.profiles = {
+    \ 'mac': 'http://127.0.0.1:8013',
+    \ 'dgx': 'http://127.0.0.1:8023',
+    \ 'rtx': 'http://127.0.0.1:8033',
+    \ }
+
+let g:llama_config.profile = 'dgx'
+
 " show whitespace chars
 set list
 set listchars=tab:🡒\ ,space:·,nbsp:␣,extends:⟩,precedes:⟨
