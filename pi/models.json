@@ -12,6 +12,19 @@
                 }
             ]
         },
+        "llama-cpp-mac-dsv4": {
+            "baseUrl": "http://127.0.0.1:8013/v1",
+            "api": "openai-completions",
+            "apiKey": "none",
+            "models": [
+                {
+                    "id": "agent-dsv4",
+                    "input": ["text"],
+                    "contextWindow": 524288,
+                    "maxTokens": 196608
+                }
+            ]
+        },
         "llama-cpp-dgx": {
             "baseUrl": "http://127.0.0.1:8023/v1",
             "api": "openai-completions",
