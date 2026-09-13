@@ -71,29 +71,33 @@ wc2wt() {
 # ggpi: run pi against a local llama provider
 # usage: ggpi <short> [model] [--] [messages...]
 # no args: list available options
-# format: short:provider:model1,model2,...
+# format: short:provider:model1,model2,...:model-name
+# model-name is a maintained, human-readable label for the model actually served
+# by that provider (used for the stderr line and herdr tab naming).
 GGPI_PROVIDERS=(
-    "m2:llama-mac-m2:agent-qwen3.8,agent-dsv4"
-    "m5:llama-mac-m5:agent-dsv4"
-    "dgx:llama-dgx:agent-dsv4"
-    "rtx:llama-rtx:agent-qwen3.8"
-    "strix:llama-strix:agent-dsv4"
+    "m2:llama-mac-m2:agent-dsv4:DeepSeek-V4-Flash-Vision-Exp"
+    "m5:llama-mac-m5:agent-dsv4:DeepSeek-V4-Flash-Vision-Exp"
+    "dgx:llama-dgx:agent-dsv4:DeepSeek-V4-Flash-Vision-Exp"
+    "rtx:llama-rtx:agent-qwen3.8:Qwen3.8-27B"
+    "strix:llama-strix:agent-dsv4:DeepSeek-V4-Flash-Vision-Exp"
 )
 
 ggpi_list() {
-    printf "%-8s %-16s %s\n" "SHORT" "PROVIDER" "MODELS"
-    local entry short rest provider models
+    printf "%-8s %-16s %-12s %s\n" "SHORT" "PROVIDER" "MODELS" "MODEL"
+    local entry short rest provider models model_name
     for entry in "${GGPI_PROVIDERS[@]}"; do
         short=${entry%%:*}
         rest=${entry#*:}
         provider=${rest%%:*}
-        models=${rest#*:}
-        printf "%-8s %-16s %s\n" "$short" "$provider" "$models"
+        rest=${rest#*:}
+        models=${rest%%:*}
+        model_name=${rest#*:}
+        printf "%-8s %-16s %-12s %s\n" "$short" "$provider" "$models" "$model_name"
     done
 }
 
 ggpi() {
-    local entry short rest provider models model tab_id
+    local entry short rest provider models model model_name tab_id
 
     if [[ -z "$1" ]]; then
         echo "Usage: ggpi <short> [model] [--] [messages...]"
@@ -114,7 +118,9 @@ ggpi() {
         if [[ "$short" == "$1" ]]; then
             rest=${entry#*:}
             provider=${rest%%:*}
-            models=${rest#*:}
+            rest=${rest#*:}
+            models=${rest%%:*}
+            model_name=${rest#*:}
             break
         fi
     done
@@ -138,13 +144,17 @@ ggpi() {
     fi
     [[ -z "$model" ]] && model=$(echo "$models" | cut -d',' -f1)
 
-    # if running under herdr, name the current tab after the selected provider/model
+    echo "ggpi: $provider: $model_name" >&2
+
+    # if running under herdr, name the current tab after the provider/model
     if [[ -n "$HERDR_ENV" ]]; then
         tab_id=$(herdr pane current 2>/dev/null | jq -r '.result.pane.tab_id // empty')
         if [[ -n "$tab_id" ]]; then
-            herdr tab rename "$tab_id" "$provider:$model" 2>/dev/null
+            herdr tab rename "$tab_id" "$provider:$model_name" 2>/dev/null
         fi
     fi
+
+    export PI_MODEL_NAME="$model_name"
 
     pi --offline -nc --provider "$provider" --model "$model" "$@"
 }
