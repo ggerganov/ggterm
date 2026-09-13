@@ -68,8 +68,77 @@ wc2wt() {
     fi
 }
 
+# ggpi: run pi against a local llama provider
+# usage: ggpi <short> [model] [--] [messages...]
+# no args: list available options
+# format: short:provider:model1,model2,...
+GGPI_PROVIDERS=(
+    "m2:llama-mac-m2:agent-qwen3.8,agent-dsv4"
+    "m5:llama-mac-m5:agent-dsv4"
+    "dgx:llama-dgx:agent-dsv4"
+    "rtx:llama-rtx:agent-qwen3.8"
+    "strix:llama-strix:agent-dsv4"
+)
+
+ggpi_list() {
+    printf "%-8s %-16s %s\n" "SHORT" "PROVIDER" "MODELS"
+    local entry short rest provider models
+    for entry in "${GGPI_PROVIDERS[@]}"; do
+        short=${entry%%:*}
+        rest=${entry#*:}
+        provider=${rest%%:*}
+        models=${rest#*:}
+        printf "%-8s %-16s %s\n" "$short" "$provider" "$models"
+    done
+}
+
 ggpi() {
-    pi --offline -nc
+    local entry short rest provider models model
+
+    if [[ -z "$1" ]]; then
+        echo "Usage: ggpi <short> [model] [--] [messages...]"
+        echo
+        ggpi_list
+        echo
+        echo "Examples:"
+        echo "  ggpi m2              # m2, first (default) model"
+        echo "  ggpi m2 agent-dsv4   # m2 with a specific model"
+        echo "  ggpi rtx 'fix the bug'  # rtx (default model) with a prompt"
+        return 1
+    fi
+
+    # find the provider matching the short name
+    provider=""; models=""
+    for entry in "${GGPI_PROVIDERS[@]}"; do
+        short=${entry%%:*}
+        if [[ "$short" == "$1" ]]; then
+            rest=${entry#*:}
+            provider=${rest%%:*}
+            models=${rest#*:}
+            break
+        fi
+    done
+
+    if [[ -z "$provider" ]]; then
+        echo "ggpi: unknown provider '$1'" >&2
+        echo >&2
+        ggpi_list >&2
+        return 1
+    fi
+
+    # drop the short name
+    shift
+
+    # the next arg is a model only if it's valid for this provider; otherwise
+    # it (and the rest) are the prompt. default to the provider's first model.
+    model=""
+    if [[ -n "${1:-}" && ",${models}," == *",${1},"* ]]; then
+        model=$1
+        shift
+    fi
+    [[ -z "$model" ]] && model=$(echo "$models" | cut -d',' -f1)
+
+    pi --offline -nc --provider "$provider" --model "$model" "$@"
 }
 
 # show most recent branches

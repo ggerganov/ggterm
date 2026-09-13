@@ -1,51 +1,72 @@
 {
     "providers": {
-        "llama-cpp-mac": {
-            "baseUrl": "http://127.0.0.1:8013/v1",
+        "llama-mac-m2": {
+            "baseUrl": "http://gg-studio:8013/v1",
             "api": "openai-completions",
             "apiKey": "none",
             "models": [
                 {
-                    "id": "pi",
+                    "id": "agent-qwen3.8",
                     "input": ["text", "image"],
+                    "contextWindow": 262144,
                     "maxTokens": 196608
-                }
-            ]
-        },
-        "llama-cpp-mac-dsv4": {
-            "baseUrl": "http://127.0.0.1:8013/v1",
-            "api": "openai-completions",
-            "apiKey": "none",
-            "models": [
+                },
                 {
                     "id": "agent-dsv4",
-                    "input": ["text"],
+                    "input": ["text", "image"],
                     "contextWindow": 524288,
                     "maxTokens": 196608
                 }
             ]
         },
-        "llama-cpp-dgx": {
-            "baseUrl": "http://127.0.0.1:8023/v1",
+        "llama-mac-m5": {
+            "baseUrl": "http://gg-mbp-m5-1:8013/v1",
             "api": "openai-completions",
             "apiKey": "none",
             "models": [
                 {
-                    "id": "pi",
+                    "id": "agent-dsv4",
                     "input": ["text", "image"],
+                    "contextWindow": 524288,
                     "maxTokens": 196608
                 }
             ]
         },
-        "llama-cpp-rtx": {
-            "baseUrl": "http://127.0.0.1:8033/v1",
+        "llama-dgx": {
+            "baseUrl": "http://gg-spark-0:8013/v1",
             "api": "openai-completions",
             "apiKey": "none",
             "models": [
                 {
-                    "id": "pi",
+                    "id": "agent-dsv4",
+                    "input": ["text", "image"],
+                    "contextWindow": 131072,
+                    "maxTokens": 196608
+                }
+            ]
+        },
+        "llama-rtx": {
+            "baseUrl": "http://homepc-2.shad-beta.ts.net:8033/v1",
+            "api": "openai-completions",
+            "apiKey": "none",
+            "models": [
+                {
+                    "id": "agent-qwen3.8",
                     "input": ["text", "image"],
                     "contextWindow": 196608,
+                    "maxTokens": 196608
+                }
+            ]
+        },
+        "llama-strix": {
+            "baseUrl": "http://gg-strix-0:8013/v1",
+            "api": "openai-completions",
+            "apiKey": "none",
+            "models": [
+                {
+                    "id": "agent-dsv4",
+                    "input": ["text", "image"],
+                    "contextWindow": 262144,
                     "maxTokens": 196608
                 }
             ]
