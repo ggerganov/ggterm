@@ -40,7 +40,7 @@
                 {
                     "id": "agent-dsv4",
                     "input": ["text", "image"],
-                    "contextWindow": 131072,
+                    "contextWindow": 524288,
                     "maxTokens": 196608
                 }
             ]
