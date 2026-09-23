@@ -26,8 +26,8 @@
             "models": [
                 {
                     "id": "agent-dsv4",
-                    "input": ["text", "image"],
-                    "contextWindow": 524288,
+                    "input": ["text"],
+                    "contextWindow": 262144,
                     "maxTokens": 196608
                 }
             ]
@@ -40,7 +40,7 @@
                 {
                     "id": "agent-dsv4",
                     "input": ["text", "image"],
-                    "contextWindow": 524288,
+                    "contextWindow": 262144,
                     "maxTokens": 196608
                 }
             ]
@@ -53,8 +53,8 @@
                 {
                     "id": "agent-qwen3.8",
                     "input": ["text", "image"],
-                    "contextWindow": 196608,
-                    "maxTokens": 196608
+                    "contextWindow": 131072,
+                    "maxTokens": 131072
                 }
             ]
         },
