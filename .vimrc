@@ -600,13 +600,13 @@ endif
 
 let g:llama_config = {
     \ 'model_fim': 'fim',
-    \ 'endpoint_fim': 'http://127.0.0.1:8013/infill',
+    \ 'endpoint_fim': '',
     \ 'show_info': 2,
     \ 'ring_n_chunks': 32,
     \ 'n_cmpl': 3,
     \
     \ 'model_inst': 'pi',
-    \ 'endpoint_inst': 'http://127.0.0.1:8013/v1/chat/completions',
+    \ 'endpoint_inst': '',
     \
     \ 'keymap_fim_trigger': '<C-F>',
     \ 'keymap_fim_accept_word': '<C-B>',
@@ -619,7 +619,7 @@ let g:llama_config.profiles = {
     \ 'rtx': 'http://100.111.34.101:8033',
     \ }
 
-let g:llama_config.profile = 'rtx'
+let g:llama_config.profile = 'none'
 
 " show whitespace chars
 set list
