@@ -16,6 +16,12 @@
                     "input": ["text", "image"],
                     "contextWindow": 524288,
                     "maxTokens": 196608
+                },
+                {
+                    "id": "agent-mimo",
+                    "input": ["text", "image"],
+                    "contextWindow": 131072,
+                    "maxTokens": 131072
                 }
             ]
         },
@@ -39,6 +45,12 @@
             "models": [
                 {
                     "id": "agent-dsv4",
+                    "input": ["text", "image"],
+                    "contextWindow": 262144,
+                    "maxTokens": 196608
+                },
+                {
+                    "id": "agent-mimo",
                     "input": ["text", "image"],
                     "contextWindow": 262144,
                     "maxTokens": 196608

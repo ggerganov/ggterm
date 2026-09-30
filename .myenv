@@ -75,9 +75,11 @@ wc2wt() {
 # model-name is a maintained, human-readable label for the model actually served
 # by that provider (used for the stderr line and herdr tab naming).
 GGPI_PROVIDERS=(
-    "m2:llama-mac-m2:agent-dsv4:DeepSeek-V4-Flash-Vision-Exp"
+    "m2-dsv4:llama-mac-m2:agent-dsv4:DeepSeek-V4-Flash-Vision-Exp"
+    "m2-mimo:llama-mac-m2:agent-mimo:MiMo-V2.6-Flash-MOPD"
     "m5:llama-mac-m5:agent-dsv4:DeepSeek-V4-Flash-Vision-Exp"
-    "dgx:llama-dgx:agent-dsv4:DeepSeek-V4-Flash-Vision-Exp"
+    "dgx-dsv4:llama-dgx:agent-dsv4:DeepSeek-V4-Flash-Vision-Exp"
+    "dgx-mimo:llama-dgx:agent-mimo:MiMo-V2.6-Flash-MOPD"
     "rtx:llama-rtx:agent-qwen3.8:Qwen3.8-27B"
     "strix:llama-strix:agent-dsv4:DeepSeek-V4-Flash-Vision-Exp"
 )
