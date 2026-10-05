@@ -80,12 +80,13 @@ GGPI_PROVIDERS=(
     "m5:llama-mac-m5:agent-dsv4:DeepSeek-V4-Flash-Vision-Exp"
     "dgx-dsv4:llama-dgx:agent-dsv4:DeepSeek-V4-Flash-Vision-Exp"
     "dgx-mimo:llama-dgx:agent-mimo:MiMo-V2.6-Flash-MOPD"
-    "rtx:llama-rtx:agent-qwen3.8:Qwen3.8-27B"
+    "rtx-qwen3.8:llama-rtx:agent-qwen3.8:Qwen3.8-27B"
+    "rtx-qwen4:llama-rtx:agent-qwen4:Qwen3.8-Flash-Next"
     "strix:llama-strix:agent-dsv4:DeepSeek-V4-Flash-Vision-Exp"
 )
 
 ggpi_list() {
-    printf "%-8s %-16s %-12s %s\n" "SHORT" "PROVIDER" "MODELS" "MODEL"
+    printf "%-16s %-16s %-12s %s\n" "SHORT" "PROVIDER" "MODELS" "MODEL"
     local entry short rest provider models model_name
     for entry in "${GGPI_PROVIDERS[@]}"; do
         short=${entry%%:*}
@@ -94,7 +95,7 @@ ggpi_list() {
         rest=${rest#*:}
         models=${rest%%:*}
         model_name=${rest#*:}
-        printf "%-8s %-16s %-12s %s\n" "$short" "$provider" "$models" "$model_name"
+        printf "%-16s %-16s %-12s %s\n" "$short" "$provider" "$models" "$model_name"
     done
 }
 
