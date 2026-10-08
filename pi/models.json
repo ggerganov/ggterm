@@ -83,7 +83,13 @@
                 {
                     "id": "agent-qwen4",
                     "input": ["text", "image"],
-                    "contextWindow": 196608,
+                    "contextWindow": 131072,
+                    "maxTokens": 131072
+                },
+                {
+                    "id": "agent-glm",
+                    "input": ["text", "image"],
+                    "contextWindow": 131072,
                     "maxTokens": 131072
                 },
             ]
