@@ -86,7 +86,8 @@ GGPI_PROVIDERS=(
     "rtx-qwen3.8:llama-rtx:agent-qwen3.8:Qwen3.8-27B"
     "rtx-qwen4:llama-rtx:agent-qwen4:Qwen3.8-Flash-Next"
     "rtx-glm:llama-rtx:agent-glm:GLM-5.3-Flash"
-    "strix:llama-strix:agent-dsv4:DeepSeek-V4-Flash-Vision-Exp"
+    "strix-dsv4:llama-strix:agent-dsv4:DeepSeek-V4-Flash-Vision-Exp"
+    "strix-mimo:llama-strix:agent-mimo:MiMo-V2.6-Flash-MOPD"
 )
 
 ggpi_list() {
