@@ -47,6 +47,12 @@
                     "input": ["text"],
                     "contextWindow": 262144,
                     "maxTokens": 196608
+                },
+                {
+                    "id": "agent-qwen4",
+                    "input": ["text", "image"],
+                    "contextWindow": 262144,
+                    "maxTokens": 196608
                 }
             ]
         },

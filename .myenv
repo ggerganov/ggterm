@@ -82,7 +82,7 @@ GGPI_PROVIDERS=(
     "m2-dsv4:llama-mac-m2:agent-dsv4:DeepSeek-V4-Flash-Vision-Exp"
     "m2-mimo:llama-mac-m2:agent-mimo:MiMo-V2.6-Flash-MOPD"
     "m2-glm:llama-mac-m2:agent-glm:GLM-5.3-Flash"
-    "m5:llama-mac-m5:agent-dsv4:DeepSeek-V4-Flash-Vision-Exp"
+    "m5-qwen4:llama-mac-m5:agent-qwen4:Qwen3.8-Flash-Next"
     "dgx-dsv4:llama-dgx:agent-dsv4:DeepSeek-V4-Flash-Vision-Exp"
     "dgx-mimo:llama-dgx:agent-mimo:MiMo-V2.6-Flash-MOPD"
     "dgx-glm:llama-dgx:agent-glm:GLM-5.3-Flash"
