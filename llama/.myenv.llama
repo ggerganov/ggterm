@@ -4,6 +4,8 @@
 # format: <short> <provider> <alias1,alias2,...> <model-name> <hardware>
 # fields are space-separated, hardware is the rest of the line (may contain spaces)
 # --spec runs a planning session: appends $GGPI_SPEC_PROMPT (default ~/.pi/agent/SPEC.md)
+# personal rules are always appended when found: $GGPI_APPEND_SYSTEM (default <repo-root>/.pi/gg/APPEND_SYSTEM.md)
+# repo skills under <repo-root>/skills are loaded when the folder exists
 GGPI_PROVIDERS=(
     "m2-qwen3.8    llama-mac-m2   agent-qwen3.8   ggml-org/Qwen3.8-27B-GGUF Mac Studio, M2 Ultra, 192GB"
     "m2-qwen4      llama-mac-m2   agent-qwen4     ggml-org/Qwen3.8-Flash-Next-GGUF Mac Studio, M2 Ultra, 192GB"
@@ -34,8 +36,9 @@ _ggpi_slug() {
 }
 
 ggpi() {
-    local entry short provider model_alias model model_name hardware tab_id spec=0 spec_prompt spec_slug
-    local -a spec_args=() _ggpi_args=()
+    local entry short provider model_alias model model_name hardware tab_id spec=0 spec_prefix="" spec_prompt spec_slug
+    local repo_root append_system
+    local -a sys_args=() skill_args=() spec_args=() _ggpi_args=()
     local arg seen_sep=0
 
     # consume --spec from the args before the first --
@@ -44,6 +47,7 @@ ggpi() {
             seen_sep=1
         elif [[ "$arg" == "--spec" ]]; then
             spec=1
+            spec_prefix="spec:"
             continue
         fi
         _ggpi_args+=( "$arg" )
@@ -92,6 +96,20 @@ ggpi() {
 
     echo "ggpi: $provider: $model_name [$hardware]" >&2
 
+    # append the personal rules on top of the main system prompt (.pi/gg is not auto-discovered)
+    repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
+    append_system=${GGPI_APPEND_SYSTEM:-${repo_root:+$repo_root/.pi/gg/APPEND_SYSTEM.md}}
+    if [[ -n "$append_system" && -f "$append_system" ]]; then
+        sys_args=( --append-system-prompt "$append_system" )
+        echo "ggpi: append: ${append_system#$HOME/}" >&2
+    fi
+
+    # pi only discovers skills under .pi/skills, so pass the repo's own folder explicitly
+    if [[ -n "$repo_root" && -d "$repo_root/skills" ]]; then
+        skill_args=( --skill "$repo_root/skills" )
+        echo "ggpi: skill: ${repo_root#$HOME/}/skills" >&2
+    fi
+
     # --spec: append the planning prompt and pin the task file for this session
     if (( spec )); then
         spec_prompt=${GGPI_SPEC_PROMPT:-$HOME/.pi/agent/SPEC.md}
@@ -118,12 +136,12 @@ ggpi() {
     if [[ -n "$HERDR_ENV" ]]; then
         tab_id=$(herdr pane current 2>/dev/null | jq -r '.result.pane.tab_id // empty')
         if [[ -n "$tab_id" ]]; then
-            herdr tab rename "$tab_id" "${spec:+spec:}$provider:$model_name" 2>/dev/null
+            herdr tab rename "$tab_id" "$spec_prefix$provider:$model_name" 2>/dev/null
         fi
     fi
 
     export PI_MODEL_NAME="$model_name"
     export PI_HARDWARE="$hardware"
 
-    pi --offline -nc --provider "$provider" --model "$model" ${spec_args[@]+"${spec_args[@]}"} "$@"
+    pi --offline -nc --provider "$provider" --model "$model" ${sys_args[@]+"${sys_args[@]}"} ${skill_args[@]+"${skill_args[@]}"} ${spec_args[@]+"${spec_args[@]}"} "$@"
 }
