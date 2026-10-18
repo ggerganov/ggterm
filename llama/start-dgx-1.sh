@@ -12,6 +12,6 @@ bash "$BASE_DIR/stop-dgx-1.sh"
 sleep 1
 
 start_rpc_server
-start_ggmcp spark-1 "Tools running on spark-1"
+start_ggmcp spark-1 'Tools running on DGX Spark (spark-1). See README-MCP.md for more info.'
 
 echo "[+] Done"

@@ -10,6 +10,6 @@ bash "$BASE_DIR/stop-m5.sh"
 sleep 1
 
 start_llama_server preset-m5-128gb
-start_ggmcp m5 "Tools for the MacBook M5 Max (m5)"
+start_ggmcp m5 'Tools for the MacBook M5 Max (m5). See README-MCP.md for more info.'
 
 echo "[+] Done"

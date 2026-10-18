@@ -12,6 +12,6 @@ bash "$BASE_DIR/stop-rtx.sh"
 sleep 1
 
 start_llama_server preset-rtx-32gb
-start_ggmcp rtx "Tools for the RTX 5090 machine (rtx)"
+start_ggmcp rtx 'Tools for the RTX 5090 machine (rtx). See README-MCP.md for more info.'
 
 echo "[+] Done"
