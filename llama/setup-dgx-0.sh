@@ -34,7 +34,7 @@ setup_repo() {
     fi
 }
 
-setup_repo https://github.com/ggml-org/llama.cpp gg/glm5 1 -DGGML_CUDA=ON
+setup_repo https://github.com/ggml-org/llama.cpp gg/glm5 1 -DGGML_CUDA=ON -DGGML_RPC=ON
 setup_repo https://github.com/ggerganov/ggmcp gg/qwen4-2 1
 
 echo "[+] Done"
