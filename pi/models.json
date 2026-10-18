@@ -77,26 +77,26 @@
                 {
                     "id": "agent-dsv4",
                     "input": ["text", "image"],
-                    "contextWindow": 32768,
-                    "maxTokens": 32768
+                    "contextWindow": 131072,
+                    "maxTokens": 131072
                 },
                 {
                     "id": "agent-qwen3.8",
                     "input": ["text", "image"],
-                    "contextWindow": 32768,
-                    "maxTokens": 32768
+                    "contextWindow": 131072,
+                    "maxTokens": 131072
                 },
                 {
                     "id": "agent-qwen4",
                     "input": ["text", "image"],
-                    "contextWindow": 32768,
-                    "maxTokens": 32768
+                    "contextWindow": 131072,
+                    "maxTokens": 131072
                 },
                 {
                     "id": "agent-glm",
                     "input": ["text", "image"],
-                    "contextWindow": 32768,
-                    "maxTokens": 32768
+                    "contextWindow": 131072,
+                    "maxTokens": 131072
                 }
             ]
         },
