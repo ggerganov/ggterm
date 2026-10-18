@@ -2,7 +2,7 @@
 
 set -e
 
-BASE_DIR=${BASE_DIR:-$(pwd)}
+BASE_DIR=${BASE_DIR:-$(cd "$(dirname "$0")" && pwd)}
 cd "$BASE_DIR"
 
 LLAMA_SERVER=$BASE_DIR/llama.cpp/build/bin/llama-server

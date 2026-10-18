@@ -2,7 +2,7 @@
 
 set -e
 
-BASE_DIR=${BASE_DIR:-$(pwd)}
+BASE_DIR=${BASE_DIR:-$(cd "$(dirname "$0")" && pwd)}
 
 setup_repo() {
     local repo=$1

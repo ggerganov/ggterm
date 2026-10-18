@@ -1,0 +1,7 @@
+llama.cpp/
+ggmcp/
+preset-cuda-32gb/
+logs/
+log-llama.txt
+log-ggmcp.txt
+*.pid
