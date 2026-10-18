@@ -1,0 +1,129 @@
+# ggpi: run pi against a local llama.cpp provider, sourced by ~/.myenv
+# usage: ggpi <short> [model] [--spec] [--] [messages...]
+# no args: list available options
+# format: <short> <provider> <alias1,alias2,...> <model-name> <hardware>
+# fields are space-separated, hardware is the rest of the line (may contain spaces)
+# --spec runs a planning session: appends $GGPI_SPEC_PROMPT (default ~/.pi/agent/SPEC.md)
+GGPI_PROVIDERS=(
+    "m2-dsv4       llama-mac-m2   agent-dsv4      ggml-org/DeepSeek-V4-Flash-Vision-Exp-GGUF Mac Studio, M2 Ultra, 192GB"
+    "m2-mimo       llama-mac-m2   agent-mimo      ggml-org/MiMo-V2.6-Flash-MOPD-GGUF Mac Studio, M2 Ultra, 192GB"
+    "m2-glm        llama-mac-m2   agent-glm       ggml-org/GLM-5.3-Flash-GGUF Mac Studio, M2 Ultra, 192GB"
+    "m5-qwen4      llama-mac-m5   agent-qwen4     ggml-org/Qwen3.8-Flash-Next-GGUF MacBook, M5 Max, 128GB"
+    "dgx-dsv4      llama-dgx      agent-dsv4      ggml-org/DeepSeek-V4-Flash-Vision-Exp-GGUF 2x DGX Spark (RDMA, TP=2)"
+    "dgx-mimo      llama-dgx      agent-mimo      ggml-org/MiMo-V2.6-Flash-MOPD-GGUF 2x DGX Spark (RDMA, TP=2)"
+    "dgx-glm       llama-dgx      agent-glm       ggml-org/GLM-5.3-Flash-GGUF 2x DGX Spark (RDMA, TP=2)"
+    "rtx-dsv4      llama-rtx      agent-dsv4      ggml-org/DeepSeek-V4-Flash-Vision-Exp-GGUF RTX 5090 32GB, DDR5 128GB"
+    "rtx-qwen3.8   llama-rtx      agent-qwen3.8   ggml-org/Qwen3.8-27B-GGUF RTX 5090 32GB, DDR5 128GB"
+    "rtx-qwen4     llama-rtx      agent-qwen4     ggml-org/Qwen3.8-Flash-Next-GGUF RTX 5090 32GB, DDR5 128GB"
+    "rtx-glm       llama-rtx      agent-glm       ggml-org/GLM-5.3-Flash-GGUF RTX 5090 32GB, DDR5 128GB"
+    "strix-dsv4    llama-strix    agent-dsv4      ggml-org/DeepSeek-V4-Flash-Vision-Exp-GGUF 2x Strix Halo (Ethernet, PP=2)"
+    "strix-mimo    llama-strix    agent-mimo      ggml-org/MiMo-V2.6-Flash-MOPD-GGUF 2x Strix Halo (Ethernet, PP=2)"
+)
+
+ggpi_list() {
+    printf "%-13s %-14s %-15s %-44s %s\n" "SHORT" "PROVIDER" "ALIAS" "MODEL" "HARDWARE"
+    local entry short provider model_alias model_name hardware
+    for entry in "${GGPI_PROVIDERS[@]}"; do
+        read -r short provider model_alias model_name hardware <<< "$entry"
+        printf "%-13s %-14s %-15s %-44s %s\n" "$short" "$provider" "$model_alias" "$model_name" "$hardware"
+    done
+}
+
+_ggpi_slug() {
+    echo "$*" | tr '[:upper:]' '[:lower:]' | LC_ALL=C tr -cs 'a-z0-9' '-' | cut -c1-48 | sed -e 's/^-*//' -e 's/-*$//'
+}
+
+ggpi() {
+    local entry short provider model_alias model model_name hardware tab_id spec=0 spec_prompt spec_slug
+    local -a spec_args=() _ggpi_args=()
+    local arg seen_sep=0
+
+    # consume --spec from the args before the first --
+    for arg in "$@"; do
+        if (( seen_sep )) || [[ "$arg" == "--" ]]; then
+            seen_sep=1
+        elif [[ "$arg" == "--spec" ]]; then
+            spec=1
+            continue
+        fi
+        _ggpi_args+=( "$arg" )
+    done
+    set -- ${_ggpi_args[@]+"${_ggpi_args[@]}"}
+
+    if [[ -z "$1" ]]; then
+        echo "Usage: ggpi <short> [model] [--spec] [--] [messages...]"
+        echo
+        ggpi_list
+        echo
+        echo "Examples:"
+        echo "  ggpi m2-dsv4                          # m2 machine, DeepSeek"
+        echo "  ggpi rtx-qwen4 'fix the bug'          # rtx machine, Qwen, with a prompt"
+        echo "  ggpi dgx-glm agent-glm 'hi'           # alias is optional before the prompt"
+        echo "  ggpi m5 --spec                        # planning session, then dictate the task"
+        return 1
+    fi
+
+    # find the provider matching the short name
+    provider=""; model_alias=""
+    for entry in "${GGPI_PROVIDERS[@]}"; do
+        [[ "${entry%% *}" == "$1" ]] || continue
+        read -r short provider model_alias model_name hardware <<< "$entry"
+        break
+    done
+
+    if [[ -z "$provider" ]]; then
+        echo "ggpi: unknown provider '$1'" >&2
+        echo >&2
+        ggpi_list >&2
+        return 1
+    fi
+
+    # drop the short name
+    shift
+
+    # the next arg is a model only if it's valid for this provider; otherwise
+    # it (and the rest) are the prompt. default to the provider's first model.
+    model=""
+    if [[ -n "${1:-}" && ",${model_alias}," == *",${1},"* ]]; then
+        model=$1
+        shift
+    fi
+    [[ -z "$model" ]] && model=$(echo "$model_alias" | cut -d',' -f1)
+
+    echo "ggpi: $provider: $model_name [$hardware]" >&2
+
+    # --spec: append the planning prompt and pin the task file for this session
+    if (( spec )); then
+        spec_prompt=${GGPI_SPEC_PROMPT:-$HOME/.pi/agent/SPEC.md}
+        if [[ ! -f "$spec_prompt" ]]; then
+            echo "ggpi: spec: no prompt found at $spec_prompt" >&2
+            return 1
+        fi
+
+        # no task description means no slug - the agent names the task file in the session
+        spec_slug=$(_ggpi_slug "$*")
+        mkdir -p .pi
+        spec_args=( --append-system-prompt "$spec_prompt" )
+        if [[ -n "$spec_slug" ]]; then
+            export GGPI_TASK_FILE="$PWD/.pi/task-${spec_slug}.md"
+            spec_args+=( --name "spec:$spec_slug" )
+            echo "ggpi: spec: ${spec_prompt#$HOME/} -> ${GGPI_TASK_FILE#$HOME/}" >&2
+        else
+            export GGPI_TASK_FILE=
+            echo "ggpi: spec: ${spec_prompt#$HOME/} -> .pi/task-<slug>.md, named in session" >&2
+        fi
+    fi
+
+    # if running under herdr, name the current tab after the provider/model
+    if [[ -n "$HERDR_ENV" ]]; then
+        tab_id=$(herdr pane current 2>/dev/null | jq -r '.result.pane.tab_id // empty')
+        if [[ -n "$tab_id" ]]; then
+            herdr tab rename "$tab_id" "${spec:+spec:}$provider:$model_name" 2>/dev/null
+        fi
+    fi
+
+    export PI_MODEL_NAME="$model_name"
+    export PI_HARDWARE="$hardware"
+
+    pi --offline -nc --provider "$provider" --model "$model" ${spec_args[@]+"${spec_args[@]}"} "$@"
+}

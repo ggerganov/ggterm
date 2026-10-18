@@ -25,6 +25,7 @@ echo "[+] Creating ~/.* symlinks"
 ln -f -s ${PWD}/.vimrc ~/.vimrc
 ln -f -s ${PWD}/.gvimrc ~/.gvimrc
 ln -f -s ${PWD}/.myenv ~/.myenv
+ln -f -s ${PWD}/llama/.myenv.llama ~/.myenv.llama
 ln -f -s ${PWD}/.gdbinit ~/.gdbinit
 ln -f -s ${PWD}/.gitconfig ~/.gitconfig
 ln -f -s ${PWD}/starship.toml ~/.config/starship.toml
