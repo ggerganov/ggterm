@@ -163,10 +163,12 @@ start_llama_server() {
 }
 
 start_rpc_server() {
+    local device=${1:-CUDA0}
+
     start_proc rpc-server "$LOG_RPC" "$RPC_SERVER" \
         --host 0.0.0.0 \
         --port "$RPC_PORT" \
-        -d CUDA0 \
+        -d "$device" \
         -c
 }
 
