@@ -17,17 +17,47 @@ stop_proc() {
     local name=$1
     local pattern=$2
     local pidfile=$BASE_DIR/$name.pid
+    local pids="$(pgrep -f "$pattern" | tr '\n' ' ')"
 
     if [ -f "$pidfile" ] ; then
-        local pid=$(cat "$pidfile")
-        if kill -0 "$pid" 2>/dev/null ; then
-            echo "[+] Stopping $name (pid $pid)"
-            kill "$pid"
-        fi
+        pids="$pids $(cat "$pidfile")"
         rm -f "$pidfile"
     fi
 
-    pkill -f "$pattern" 2>/dev/null || true
+    pids=$(echo $pids | tr ' ' '\n' | sort -un | tr '\n' ' ')
+    pids=$(echo $pids)
+
+    if [ -z "$pids" ] ; then
+        echo "[+] No running $name found"
+        return
+    fi
+
+    echo "[+] Stopping old $name: $pids"
+    local pid left
+    for pid in $pids ; do
+        echo "    - $pid: $(ps -p $pid -o args= 2>/dev/null)"
+        kill "$pid" 2>/dev/null || true
+    done
+
+    for _ in $(seq 1 20) ; do
+        left=""
+        for pid in $pids ; do
+            if kill -0 "$pid" 2>/dev/null ; then
+                left="$left $pid"
+            fi
+        done
+        if [ -z "$(echo $left)" ] ; then
+            break
+        fi
+        sleep 0.5
+    done
+
+    if [ -n "$(echo $left)" ] ; then
+        echo "[+] Force killing $name: $(echo $left)"
+        kill -9 $(echo $left) 2>/dev/null || true
+    else
+        echo "[+] Stopped $name"
+    fi
 }
 
 start_proc() {
@@ -52,7 +82,7 @@ start_proc() {
 
 stop_proc llama-server "$LLAMA_SERVER"
 stop_proc ggmcp "$GGMCP"
-sleep 2
+sleep 1
 
 export CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-0}
 
