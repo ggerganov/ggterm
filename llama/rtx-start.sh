@@ -87,7 +87,7 @@ sleep 1
 export CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-0}
 
 start_proc llama-server "$LOG_LLAMA" "$LLAMA_SERVER" \
-    --models-preset preset-cuda-32gb/preset.ini \
+    --models-preset preset-rtx-32gb/preset.ini \
     --log-prompts-dir ./logs \
     --fit off \
     --host 0.0.0.0 \

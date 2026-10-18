@@ -36,6 +36,5 @@ setup_repo() {
 
 setup_repo https://github.com/ggml-org/llama.cpp master 1 -DGGML_CUDA=ON
 setup_repo https://github.com/ggerganov/ggmcp gg/qwen4-2 1
-setup_repo https://huggingface.co/ggerganov/preset-cuda-32gb main 0
 
 echo "[+] Done"
