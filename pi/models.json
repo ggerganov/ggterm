@@ -8,8 +8,8 @@
                 {
                     "id": "agent-qwen3.8",
                     "input": ["text", "image"],
-                    "contextWindow": 65536,
-                    "maxTokens": 65536
+                    "contextWindow": 131072,
+                    "maxTokens": 131072
                 },
                 {
                     "id": "agent-dsv4",
