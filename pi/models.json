@@ -1,21 +1,21 @@
 {
     "providers": {
         "llama-mac-m2": {
-            "baseUrl": "http://gg-studio:8013/v1",
+            "baseUrl": "http://gg-studio:9932/v1",
             "api": "openai-completions",
             "apiKey": "none",
             "models": [
                 {
                     "id": "agent-qwen3.8",
                     "input": ["text", "image"],
-                    "contextWindow": 262144,
-                    "maxTokens": 196608
+                    "contextWindow": 65536,
+                    "maxTokens": 65536
                 },
                 {
                     "id": "agent-dsv4",
                     "input": ["text", "image"],
-                    "contextWindow": 524288,
-                    "maxTokens": 196608
+                    "contextWindow": 131072,
+                    "maxTokens": 131072
                 },
                 {
                     "id": "agent-mimo",
@@ -38,35 +38,23 @@
             ]
         },
         "llama-mac-m5": {
-            "baseUrl": "http://gg-mbp-m5-1:8013/v1",
+            "baseUrl": "http://gg-mbp-m5-1:9932/v1",
             "api": "openai-completions",
             "apiKey": "none",
             "models": [
                 {
-                    "id": "agent-dsv4",
-                    "input": ["text"],
-                    "contextWindow": 262144,
-                    "maxTokens": 196608
-                },
-                {
                     "id": "agent-qwen4",
                     "input": ["text", "image"],
-                    "contextWindow": 262144,
-                    "maxTokens": 196608
+                    "contextWindow": 65536,
+                    "maxTokens": 65536
                 }
             ]
         },
         "llama-dgx": {
-            "baseUrl": "http://gg-spark-0:8013/v1",
+            "baseUrl": "http://gg-spark-0:9932/v1",
             "api": "openai-completions",
             "apiKey": "none",
             "models": [
-                {
-                    "id": "agent-dsv4",
-                    "input": ["text", "image"],
-                    "contextWindow": 262144,
-                    "maxTokens": 196608
-                },
                 {
                     "id": "agent-mimo",
                     "input": ["text", "image"],
@@ -82,47 +70,41 @@
             ]
         },
         "llama-rtx": {
-            "baseUrl": "http://homepc-2.shad-beta.ts.net:8033/v1",
+            "baseUrl": "http://homepc-2.shad-beta.ts.net:9932/v1",
             "api": "openai-completions",
             "apiKey": "none",
             "models": [
                 {
                     "id": "agent-dsv4",
                     "input": ["text", "image"],
-                    "contextWindow": 131072,
-                    "maxTokens": 131072
+                    "contextWindow": 32768,
+                    "maxTokens": 32768
                 },
                 {
                     "id": "agent-qwen3.8",
                     "input": ["text", "image"],
-                    "contextWindow": 131072,
-                    "maxTokens": 131072
+                    "contextWindow": 32768,
+                    "maxTokens": 32768
                 },
                 {
                     "id": "agent-qwen4",
                     "input": ["text", "image"],
-                    "contextWindow": 131072,
-                    "maxTokens": 131072
+                    "contextWindow": 32768,
+                    "maxTokens": 32768
                 },
                 {
                     "id": "agent-glm",
                     "input": ["text", "image"],
-                    "contextWindow": 131072,
-                    "maxTokens": 131072
+                    "contextWindow": 32768,
+                    "maxTokens": 32768
                 }
             ]
         },
         "llama-strix": {
-            "baseUrl": "http://gg-strix-0:8013/v1",
+            "baseUrl": "http://gg-strix-0:9932/v1",
             "api": "openai-completions",
             "apiKey": "none",
             "models": [
-                {
-                    "id": "agent-dsv4",
-                    "input": ["text", "image"],
-                    "contextWindow": 262144,
-                    "maxTokens": 196608
-                },
                 {
                     "id": "agent-mimo",
                     "input": ["text", "image"],

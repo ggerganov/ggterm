@@ -5,18 +5,18 @@
 # fields are space-separated, hardware is the rest of the line (may contain spaces)
 # --spec runs a planning session: appends $GGPI_SPEC_PROMPT (default ~/.pi/agent/SPEC.md)
 GGPI_PROVIDERS=(
+    "m2-qwen3.8    llama-mac-m2   agent-qwen3.8   ggml-org/Qwen3.8-27B-GGUF Mac Studio, M2 Ultra, 192GB"
+    "m2-qwen4      llama-mac-m2   agent-qwen4     ggml-org/Qwen3.8-Flash-Next-GGUF Mac Studio, M2 Ultra, 192GB"
     "m2-dsv4       llama-mac-m2   agent-dsv4      ggml-org/DeepSeek-V4-Flash-Vision-Exp-GGUF Mac Studio, M2 Ultra, 192GB"
     "m2-mimo       llama-mac-m2   agent-mimo      ggml-org/MiMo-V2.6-Flash-MOPD-GGUF Mac Studio, M2 Ultra, 192GB"
     "m2-glm        llama-mac-m2   agent-glm       ggml-org/GLM-5.3-Flash-GGUF Mac Studio, M2 Ultra, 192GB"
     "m5-qwen4      llama-mac-m5   agent-qwen4     ggml-org/Qwen3.8-Flash-Next-GGUF MacBook, M5 Max, 128GB"
-    "dgx-dsv4      llama-dgx      agent-dsv4      ggml-org/DeepSeek-V4-Flash-Vision-Exp-GGUF 2x DGX Spark (RDMA, TP=2)"
     "dgx-mimo      llama-dgx      agent-mimo      ggml-org/MiMo-V2.6-Flash-MOPD-GGUF 2x DGX Spark (RDMA, TP=2)"
     "dgx-glm       llama-dgx      agent-glm       ggml-org/GLM-5.3-Flash-GGUF 2x DGX Spark (RDMA, TP=2)"
     "rtx-dsv4      llama-rtx      agent-dsv4      ggml-org/DeepSeek-V4-Flash-Vision-Exp-GGUF RTX 5090 32GB, DDR5 128GB"
     "rtx-qwen3.8   llama-rtx      agent-qwen3.8   ggml-org/Qwen3.8-27B-GGUF RTX 5090 32GB, DDR5 128GB"
     "rtx-qwen4     llama-rtx      agent-qwen4     ggml-org/Qwen3.8-Flash-Next-GGUF RTX 5090 32GB, DDR5 128GB"
     "rtx-glm       llama-rtx      agent-glm       ggml-org/GLM-5.3-Flash-GGUF RTX 5090 32GB, DDR5 128GB"
-    "strix-dsv4    llama-strix    agent-dsv4      ggml-org/DeepSeek-V4-Flash-Vision-Exp-GGUF 2x Strix Halo (Ethernet, PP=2)"
     "strix-mimo    llama-strix    agent-mimo      ggml-org/MiMo-V2.6-Flash-MOPD-GGUF 2x Strix Halo (Ethernet, PP=2)"
 )
 

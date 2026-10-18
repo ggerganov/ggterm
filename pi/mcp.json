@@ -1,0 +1,32 @@
+{
+    "mcpServers": {
+        "rtx": {
+            "url": "http://homepc-2.shad-beta.ts.net:9933/mcp",
+            "description": "ggmcp on the RTX 5090 machine (rtx)"
+        },
+        "m5": {
+            "url": "http://gg-mbp-m5-1:9933/mcp",
+            "description": "ggmcp on the MacBook M5 Max (m5)"
+        },
+        "m2": {
+            "url": "http://gg-studio:9933/mcp",
+            "description": "ggmcp on the Mac Studio M2 Ultra (m2)"
+        },
+        "spark-0": {
+            "url": "http://gg-spark-0:9933/mcp",
+            "description": "ggmcp on DGX Spark spark-0"
+        },
+        "spark-1": {
+            "url": "http://gg-spark-1:9933/mcp",
+            "description": "ggmcp on DGX Spark spark-1"
+        },
+        "strix-0": {
+            "url": "http://gg-strix-0:9933/mcp",
+            "description": "ggmcp on Strix Halo strix-0"
+        },
+        "strix-1": {
+            "url": "http://gg-strix-1:9933/mcp",
+            "description": "ggmcp on Strix Halo strix-1"
+        }
+    }
+}
