@@ -42,7 +42,7 @@ start_proc llama-server "$LOG_LLAMA" "$LLAMA_SERVER" \
     --log-prompts-dir ./logs \
     --fit off \
     --host 0.0.0.0 \
-    --port 9931 \
+    --port 9932 \
     -lv 4 \
     --models-max 1 \
     --cors-origins '*' \
@@ -50,7 +50,7 @@ start_proc llama-server "$LOG_LLAMA" "$LLAMA_SERVER" \
 
 start_proc ggmcp "$LOG_GGMCP" "$GGMCP" \
     --host 0.0.0.0 \
-    --port 9932 \
+    --port 9933 \
     --alias m5 \
     --instructions "Tools for the MacBook M5 Max (m5)"
 
