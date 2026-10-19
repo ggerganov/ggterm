@@ -29,8 +29,8 @@ Pull requests (PRs):
   - Model: `<model>`, linked to its Hugging Face page - the link text is the plain model name
   - Stats: `<stats>`
 - Run `~/.pi/stats.sh "$PI_SESSION_FILE"` to get `<stats>` and write it as
-  `◷ <time> · ↑ <input tokens> · ↓ <output tokens> · ≡ <messages> · ⌨ <user messages>`,
-  e.g. `◷ 12.3m · ↑ 120k · ↓ 45k · ≡ 87 · ⌨ 6`
+  `◷ <agent time> · ⚙ <tool time> · ↑ <input tokens> · ↓ <output tokens> · ≡ <messages> · ⌨ <user messages>`,
+  e.g. `◷ 11.8m · ⚙ 45.2s · ↑ 120k · ↓ 45k · ≡ 87 · ⌨ 6`
 - Write these symbols as literal unicode in the PR description, never `:shortcodes:`, and keep
   commit trailers ASCII
 - If `PI_MODEL_NAME` or `PI_HARDWARE` is not set, ask the user and use their answer for `<model>` or `<hardware>`
