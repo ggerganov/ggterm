@@ -2,6 +2,14 @@
 # shared helpers for the per-machine llama.cpp scripts
 # machine scripts must set BASE_DIR and MACHINE before sourcing
 
+# the setup scripts take the git ref of each repo as an argument: a branch, a
+# tag or a commit hash. A hash is any 7-40 char hex string and is pinned in
+# detached HEAD:
+#   ./setup-rtx.sh                                   # machine defaults
+#   ./setup-rtx.sh --llama gg/glm5                   # branch or tag
+#   ./setup-rtx.sh --llama master --ggmcp gg/qwen4-2 # both repos
+#   ./setup-rtx.sh --llama 098ce526b546b5a190327c1da82929cee051b9ac  # commit
+
 LLAMA_DIR=${LLAMA_DIR:-$BASE_DIR/llama.cpp}
 GGMCP_DIR=${GGMCP_DIR:-$BASE_DIR/ggmcp}
 LLAMA_SERVER=$LLAMA_DIR/build/bin/llama-server
@@ -17,24 +25,109 @@ LLAMA_PORT=${LLAMA_PORT:-9932}
 GGMCP_PORT=${GGMCP_PORT:-9933}
 RPC_PORT=${RPC_PORT:-50052}
 
+setup_usage() {
+    echo "usage: $(basename "$0") [--llama <ref>] [--ggmcp <ref>]"
+    echo "       <ref> is a branch, a tag or a commit hash"
+    echo "       default: --llama $LLAMA_REF --ggmcp $GGMCP_REF"
+}
+
+# parse the setup scripts' arguments, the machine script sets the default refs
+parse_args() {
+    local flag
+
+    while [ $# -gt 0 ] ; do
+        case $1 in
+            --llama|--ggmcp)
+                flag=$1
+                shift
+
+                if [ -z "${1:-}" ] || [ "${1#-}" != "$1" ] ; then
+                    echo "[!] $flag requires a ref"
+                    setup_usage
+                    exit 1
+                fi
+
+                if [ "$flag" = "--llama" ] ; then
+                    LLAMA_REF=$1
+                else
+                    GGMCP_REF=$1
+                fi
+                shift
+                ;;
+            -h|--help)
+                setup_usage
+                exit 0
+                ;;
+            *)
+                echo "[!] Unknown option: $1"
+                setup_usage
+                exit 1
+                ;;
+        esac
+    done
+}
+
+is_commit() {
+    local ref=$1
+
+    case "$ref" in
+        '') return 1 ;;
+        *[!0-9a-fA-F]*) return 1 ;;
+    esac
+
+    [ ${#ref} -ge 7 ] && [ ${#ref} -le 40 ]
+}
+
 setup_repo() {
     local repo=$1
-    local branch=$2
+    local ref=$2
     local build=$3
     shift 3
 
     local name=$(basename "$repo")
     local dir=$BASE_DIR/$name
+    local commit=0
+
+    if is_commit "$ref" ; then
+        commit=1
+    fi
 
     if [ -d "$dir/.git" ] ; then
-        echo "[+] Updating $dir ($branch)"
-        git -C "$dir" fetch origin "$branch"
-        git -C "$dir" checkout "$branch"
-        git -C "$dir" reset --hard "origin/$branch"
+        echo "[+] Updating $dir ($ref)"
+
+        if [ "$commit" = "1" ] ; then
+            # fetch a commit by hash when the server allows it, a full fetch is the fallback
+            git -C "$dir" fetch --quiet --tags origin "$ref" 2> /dev/null \
+                || git -C "$dir" fetch --quiet --tags --prune origin
+        else
+            git -C "$dir" fetch --quiet --tags --prune origin
+        fi
     else
-        echo "[+] Cloning $repo ($branch) into $dir"
-        git clone --branch "$branch" "$repo" "$dir"
+        echo "[+] Cloning $repo ($ref) into $dir"
+
+        if [ "$commit" = "1" ] ; then
+            git clone --quiet "$repo" "$dir"
+        else
+            git clone --quiet --branch "$ref" "$repo" "$dir"
+        fi
     fi
+
+    if [ "$commit" = "1" ] ; then
+        if ! git -C "$dir" checkout --quiet --detach "$ref" 2> /dev/null ; then
+            echo "[!] $name: commit $ref not found in $dir"
+            exit 1
+        fi
+    elif ! git -C "$dir" checkout --quiet "$ref" 2> /dev/null ; then
+        echo "[!] $name: ref $ref not found in $dir"
+        exit 1
+    fi
+
+    # a branch is kept on top of its remote tip, a tag stays where it is
+    if git -C "$dir" rev-parse --quiet --verify "refs/remotes/origin/$ref" > /dev/null ; then
+        git -C "$dir" reset --quiet --hard "origin/$ref"
+    fi
+
+    echo "    - HEAD: $(git -C "$dir" rev-parse --short HEAD) $(git -C "$dir" log -1 --format=%s)"
 
     if command -v git-lfs &> /dev/null ; then
         git -C "$dir" lfs pull
