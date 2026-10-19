@@ -19,6 +19,7 @@ Coding:
 
 Pull requests (PRs):
 - New branch names are prefixed with "gg/"
+- Push PR branches to `origin` first
 - Before opening a pull request, ask the user to confirm the description
 - Don't explicitly wrap lines in the PR description (each paragraph and bullet is a single line)
 - When creating a pull request, look for the repository's PR template and follow it
