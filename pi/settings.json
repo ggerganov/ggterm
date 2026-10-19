@@ -1,0 +1,18 @@
+{
+  "lastChangelogVersion": "1.1.0",
+  "defaultProvider": "llama-mac-m2",
+  "defaultModel": "agent-dsv4",
+  "defaultTools": [
+    "+codemode"
+  ],
+  "theme": "dark",
+  "defaultThinkingLevel": "medium",
+  "showHardwareCursor": true,
+  "steeringMode": "one-at-a-time",
+  "collapseChangelog": false,
+  "compaction": {
+    "enabled": true,
+    "reserveTokens": 40960,
+    "keepRecentTokens": 24576
+  }
+}
