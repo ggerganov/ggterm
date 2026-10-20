@@ -5,6 +5,7 @@ General:
 - If an inline comment exceeds 2 lines, replace it with: `// note: TODO LATER`
 - PR and commit titles format: `<module> : <title>`. Lookup recents for examples
 - Don't try to build or run the code unless you are explicitly asked to do so
+- When the `codemode` tool is available, always use it to invoke other tools (e.g. `read`, `bash`, `edit`), not just MCP tools. Batch related tool calls into a single script instead of making them one at a time
 - Use the `gh` CLI tool when querying PRs, issues, or other GitHub resources
 - When a model name is needed, first try to get it from the `PI_MODEL_NAME` env var before asking the user
 - When a hardware description is needed, first try to get it from the `PI_HARDWARE` env var before asking the user
