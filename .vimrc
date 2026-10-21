@@ -102,7 +102,39 @@ set secure
 
 " share system clipboard
 "autocmd VimLeave * call system("xsel -ib", getreg("+"))
-vnoremap Y "+y
+
+" Y - yank to clipboard, prefixed with a `file:lines` header line
+" ^ - same, but the header uses the full absolute path
+function! s:CopyPos(...) range
+    let l:name = fnamemodify(bufname('%'), a:0 && a:1 ? ':p' : ':~:.')
+    let l:range = a:firstline == a:lastline ? '' . a:firstline : a:firstline . '-' . a:lastline
+    let l:cs = &commentstring =~# '%s' ? &commentstring : '# %s'
+    let l:header = printf(l:cs, (empty(l:name) ? '[No Name]' : l:name) . ':' . l:range)
+
+    let l:lines = getline(a:firstline, a:lastline)
+    let l:mode = visualmode()
+    let l:type = 'v'
+
+    if l:mode ==# 'V'
+        let l:type = 'V'
+        call add(l:lines, '')
+    elseif l:mode ==# "\<C-V>"
+        let l:c1 = virtcol("'<")
+        let l:c2 = virtcol("'>") - l:c1 + 1
+        let l:type = "\26" . l:c2
+        call map(l:lines, 'strpart(v:val, ' . (l:c1 - 1) . ', ' . l:c2 . ')')
+    elseif a:firstline == a:lastline
+        let l:lines[0] = strpart(l:lines[0], col("'<") - 1, col("'>") - col("'<") + 1)
+    else
+        let l:lines[0] = strpart(l:lines[0], col("'<") - 1)
+        let l:lines[-1] = strpart(l:lines[-1], 0, col("'>"))
+    endif
+
+    call setreg('+', [l:header] + l:lines, l:type)
+    echo l:header
+endfunction
+vnoremap <silent> Y :call <SID>CopyPos(0)<CR>`<
+vnoremap <silent> ^ :call <SID>CopyPos(1)<CR>`<
 
 " edit json
 let g:vim_json_conceal=0
