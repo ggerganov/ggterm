@@ -4,3 +4,7 @@ logs/
 log-llama.txt
 log-ggmcp.txt
 *.pid
+kiss-manager/
+log-kiss.txt
+servers.tsv
+*.log

@@ -12,23 +12,34 @@
 
 LLAMA_DIR=${LLAMA_DIR:-$BASE_DIR/llama.cpp}
 GGMCP_DIR=${GGMCP_DIR:-$BASE_DIR/ggmcp}
+KISS_MANAGER_DIR=${KISS_MANAGER_DIR:-$BASE_DIR/kiss-manager}
 LLAMA_SERVER=$LLAMA_DIR/build/bin/llama-server
 GGMCP=$GGMCP_DIR/build/ggmcp
 RPC_SERVER=$LLAMA_DIR/build/bin/ggml-rpc-server
+KISS_MANAGER=$KISS_MANAGER_DIR/build/manager
+KISS_SERVER=$KISS_MANAGER_DIR/build/server
 
 LOG_LLAMA=$BASE_DIR/log-llama.txt
 LOG_GGMCP=$BASE_DIR/log-ggmcp.txt
 LOG_RPC=$BASE_DIR/log-rpc.txt
+LOG_KISS=$BASE_DIR/log-kiss.txt
 SCRATCH_DIR=${SCRATCH_DIR:-$HOME/scratch}
+
+# kiss.conf is the fleet the KiSS servers of this machine answer to: the
+# endpoints and the MCP servers of every machine, copied to the server.conf of
+# whichever directory a KiSS server is started in
+KISS_CONF=${KISS_CONF:-$BASE_DIR/kiss.conf}
 
 LLAMA_PORT=${LLAMA_PORT:-9932}
 GGMCP_PORT=${GGMCP_PORT:-9933}
 RPC_PORT=${RPC_PORT:-50052}
+KISS_PORT=${KISS_PORT:-9934}
+KISS_PORT_BASE=${KISS_PORT_BASE:-19000}
 
 setup_usage() {
-    echo "usage: $(basename "$0") [--llama <ref>] [--ggmcp <ref>]"
+    echo "usage: $(basename "$0") [--llama <ref>] [--ggmcp <ref>] [--kiss <ref>]"
     echo "       <ref> is a branch, a tag or a commit hash"
-    echo "       default: --llama $LLAMA_REF --ggmcp $GGMCP_REF"
+    echo "       default: --llama $LLAMA_REF --ggmcp $GGMCP_REF --kiss $KISS_REF"
 }
 
 # parse the setup scripts' arguments, the machine script sets the default refs
@@ -37,7 +48,7 @@ parse_args() {
 
     while [ $# -gt 0 ] ; do
         case $1 in
-            --llama|--ggmcp)
+            --llama|--ggmcp|--kiss)
                 flag=$1
                 shift
 
@@ -47,11 +58,11 @@ parse_args() {
                     exit 1
                 fi
 
-                if [ "$flag" = "--llama" ] ; then
-                    LLAMA_REF=$1
-                else
-                    GGMCP_REF=$1
-                fi
+                case $flag in
+                    --llama)  LLAMA_REF=$1  ;;
+                    --ggmcp)  GGMCP_REF=$1  ;;
+                    --kiss)   KISS_REF=$1   ;;
+                esac
                 shift
                 ;;
             -h|--help)
@@ -134,10 +145,31 @@ setup_repo() {
     fi
 
     if [ "$build" = "1" ] ; then
-        echo "[+] Building $name"
-        cmake -S "$dir" -B "$dir/build" "$@"
-        cmake --build "$dir/build" -j
+        setup_build "$name" "$dir" "$@"
     fi
+}
+
+# a repository whose build needs what it keeps as submodules: check it out
+# first, its submodules next, and only then build it
+setup_submodules() {
+    local dir=$1
+
+    if [ ! -f "$dir/.gitmodules" ] ; then
+        return
+    fi
+
+    echo "[+] Updating the submodules of $(basename "$dir")"
+    git -C "$dir" submodule --quiet update --init --recursive
+}
+
+setup_build() {
+    local name=$1
+    local dir=$2
+    shift 2
+
+    echo "[+] Building $name"
+    cmake -S "$dir" -B "$dir/build" "$@"
+    cmake --build "$dir/build" -j
 }
 
 stop_proc() {
@@ -265,8 +297,20 @@ start_rpc_server() {
         -c
 }
 
+# the dashboard of the KiSS servers of this machine: it reads the registry the
+# kiss alias writes, and stops the servers it lists. It keeps nothing of its
+# own, so its address is the only secret here
+start_kiss_manager() {
+    start_proc manager "$LOG_KISS" "$KISS_MANAGER" \
+        --host 0.0.0.0 \
+        --port "$KISS_PORT" \
+        --file "$BASE_DIR/servers.tsv"
+}
+
 stop_machine() {
     stop_proc llama-server "$LLAMA_SERVER"
     stop_proc ggmcp "$GGMCP"
     stop_proc rpc-server "$RPC_SERVER"
+    stop_proc manager "$KISS_MANAGER"
+    stop_proc kiss-server "$KISS_SERVER"
 }

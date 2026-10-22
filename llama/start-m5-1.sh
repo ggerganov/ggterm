@@ -12,4 +12,6 @@ sleep 1
 start_llama_server preset-m5-1-128gb
 start_ggmcp m5-1 'Tools for the MacBook M5 Max (m5-1). See README-MCP.md for more info.'
 
+start_kiss_manager
+
 echo "[+] Done"

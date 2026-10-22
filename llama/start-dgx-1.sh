@@ -14,4 +14,6 @@ sleep 1
 start_rpc_server
 start_ggmcp spark-1 'Tools running on DGX Spark (spark-1). See README-MCP.md for more info.'
 
+start_kiss_manager
+
 echo "[+] Done"

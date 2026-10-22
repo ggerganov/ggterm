@@ -12,4 +12,6 @@ sleep 1
 start_rpc_server Vulkan0
 start_ggmcp strix-1 'Tools running on Strix Halo (strix-1). See README-MCP.md for more info.'
 
+start_kiss_manager
+
 echo "[+] Done"

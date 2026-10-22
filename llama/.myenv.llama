@@ -146,3 +146,145 @@ ggpi() {
 
     pi --offline -nc --provider "$provider" --model "$model" ${sys_args[@]+"${sys_args[@]}"} ${skill_args[@]+"${skill_args[@]}"} ${spec_args[@]+"${spec_args[@]}"} "$@"
 }
+
+# kiss: start a KiSS server of the current directory, aimed at one endpoint of
+# the fleet, sourced by ~/.myenv
+# usage: kiss <short>               the short names of ggpi, with the model they name
+#        kiss <endpoint>[/<model>]  an endpoint of kiss.conf, and a model of its own
+# no args: list the shorts and the endpoints
+# The server reads its configuration from ./server.conf alone, so kiss copies
+# kiss.conf there and adds the port it took, the hostname and the key it made.
+# The KiSS server of a directory is started once and answers on its own port:
+# the manager start-*.sh leaves on $KISS_PORT lists it and stops it again.
+# the directory this file is in, which is the directory of the machines it
+# sets up: it is sourced as ~/.myenv.llama, a link to it, so a link is followed
+# to what it links to before its directory is taken
+_kiss_env=${BASH_SOURCE[0]}
+while [[ -L $_kiss_env ]]; do
+    _kiss_at=$(readlink "$_kiss_env")
+    [[ $_kiss_at == /* ]] || _kiss_at=$(dirname "$_kiss_env")/$_kiss_at
+    _kiss_env=$_kiss_at
+done
+KISS_BASE=${KISS_BASE:-$(cd "$(dirname "$_kiss_env")" && pwd)}
+unset _kiss_env _kiss_at
+KISS_MANAGER_DIR=${KISS_MANAGER_DIR:-$KISS_BASE/kiss-manager}
+KISS_CONF=${KISS_CONF:-$KISS_BASE/kiss.conf}
+KISS_HOME=${KISS_HOME:-$KISS_BASE}
+KISS_PORT_BASE=${KISS_PORT_BASE:-19000}
+KISS_HOST=${KISS_HOST:-0.0.0.0}
+# the rules every KiSS session of the fleet answers by, written into the
+# server.conf of the directory as chat system-prompt: the same file ggpi hands
+# to pi as --append-system-prompt
+KISS_SYSTEM=${KISS_SYSTEM:-$(cd "$KISS_BASE/../pi" 2> /dev/null && pwd)/SYSTEM.md}
+
+# the endpoint of kiss.conf each provider of ggpi answers with
+KISS_ENDPOINTS=(
+    "llama-mac-m2   m2"
+    "llama-mac-m5-1 m5-1"
+    "llama-dgx      dgx-0"
+    "llama-rtx      rtx"
+    "llama-strix    strix-0"
+)
+
+kiss_list() {
+    local entry at short provider model model_name hardware endpoint
+
+    printf "%-13s %-11s %-14s %s\n" "SHORT" "ENDPOINT" "MODEL" "HARDWARE"
+    for entry in "${GGPI_PROVIDERS[@]}"; do
+        read -r short provider model model_name hardware <<< "$entry"
+        endpoint=""
+        for at in "${KISS_ENDPOINTS[@]}"; do
+            [[ "${at%% *}" == "$provider" ]] && endpoint=${at##* } && break
+        done
+        [[ -n $endpoint ]] || continue
+        printf "%-13s %-11s %-14s %s\n" "$short" "$endpoint" "${model%%,*}" "$hardware"
+    done
+
+    if [[ -f $KISS_CONF ]]; then
+        echo
+        echo "every endpoint of ${KISS_CONF#$HOME/}, each answered to by kiss <endpoint>/<model>:"
+        awk '$2 == "endpoints" && $3 == "url" { printf "  %-11s %s\n", $4, $5 }' "$KISS_CONF"
+        awk '$2 == "mcp" && $3 == "url" { printf "  %-11s %s\n", $4, $5 }' "$KISS_CONF"
+    fi
+}
+
+kiss() {
+    local entry short="" provider="" model_alias="" model_name="" hardware="" endpoint="" model=""
+    local -a kiss_args=()
+
+    if [[ -z "${1:-}" || $1 == "-h" || $1 == "--help" ]]; then
+        kiss_list
+        echo
+        echo "Examples:"
+        echo "  kiss rtx-qwen4              # the machine and the model of ggpi's rtx-qwen4"
+        echo "  kiss m5-0                   # an endpoint of kiss.conf, its own first model"
+        echo "  kiss dgx-0/agent-glm        # an endpoint and a model of its own"
+        return 1
+    fi
+
+    # a ggpi short names the machine, the model and the hardware at once
+    for entry in "${GGPI_PROVIDERS[@]}"; do
+        [[ "${entry%% *}" == "$1" ]] || continue
+        read -r short provider model_alias model_name hardware <<< "$entry"
+        break
+    done
+
+    if [[ -n $provider ]]; then
+        for entry in "${KISS_ENDPOINTS[@]}"; do
+            [[ "${entry%% *}" == "$provider" ]] && endpoint=${entry##* } && break
+        done
+        model=${model_alias%%,*}
+    elif [[ $1 == */* ]]; then
+        endpoint=${1%%/*}
+        model=${1##*/}
+    elif [[ -f $KISS_CONF ]] && grep -q "^set endpoints url $1 " "$KISS_CONF"; then
+        endpoint=$1
+    else
+        echo "kiss: unknown name '$1'" >&2
+        echo >&2
+        kiss_list >&2
+        return 1
+    fi
+
+    if [[ -z $endpoint ]]; then
+        echo "kiss: no endpoint of kiss.conf answers to the provider '$provider'" >&2
+        echo >&2
+        kiss_list >&2
+        return 1
+    fi
+
+    if [[ ! -x $KISS_MANAGER_DIR/kiss-start.sh ]]; then
+        echo "kiss: no kiss-start.sh in $KISS_MANAGER_DIR: run ./setup-<machine>.sh" >&2
+        return 1
+    fi
+    if [[ ! -f $KISS_CONF ]]; then
+        echo "kiss: no kiss.conf at $KISS_CONF" >&2
+        return 1
+    fi
+
+    echo "kiss: $endpoint${model:+/$model}${hardware:+ [$hardware]}" >&2
+
+    # a hostname may not carry a hyphen: it prefixes the names of the tools
+    kiss_args=(--free --host "$KISS_HOST" --name "${endpoint//-/_}" --conf "$KISS_CONF")
+    [[ -z $model ]] || kiss_args+=(--model "$endpoint/$model")
+    if [[ -f $KISS_SYSTEM ]]; then
+        kiss_args+=(--system "$KISS_SYSTEM")
+        echo "kiss: system: ${KISS_SYSTEM#$HOME/}" >&2
+    else
+        echo "kiss: system: none found at $KISS_SYSTEM, the chat keeps the model's own prompt" >&2
+    fi
+    [[ -z $model_name ]] || export PI_MODEL_NAME="$model_name"
+    [[ -z $hardware ]] || export PI_HARDWARE="$hardware"
+
+    # if running under herdr, name the current tab after the endpoint
+    if [[ -n "$HERDR_ENV" ]]; then
+        local tab_id
+        tab_id=$(herdr pane current 2>/dev/null | jq -r '.result.pane.tab_id // empty')
+        if [[ -n "$tab_id" ]]; then
+            herdr tab rename "$tab_id" "kiss:$endpoint${model:+/$model}" 2>/dev/null
+        fi
+    fi
+
+    KISS_HOME="$KISS_HOME" KISS_PORT_BASE="$KISS_PORT_BASE" \
+        "$KISS_MANAGER_DIR/kiss-start.sh" "${kiss_args[@]}"
+}

@@ -12,4 +12,6 @@ sleep 1
 start_llama_server preset-m2-192gb
 start_ggmcp m2 'Tools for the Mac Studio M2 Ultra (m2). See README-MCP.md for more info.'
 
+start_kiss_manager
+
 echo "[+] Done"

@@ -14,4 +14,6 @@ sleep 1
 start_llama_server preset-rtx-32gb
 start_ggmcp rtx 'Tools for the RTX 5090 machine (rtx). See README-MCP.md for more info.'
 
+start_kiss_manager
+
 echo "[+] Done"

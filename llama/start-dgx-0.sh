@@ -15,4 +15,6 @@ start_rpc_server
 start_llama_server preset-dgx-128gb
 start_ggmcp spark-0 'Tools running on DGX Spark (spark-0). See README-MCP.md for more info.'
 
+start_kiss_manager
+
 echo "[+] Done"
