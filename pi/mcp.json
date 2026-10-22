@@ -5,7 +5,7 @@
             "description": "ggmcp on the RTX 5090 machine (rtx)"
         },
         "m5-0": {
-            "url": "http://100.66.7.1:9933/mcp",
+            "url": "http://100.109.1.92:9933/mcp",
             "description": "ggmcp on the MacBook M5 (m5-0)"
         },
         "m5-1": {
@@ -18,19 +18,19 @@
         },
         "spark-0": {
             "url": "http://gg-spark-0:9933/mcp",
-            "description": "ggmcp on DGX Spark spark-0"
+            "description": "ggmcp on DGX Spark (spark-0)"
         },
         "spark-1": {
             "url": "http://gg-spark-1:9933/mcp",
-            "description": "ggmcp on DGX Spark spark-1"
+            "description": "ggmcp on DGX Spark (spark-1)"
         },
         "strix-0": {
             "url": "http://gg-strix-0:9933/mcp",
-            "description": "ggmcp on Strix Halo strix-0"
+            "description": "ggmcp on Strix Halo (strix-0)"
         },
         "strix-1": {
             "url": "http://gg-strix-1:9933/mcp",
-            "description": "ggmcp on Strix Halo strix-1"
+            "description": "ggmcp on Strix Halo (strix-1)"
         }
     }
 }

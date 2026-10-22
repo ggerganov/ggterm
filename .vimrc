@@ -649,7 +649,7 @@ let g:llama_config.profiles = {
     \ 'mac': 'http://127.0.0.1:8013',
     \ 'dgx': 'http://127.0.0.1:8023',
     \ 'rtx': 'http://100.111.34.101:8033',
-    \ 'm5-0': 'http://100.66.7.1:9932',
+    \ 'm5-0': 'http://100.109.1.92:9932',
     \ }
 
 let g:llama_config.profile = 'none'
