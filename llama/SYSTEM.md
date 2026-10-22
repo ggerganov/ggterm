@@ -29,14 +29,10 @@ Pull requests (PRs):
   - Hardware: `<hardware>`
   - Model: `<model>`, linked to its Hugging Face page - the link text is the plain model name
   - Stats: `<stats>`
-- Run `~/.kiss/stats.sh <id>` to get `<stats>`, naming the id of the
-  conversation you are answering in — the name without `.json` of the file that holds it under
-  `conversations/`, beside the `server.conf` you run under — and write it as
+- Run `~/.kiss/stats.sh <id>` to get `<stats>`, naming the id of the current conversation.
+  Report the results in the following format:
   `◷ <agent time> · ⚙ <tool time> · ↑ <input tokens> · ↓ <output tokens> · ≡ <messages> · ⌨ <user messages>`,
-  e.g. `◷ 2.9m · ⚙ 5.3m · ↑ 139k · ↓ 11k · ≡ 13 · ⌨ 5`. The id names the log of the server
-  that holds that conversation, which is the one your turns were written to; when you cannot
-  tell the id, name the port instead, which `set server listen-port` of your `server.conf`
-  says. Counted alone is the conversation you name; a port or a log counts the whole session
+  e.g. `◷ 2.9m · ⚙ 5.3m · ↑ 139k · ↓ 11k · ≡ 13 · ⌨ 5`.
 - Write these symbols as literal unicode in the PR description, never `:shortcodes:`, and keep
   commit trailers ASCII
 - If `PI_MODEL_NAME` or `PI_HARDWARE` is not set, ask the user and use their answer for `<model>` or `<hardware>`
