@@ -173,9 +173,9 @@ KISS_HOME=${KISS_HOME:-$KISS_BASE}
 KISS_PORT_BASE=${KISS_PORT_BASE:-19000}
 KISS_HOST=${KISS_HOST:-0.0.0.0}
 # the rules every KiSS session of the fleet answers by, written into the
-# server.conf of the directory as chat system-prompt: the same file ggpi hands
-# to pi as --append-system-prompt
-KISS_SYSTEM=${KISS_SYSTEM:-$(cd "$KISS_BASE/../pi" 2> /dev/null && pwd)/SYSTEM.md}
+# server.conf of the directory as chat system-prompt: SYSTEM.md beside this
+# file, which is pi/SYSTEM.md with the harness named as KiSS
+KISS_SYSTEM=${KISS_SYSTEM:-$KISS_BASE/SYSTEM.md}
 
 # the endpoint of kiss.conf each provider of ggpi answers with
 KISS_ENDPOINTS=(
