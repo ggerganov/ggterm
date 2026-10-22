@@ -30,12 +30,11 @@ Pull requests (PRs):
   - Hardware: `<hardware>`
   - Model: `<model>`, linked to its Hugging Face page - the link text is the plain model name
   - Stats: `<stats>`
-- Run `~/.kiss/stats.sh <conversation_id.json>` to get `<stats>`, naming the id of the current conversation.
-  Report the results in the following format:
-  `◷ <agent time> · ⚙ <tool time> · ↑ <input tokens> · ↓ <output tokens> · ≡ <messages> · ⌨ <user messages>`,
-  e.g. `◷ 2.9m · ⚙ 5.3m · ↑ 139k · ↓ 11k · ≡ 13 · ⌨ 5`.
-- Write these symbols as literal unicode in the PR description, never `:shortcodes:`, and keep
-  commit trailers ASCII
+  - To get `<stats>`, run `~/.kiss/stats.sh <conversation_id.json>` using the id of the current conversation.
+    Report the stats in the following format:
+    `◷ <agent time> · ⚙ <tool time> · ↑ <input tokens> · ↓ <output tokens> · ≡ <messages> · ⌨ <user messages>`,
+    e.g. `◷ 2.9m · ⚙ 5.3m · ↑ 139k · ↓ 11k · ≡ 13 · ⌨ 5`.
+  - Write these symbols as literal unicode in the PR description, never `:shortcodes:`
 - If `PI_MODEL_NAME` or `PI_HARDWARE` is not set, ask the user and use their answer for `<model>` or `<hardware>`
 - Always create the pull requests in draft mode
 - Never reply to review comments or post comments on issues/PRs without explicit permission from the user
