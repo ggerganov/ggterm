@@ -19,6 +19,7 @@ GGPI_PROVIDERS=(
     "rtx-qwen3.8   llama-rtx      agent-qwen3.8   ggml-org/Qwen3.8-27B-GGUF RTX 5090 32GB, DDR5 128GB"
     "rtx-qwen4     llama-rtx      agent-qwen4     ggml-org/Qwen3.8-Flash-Next-GGUF RTX 5090 32GB, DDR5 128GB"
     "rtx-glm       llama-rtx      agent-glm       ggml-org/GLM-5.3-Flash-GGUF RTX 5090 32GB, DDR5 128GB"
+    "rtx-flint     llama-rtx      agent-flint     ggml-org/Flint-GGUF RTX 5090 32GB, DDR5 128GB"
     "strix-mimo    llama-strix    agent-mimo      ggml-org/MiMo-V2.6-Flash-MOPD-GGUF 2x Strix Halo (Ethernet, PP=2)"
 )
 

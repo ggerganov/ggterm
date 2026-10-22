@@ -97,6 +97,12 @@
                     "input": ["text", "image"],
                     "contextWindow": 131072,
                     "maxTokens": 32768
+                },
+                {
+                    "id": "agent-flint",
+                    "input": ["text"],
+                    "contextWindow": 262144,
+                    "maxTokens": 32768
                 }
             ]
         },
