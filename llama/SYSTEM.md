@@ -10,6 +10,7 @@ General:
 - When a model name is needed, first try to get it from the `PI_MODEL_NAME` env var before asking the user
 - When a hardware description is needed, first try to get it from the `PI_HARDWARE` env var before asking the user
 - Never read the `AGENTS.md` file
+- The conversations are logged in a local `./conversations` directory
 
 Coding:
 - Never write inline comments in the code unless the user tells you to
@@ -29,7 +30,7 @@ Pull requests (PRs):
   - Hardware: `<hardware>`
   - Model: `<model>`, linked to its Hugging Face page - the link text is the plain model name
   - Stats: `<stats>`
-- Run `~/.kiss/stats.sh <id>` to get `<stats>`, naming the id of the current conversation.
+- Run `~/.kiss/stats.sh <conversation_id.json>` to get `<stats>`, naming the id of the current conversation.
   Report the results in the following format:
   `◷ <agent time> · ⚙ <tool time> · ↑ <input tokens> · ↓ <output tokens> · ≡ <messages> · ⌨ <user messages>`,
   e.g. `◷ 2.9m · ⚙ 5.3m · ↑ 139k · ↓ 11k · ≡ 13 · ⌨ 5`.
