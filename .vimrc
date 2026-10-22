@@ -652,7 +652,7 @@ let g:llama_config.profiles = {
     \ 'm5-0': 'http://100.109.1.92:9932',
     \ }
 
-let g:llama_config.profile = 'none'
+"let g:llama_config.profile = 'none'
 
 " show whitespace chars
 set list
