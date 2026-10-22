@@ -12,7 +12,7 @@ GGPI_PROVIDERS=(
     "m2-dsv4       llama-mac-m2   agent-dsv4      ggml-org/DeepSeek-V4-Flash-Vision-Exp-GGUF Mac Studio, M2 Ultra, 192GB"
     "m2-mimo       llama-mac-m2   agent-mimo      ggml-org/MiMo-V2.6-Flash-MOPD-GGUF Mac Studio, M2 Ultra, 192GB"
     "m2-glm        llama-mac-m2   agent-glm       ggml-org/GLM-5.3-Flash-GGUF Mac Studio, M2 Ultra, 192GB"
-    "m5-qwen4      llama-mac-m5   agent-qwen4     ggml-org/Qwen3.8-Flash-Next-GGUF MacBook, M5 Max, 128GB"
+    "m5-1-qwen4    llama-mac-m5-1 agent-qwen4     ggml-org/Qwen3.8-Flash-Next-GGUF MacBook, M5 Max, 128GB"
     "dgx-mimo      llama-dgx      agent-mimo      ggml-org/MiMo-V2.6-Flash-MOPD-GGUF 2x DGX Spark (RDMA, TP=2)"
     "dgx-glm       llama-dgx      agent-glm       ggml-org/GLM-5.3-Flash-GGUF 2x DGX Spark (RDMA, TP=2)"
     "rtx-dsv4      llama-rtx      agent-dsv4      ggml-org/DeepSeek-V4-Flash-Vision-Exp-GGUF RTX 5090 32GB, DDR5 128GB"
@@ -63,7 +63,7 @@ ggpi() {
         echo "  ggpi m2-dsv4                          # m2 machine, DeepSeek"
         echo "  ggpi rtx-qwen4 'fix the bug'          # rtx machine, Qwen, with a prompt"
         echo "  ggpi dgx-glm agent-glm 'hi'           # alias is optional before the prompt"
-        echo "  ggpi m5 --spec                        # planning session, then dictate the task"
+        echo "  ggpi m5-1-qwen4 --spec                # planning session, then dictate the task"
         return 1
     fi
 

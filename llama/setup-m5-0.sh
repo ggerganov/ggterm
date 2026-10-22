@@ -3,7 +3,7 @@
 set -e
 
 BASE_DIR=${BASE_DIR:-$(cd "$(dirname "$0")" && pwd)}
-MACHINE='m5'
+MACHINE='m5-0'
 LLAMA_REF=master
 GGMCP_REF=gg/qwen4-2
 source "$BASE_DIR/common.sh"

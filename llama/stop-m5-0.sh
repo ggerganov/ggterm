@@ -3,7 +3,7 @@
 set -e
 
 BASE_DIR=${BASE_DIR:-$(cd "$(dirname "$0")" && pwd)}
-MACHINE='m5'
+MACHINE='m5-0'
 source "$BASE_DIR/common.sh"
 
 stop_machine

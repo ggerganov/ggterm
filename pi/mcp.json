@@ -4,9 +4,13 @@
             "url": "http://homepc-2.shad-beta.ts.net:9933/mcp",
             "description": "ggmcp on the RTX 5090 machine (rtx)"
         },
-        "m5": {
+        "m5-0": {
+            "url": "http://100.66.7.1:9933/mcp",
+            "description": "ggmcp on the MacBook M5 (m5-0)"
+        },
+        "m5-1": {
             "url": "http://gg-mbp-m5-1:9933/mcp",
-            "description": "ggmcp on the MacBook M5 Max (m5)"
+            "description": "ggmcp on the MacBook M5 Max (m5-1)"
         },
         "m2": {
             "url": "http://gg-studio:9933/mcp",

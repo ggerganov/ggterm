@@ -37,7 +37,7 @@
                 }
             ]
         },
-        "llama-mac-m5": {
+        "llama-mac-m5-1": {
             "baseUrl": "http://gg-mbp-m5-1:9932/v1",
             "api": "openai-completions",
             "apiKey": "none",
