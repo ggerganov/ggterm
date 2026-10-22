@@ -37,6 +37,9 @@ ln -f -s ${PWD}/pi/SYSTEM.md ~/.pi/agent/SYSTEM.md
 ln -f -s ${PWD}/pi/SPEC.md ~/.pi/agent/SPEC.md
 ln -f -s ${PWD}/pi/stats.sh ~/.pi/stats.sh
 
+mkdir -p ~/.kiss
+ln -f -s ${PWD}/llama/stats.sh ~/.kiss/stats.sh
+
 if [ -d ~/.pi/agent ]; then
     mkdir -p ~/.pi/agent/extensions
     ln -f -s ${PWD}/pi/extensions/confirm.ts ~/.pi/agent/extensions/confirm.ts

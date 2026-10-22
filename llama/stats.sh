@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 # stats.sh: the one line a KiSS session writes under Stats: in a pull request,
-# the twin of ~/.pi/stats.sh.
+# the twin of ~/.pi/stats.sh, linked as ~/.kiss/stats.sh.
 #
 # Name it the conversation the session answers in. A server keeps the rest of
 # what the line wants in two files: the log of the port it listens on holds the
 # wall time of every answer and every tool it ran but carries no clock of its
 # own, and the conversation holds the tokens, the time of every turn and the
 # time each answer spent generating. The registry names which of the fleet's
-# servers holds which conversation, and so which log answers for it.
+# servers holds which conversation, and so which log answers for it. The link is
+# followed to find that fleet, and a machine that ran kiss-start without one has
+# its servers recorded in ~/.kiss beside their own logs: both are read.
 #
 # usage: stats.sh <conversation id> | <conversation.json> | <log> | <port> [-v]
 #
@@ -26,12 +28,23 @@
 
 set -eu
 
-# the logs and the registry of the fleet sit beside this script; elsewhere,
-# where there is no fleet, $KISS_HOME says where the servers of a machine keep
+# this script is linked as ~/.kiss/stats.sh and lives beside the logs and the
+# registry of the fleet it counts for: follow the link, or $KISS_HOME, to find
 # them
-here=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+follow=${BASH_SOURCE[0]}
+while [[ -L $follow ]]; do
+	step=$(readlink "$follow")
+	[[ $step == /* ]] || step=$(dirname "$follow")/$step
+	follow=$step
+done
+here=$(cd -- "$(dirname -- "$follow")" && pwd)
 home=${KISS_HOME:-$here}
-registry=$home/servers.tsv
+
+# a machine that ran kiss-start without a fleet recorded its servers in ~/.kiss,
+# beside the logs it wrote: both registries are read, the fleet's last, so of a
+# port started twice it is the last of those that answers
+registries=("$home/servers.tsv")
+[[ $home == "$HOME/.kiss" ]] || registries+=("$HOME/.kiss/servers.tsv")
 verbose=0
 arg=
 
@@ -92,17 +105,18 @@ to_epoch() {
 	date -j -u -f '%Y-%m-%dT%H:%M:%SZ' "$1" +%s 2>/dev/null || date -u -d "$1" +%s 2>/dev/null || echo 0
 }
 
-# a line of the registry, the last one written for that port: a port started
-# twice has two, and the session of this log is the last of them
-line_of() {
-	[[ -f $registry ]] || return 0
-	awk -F'\t' -v p="$1" '$1 == p { last = $0 } END { print last }' "$registry"
+# every line of every registry that names a server, the fleet's last
+lines_of() {
+	local f
+	for f in "${registries[@]}"; do
+		[[ -f $f ]] && awk -F'\t' 'NF >= 5 { print }' "$f"
+	done
+	return 0
 }
 
-# every line of the registry that names a server and the directory it runs in
-lines_of() {
-	[[ -f $registry ]] || return 0
-	awk -F'\t' 'NF >= 5 { print }' "$registry"
+# the line a port was recorded with, the last of them
+line_of() {
+	lines_of | awk -F'\t' -v p="$1" '$1 == p { last = $0 } END { print last }'
 }
 
 log=
@@ -128,18 +142,20 @@ case $arg in
 		[[ -f $where/conversations/$arg.json ]] || continue
 		convs+=("$where/conversations/$arg.json")
 		port=$p
-		log=${where_log:-$home/$p.log}
+		log=$where_log
 		[[ -f $log ]] || log=$home/$p.log
 		[[ -f $log ]] || log=
 		found=1 # the last line of that directory, the newest session of it
 	done < <(lines_of)
-	[[ -n $found ]] || die "$arg names no log, no port, and no conversation of a server in $registry"
+	[[ -n $found ]] ||
+		die "$arg names no log, no port and no conversation of a server of these registries"
 	;;
 *)
 	port=$arg
-	log=$home/$arg.log
+	log=$(line_of "$port" | cut -f6)
+	[[ -f $log ]] || log=$home/$port.log
 	[[ -f $log ]] || log=
-	[[ -n $log ]] || say "no log of port $port in $home: the conversations alone answer"
+	[[ -n $log ]] || say "no log of port $port: the conversations alone answer"
 	;;
 esac
 
@@ -173,8 +189,8 @@ refused=0
 if [[ -n $log && -f $log ]]; then
 	answered=$(sed -nE 's/^\[Agent\] [^ ]+ answered in ([0-9]+) ms$/\1/p' "$log" |
 		awk '{ s += $1 } END { print s + 0 }')
-	calls=$(grep -cE '^\[Agent\] [^ ]+ calls ' "$log" || echo 0)
-	refused=$(grep -cE '^\[HTTP\] Refused ' "$log" || echo 0)
+	calls=$(grep -cE '^\[Agent\] [^ ]+ calls ' "$log" || true)
+	refused=$(grep -cE '^\[HTTP\] Refused ' "$log" || true)
 fi
 
 # the conversation: what it cost and how many it holds. The tokens an answer

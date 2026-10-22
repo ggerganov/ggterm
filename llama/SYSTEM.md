@@ -29,7 +29,7 @@ Pull requests (PRs):
   - Hardware: `<hardware>`
   - Model: `<model>`, linked to its Hugging Face page - the link text is the plain model name
   - Stats: `<stats>`
-- Run `~/development/github/ggterm/llama/stats.sh <id>` to get `<stats>`, naming the id of the
+- Run `~/.kiss/stats.sh <id>` to get `<stats>`, naming the id of the
   conversation you are answering in — the name without `.json` of the file that holds it under
   `conversations/`, beside the `server.conf` you run under — and write it as
   `◷ <agent time> · ⚙ <tool time> · ↑ <input tokens> · ↓ <output tokens> · ≡ <messages> · ⌨ <user messages>`,
