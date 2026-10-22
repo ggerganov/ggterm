@@ -176,6 +176,9 @@ KISS_HOST=${KISS_HOST:-0.0.0.0}
 # server.conf of the directory as chat system-prompt: SYSTEM.md beside this
 # file, which is pi/SYSTEM.md with the harness named as KiSS
 KISS_SYSTEM=${KISS_SYSTEM:-$KISS_BASE/SYSTEM.md}
+# the look of the pages these servers serve, copied beside their server.conf as
+# client.conf: the page reads it from there, the server only hands it over
+KISS_SITE=${KISS_SITE:-$KISS_BASE/kiss-client.conf}
 
 # the endpoint of kiss.conf each provider of ggpi answers with
 KISS_ENDPOINTS=(
@@ -272,6 +275,10 @@ kiss() {
         echo "kiss: system: ${KISS_SYSTEM#$HOME/}" >&2
     else
         echo "kiss: system: none found at $KISS_SYSTEM, the chat keeps the model's own prompt" >&2
+    fi
+    if [[ -f $KISS_SITE ]]; then
+        kiss_args+=(--site "$KISS_SITE")
+        echo "kiss: site:   ${KISS_SITE#$HOME/}" >&2
     fi
     [[ -z $model_name ]] || export PI_MODEL_NAME="$model_name"
     [[ -z $hardware ]] || export PI_HARDWARE="$hardware"
