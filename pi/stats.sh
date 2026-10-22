@@ -30,8 +30,9 @@ def time: if . >= 3600 then (. * 10 / 3600 | round | frac) + "h"
 def num: if . >= 1000000 then (. / 1000000 | floor | tostring) + "m"
          elif . >= 1000 then (. / 1000 | floor | tostring) + "k"
          else tostring end;
-def batch_end($m; $i): reduce range($i; $m | length) as $j (null;
-  if . == null and $m[$j].message.role != "toolResult" then $j else . end) as $b
+# note: jq 1.7 needs the reduce wrapped in parens to bind its result with `as`
+def batch_end($m; $i): (reduce range($i; $m | length) as $j (null;
+  if . == null and $m[$j].message.role != "toolResult" then $j else . end)) as $b
   | ($b // ($m | length)) as $e
   | if $e > $i then ([$m[$i:$e][].message.timestamp] | max) else null end;
 [.[] | select(.type == "message")] as $m
