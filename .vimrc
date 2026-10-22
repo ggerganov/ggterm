@@ -632,13 +632,13 @@ endif
 
 let g:llama_config = {
     \ 'model_fim': 'fim',
-    \ 'endpoint_fim': '',
+    \ 'endpoint_fim': 'http://100.109.1.92:9932/infill',
     \ 'show_info': 2,
     \ 'ring_n_chunks': 32,
     \ 'n_cmpl': 3,
     \
-    \ 'model_inst': 'pi',
-    \ 'endpoint_inst': '',
+    \ 'model_inst': 'agent-qwen4',
+    \ 'endpoint_inst': 'http://100.82.237.74:9932/v1/chat/completions',
     \
     \ 'keymap_fim_trigger': '<C-F>',
     \ 'keymap_fim_accept_word': '<C-B>',
