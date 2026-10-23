@@ -400,3 +400,10 @@
           - id: tool-plugin-market
             name: '@deepseek-ai/dsh-plugin-market/tools'
             disabled: true
+# The web client's built-in theme. The host appends this row when the theme changes,
+# which replaces the symlink to this file with its own copy; keeping the row here means
+# a re-link does not lose the preference. `preference` takes light, dark or system.
+- id: ui-theme
+  name: "@deepseek-ai/dsh-client-ui-theme"
+  config:
+    preference: system
