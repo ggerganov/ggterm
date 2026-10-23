@@ -116,7 +116,7 @@
 - id: agent-default-model
   name: "@deepseek-ai/dsh-agent-default-model"
   config:
-    provider: llama-m5-1
+    provider: llama-rtx
     model: agent-qwen4
 - id: agent-preset-registry
   name: "@deepseek-ai/dsh-agent-preset-registry"
@@ -147,12 +147,23 @@
                 - Don't try to build or run the code unless you are explicitly asked to do so
                 - Use the `gh` CLI tool when querying PRs, issues, or other GitHub resources
                 - Never read the `AGENTS.md` file
-                - Model and hardware are known from this prompt: the model is `{{model}}`, and the
-                  hardware is whatever the `{{provider}}` route names in the table below. Use these
-                  values for `<model>` and `<hardware>` instead of asking the user. Only when
-                  `{{provider}}` is not one of the routes below should you ask for the hardware.
+                - Model and hardware are known from this prompt: `{{model}}` is the id of the model you
+                  are answering on, and `{{provider}}` the route that serves it. Neither is what a commit
+                  or a pull request should name: there `<model>` is the Hugging Face repository the first
+                  table gives for `{{model}}`, and `<hardware>` is what the second gives for
+                  `{{provider}}`. Take these values from the tables, never from the id or by asking the
+                  user. Only a row these tables do not carry leaves a question for the user.
 
-                  | Model route | Hardware |
+                  | Model id | `<model>` |
+                  | --- | --- |
+                  | `agent-qwen3.8` | `ggml-org/Qwen3.8-27B-GGUF` |
+                  | `agent-qwen4` | `ggml-org/Qwen3.8-Flash-Next-GGUF` |
+                  | `agent-dsv4` | `ggml-org/DeepSeek-V4-Flash-Vision-Exp-GGUF` |
+                  | `agent-mimo` | `ggml-org/MiMo-V2.6-Flash-MOPD-GGUF` |
+                  | `agent-glm` | `ggml-org/GLM-5.3-Flash-GGUF` |
+                  | `agent-flint` | `ggml-org/Flint-GGUF` |
+
+                  | Model route | `<hardware>` |
                   | --- | --- |
                   | `llama-m5-1` | MacBook M5 Max (m5-1) |
                   | `llama-m2` | Mac Studio M2 Ultra (m2) |
@@ -181,21 +192,24 @@
                 - For the AI usage disclosure section, write "YES", then these 4 bullets:
                   - Harness: `dsh:llama.cpp`
                   - Hardware: `<hardware>`
-                  - Model: `<model>`, linked to its Hugging Face page - the link text is the plain model name
+                  - Model: `<model>`, linked to its Hugging Face page - the link text is the plain
+                    repository, the one the table gives and not the `{{model}}` id
                   - Stats: `<stats>`
                   - To get `<stats>`, run `~/.dsh/stats.sh "$DSH_SESSION_ID"`.
                     Report the stats in the following format:
                     `◷ <agent time> · ⚙ <tool time> · ↑ <input tokens> · ↓ <output tokens> · ≡ <messages> · ⌨ <user messages>`,
                     e.g. `◷ 11.8m · ⚙ 45.2s · ↑ 120k · ↓ 45k · ≡ 87 · ⌨ 6`
                   - Write these symbols as literal unicode in the PR description, never `:shortcodes:`
-                - If `{{provider}}` names a route that is not in the table above, ask the user and use their
-                  answer for `<hardware>`
+                - If the tables above carry no row for `{{provider}}` or none for `{{model}}`, ask the user
+                  and use their answer for the `<hardware>` or the `<model>` it does not name
                 - Always create the pull requests in draft mode
                 - Never reply to review comments or post comments on issues/PRs without explicit permission
                   from the user
 
                 Commits:
-                - On every commit that you make, include an `Assisted-by: dsh:llama.cpp/<model> (<hardware>)` tag
+                - On every commit that you make, include an `Assisted-by: dsh:llama.cpp/<model> (<hardware>)`
+                  tag, where `<model>` is the Hugging Face repository the first table gives for `{{model}}`
+                  and `<hardware>` is what the second gives for `{{provider}}`
                 - Do not explicitly set the git author in commits - rely on the default git config
                 - Always use `--no-gpg-sign` when committing
                 - Never `git push` without explicit confirmation from the user
