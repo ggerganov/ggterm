@@ -37,6 +37,7 @@ ln -f -s ${PWD}/pi/SYSTEM.md ~/.pi/agent/SYSTEM.md
 ln -f -s ${PWD}/pi/SPEC.md ~/.pi/agent/SPEC.md
 ln -f -s ${PWD}/pi/stats.sh ~/.pi/stats.sh
 ln -f -s ${PWD}/dsh/stats.sh ~/.dsh/stats.sh
+ln -f -s ${PWD}/dsh/cordis.patch.yml ~/.dsh/profiles/web/cordis.patch.yml
 
 mkdir -p ~/.kiss
 ln -f -s ${PWD}/llama/stats.sh ~/.kiss/stats.sh

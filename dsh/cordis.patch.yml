@@ -1,3 +1,128 @@
+# Your patch layer for this dsh profile, applied after every bundle layer:
+# a top-level YAML array of loader patch entries (id-targeted config
+# overrides, disables, and insert lists; `!!js` expressions allowed).
+- id: ui-settings
+  name: "@deepseek-ai/dsh-client-ui-settings"
+  config:
+    enabled: true
+- id: llm-pi-ai
+  name: "@deepseek-ai/dsh-llm-pi-ai"
+  config:
+    providers:
+      llama-m5-1:
+        displayName: m5-1
+        api: openai-completions
+        baseURL: http://100.82.237.74:9932
+        models:
+          - id: agent-qwen4
+            name: m5-1/agent-qwen4
+            contextWindow: 262144
+            maxTokens: 32768
+            input: [ text, image ]
+        apiKeyEnv: LLAMA_API_KEY
+      llama-m2:
+        displayName: m2
+        api: openai-completions
+        baseURL: http://gg-studio:9932
+        models:
+          - id: agent-qwen3.8
+            name: m2/agent-qwen3.8
+            contextWindow: 262144
+            maxTokens: 32768
+            input: [ text, image ]
+          - id: agent-dsv4
+            name: m2/agent-dsv4
+            contextWindow: 262144
+            maxTokens: 32768
+            input: [ text, image ]
+          - id: agent-mimo
+            name: m2/agent-mimo
+            contextWindow: 262144
+            maxTokens: 32768
+            input: [ text, image ]
+          - id: agent-qwen4
+            name: m2/agent-qwen4
+            contextWindow: 262144
+            maxTokens: 32768
+            input: [ text, image ]
+          - id: agent-glm
+            name: m2/agent-glm
+            contextWindow: 262144
+            maxTokens: 32768
+            input: [ text, image ]
+        apiKeyEnv: LLAMA_API_KEY
+      llama-dgx:
+        displayName: dgx
+        api: openai-completions
+        baseURL: http://gg-spark-0:9932
+        models:
+          - id: agent-mimo
+            name: dgx/agent-mimo
+            contextWindow: 262144
+            maxTokens: 32768
+            input: [ text, image ]
+          - id: agent-glm
+            name: dgx/agent-glm
+            contextWindow: 262144
+            maxTokens: 32768
+            input: [ text, image ]
+        apiKeyEnv: LLAMA_API_KEY
+      llama-rtx:
+        displayName: rtx
+        api: openai-completions
+        baseURL: http://homepc-2.shad-beta.ts.net:9932
+        models:
+          - id: agent-dsv4
+            name: rtx/agent-dsv4
+            contextWindow: 131072
+            maxTokens: 32768
+            input: [ text, image ]
+          - id: agent-qwen3.8
+            name: rtx/agent-qwen3.8
+            contextWindow: 131072
+            maxTokens: 32768
+            input: [ text, image ]
+          - id: agent-qwen4
+            name: rtx/agent-qwen4
+            contextWindow: 131072
+            maxTokens: 32768
+            input: [ text, image ]
+          - id: agent-glm
+            name: rtx/agent-glm
+            contextWindow: 131072
+            maxTokens: 32768
+            input: [ text, image ]
+          - id: agent-flint
+            name: rtx/agent-flint
+            contextWindow: 262144
+            maxTokens: 32768
+            input: [ text ]
+        apiKeyEnv: LLAMA_API_KEY
+      llama-strix:
+        displayName: strix
+        api: openai-completions
+        baseURL: http://gg-strix-0:9932
+        models:
+          - id: agent-mimo
+            name: strix/agent-mimo
+            contextWindow: 262144
+            maxTokens: 32768
+            input: [ text, image ]
+        apiKeyEnv: LLAMA_API_KEY
+- id: ui-settings-general
+  name: "@deepseek-ai/dsh-client-ui-settings-general"
+  config:
+    welcomeNoticeVersion: 2026-09-28.1
+- id: agent-default-model
+  name: "@deepseek-ai/dsh-agent-default-model"
+  config:
+    provider: llama-m5-1
+    model: agent-qwen4
+- id: agent-preset-registry
+  name: "@deepseek-ai/dsh-agent-preset-registry"
+  config:
+    default: standard
+    selectedDefault: cordis
 # The `gg` agent preset: the standard web tool set plus one dsh-mcp-client row per
 # ggmcp machine, and a persona adapted from pi/SYSTEM.md.
 - insert:
