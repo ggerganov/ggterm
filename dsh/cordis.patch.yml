@@ -75,22 +75,22 @@
           - id: agent-dsv4
             name: rtx/agent-dsv4
             contextWindow: 131072
-            maxTokens: 32768
+            maxTokens: 16384
             input: [ text, image ]
           - id: agent-qwen3.8
             name: rtx/agent-qwen3.8
             contextWindow: 131072
-            maxTokens: 32768
+            maxTokens: 16384
             input: [ text, image ]
           - id: agent-qwen4
             name: rtx/agent-qwen4
             contextWindow: 131072
-            maxTokens: 32768
+            maxTokens: 16384
             input: [ text, image ]
           - id: agent-glm
             name: rtx/agent-glm
             contextWindow: 131072
-            maxTokens: 32768
+            maxTokens: 16384
             input: [ text, image ]
           - id: agent-flint
             name: rtx/agent-flint
@@ -272,30 +272,31 @@
               - id: compaction-basic
                 name: '@deepseek-ai/dsh-compaction-basic'
                 config:
-                  # headroomTokens is a fixed reservation (default 65536) taken after the
-                  # routed request's own maxTokens, and the pressure threshold is
-                  # min(0.8 * contextWindow, contextWindow - maxTokens - headroomTokens).
-                  # On these 128k llama.cpp routes that is 131072 - 32768 - 65536 = 32768,
-                  # well under the 0.8 cap, so compaction fired at ~32k. 16384 headroom
-                  # moves them to 81920. maxTokens is pinned so the summarization budget
-                  # does not silently track headroom. 256k routes are left at the default
-                  # headroom, so they stay at 262144 - 32768 - 65536 = 163840.
+                  # The pressure threshold is min(thresholdRatio * contextWindow,
+                  # contextWindow - request maxTokens - headroomTokens). These 128k routes
+                  # carry a 16384 output reservation, so at the 65536 default headroom the
+                  # second term collapses to 32768 and folds fire at a quarter of the
+                  # window; at 16384 headroom they still fold at 81920. 8192 headroom
+                  # leaves 106496, just over the 0.8 cap of 104857, so the ratio becomes
+                  # the binding term. maxTokens here is the summarization generation cap,
+                  # not the output reservation, and is pinned so it does not track
+                  # headroom down with it.
                   modelPolicies:
                     - provider: llama-rtx
                       model: agent-dsv4
-                      headroomTokens: 16384
+                      headroomTokens: 8192
                       maxTokens: 16384
                     - provider: llama-rtx
                       model: agent-qwen3.8
-                      headroomTokens: 16384
+                      headroomTokens: 8192
                       maxTokens: 16384
                     - provider: llama-rtx
                       model: agent-qwen4
-                      headroomTokens: 16384
+                      headroomTokens: 8192
                       maxTokens: 16384
                     - provider: llama-rtx
                       model: agent-glm
-                      headroomTokens: 16384
+                      headroomTokens: 8192
                       maxTokens: 16384
               - id: command-compact
                 name: '@deepseek-ai/dsh-command-compact'
