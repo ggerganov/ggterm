@@ -23,7 +23,7 @@
       llama-m2:
         displayName: m2
         api: openai-completions
-        baseURL: http://gg-studio:9932
+        baseURL: http://100.109.206.95:9932
         models:
           - id: agent-qwen3.8
             name: m2/agent-qwen3.8
@@ -54,7 +54,7 @@
       llama-dgx:
         displayName: dgx
         api: openai-completions
-        baseURL: http://gg-spark-0:9932
+        baseURL: http://100.64.225.101:9932
         models:
           - id: agent-mimo
             name: dgx/agent-mimo
@@ -70,7 +70,7 @@
       llama-rtx:
         displayName: rtx
         api: openai-completions
-        baseURL: http://homepc-2.shad-beta.ts.net:9932
+        baseURL: http://100.111.34.101:9932
         models:
           - id: agent-dsv4
             name: rtx/agent-dsv4
@@ -101,7 +101,7 @@
       llama-strix:
         displayName: strix
         api: openai-completions
-        baseURL: http://gg-strix-0:9932
+        baseURL: http://100.112.93.68:9932
         models:
           - id: agent-mimo
             name: strix/agent-mimo
@@ -310,7 +310,7 @@
             config:
               serverName: rtx
               transport: streamable-http
-              url: http://homepc-2.shad-beta.ts.net:9933/mcp
+              url: http://100.111.34.101:9933/mcp
           - id: mcp-m5-0
             name: '@deepseek-ai/dsh-mcp-client'
             config:
@@ -322,37 +322,37 @@
             config:
               serverName: m5-1
               transport: streamable-http
-              url: http://gg-mbp-m5-1:9933/mcp
+              url: http://100.82.237.74:9933/mcp
           - id: mcp-m2
             name: '@deepseek-ai/dsh-mcp-client'
             config:
               serverName: m2
               transport: streamable-http
-              url: http://gg-studio:9933/mcp
+              url: http://100.109.206.95:9933/mcp
           - id: mcp-spark-0
             name: '@deepseek-ai/dsh-mcp-client'
             config:
               serverName: spark-0
               transport: streamable-http
-              url: http://gg-spark-0:9933/mcp
+              url: http://100.64.225.101:9933/mcp
           - id: mcp-spark-1
             name: '@deepseek-ai/dsh-mcp-client'
             config:
               serverName: spark-1
               transport: streamable-http
-              url: http://gg-spark-1:9933/mcp
+              url: http://100.69.125.93:9933/mcp
           - id: mcp-strix-0
             name: '@deepseek-ai/dsh-mcp-client'
             config:
               serverName: strix-0
               transport: streamable-http
-              url: http://gg-strix-0:9933/mcp
+              url: http://100.112.93.68:9933/mcp
           - id: mcp-strix-1
             name: '@deepseek-ai/dsh-mcp-client'
             config:
               serverName: strix-1
               transport: streamable-http
-              url: http://gg-strix-1:9933/mcp
+              url: http://100.77.67.107:9933/mcp
           - id: tool-plugin-manager
             name: '@deepseek-ai/dsh-plugin-manager/tools'
             disabled: true

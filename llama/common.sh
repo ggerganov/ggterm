@@ -36,6 +36,35 @@ RPC_PORT=${RPC_PORT:-50052}
 KISS_PORT=${KISS_PORT:-9934}
 KISS_PORT_BASE=${KISS_PORT_BASE:-19000}
 
+# the address of each machine of the fleet: the id its scripts set as MACHINE,
+# the tailnet address its services bind to, and the MagicDNS name that answers
+# to that address. A machine missing from this map starts nothing: give it its
+# address here, or start it with BIND_HOST set to that address
+MACHINE_HOSTS=(
+    "m2      100.109.206.95   gg-studio"
+    "m5-0    100.109.1.92     gg-mbp-m5-0"
+    "m5-1    100.82.237.74    gg-mbp-m5-1"
+    "dgx-0   100.64.225.101   gg-spark-0"
+    "dgx-1   100.69.125.93    gg-spark-1"
+    "rtx     100.111.34.101   homepc-2.shad-beta.ts.net"
+    "strix-0 100.112.93.68    gg-strix-0"
+    "strix-1 100.77.67.107    gg-strix-1"
+)
+
+# the tailnet address of a machine, empty and a warning when the map has none
+machine_host() {
+    local entry at host name
+
+    for entry in "${MACHINE_HOSTS[@]}" ; do
+        read -r at host name <<< "$entry"
+        [ "$at" = "$1" ] && echo "$host" && return 0
+    done
+
+    echo "[!] $1: no tailnet address in MACHINE_HOSTS, set BIND_HOST" >&2
+}
+
+BIND_HOST=${BIND_HOST:-$(machine_host "$MACHINE")}
+
 setup_usage() {
     echo "usage: $(basename "$0") [--llama <ref>] [--ggmcp <ref>] [--kiss <ref>]"
     echo "       <ref> is a branch, a tag or a commit hash"
@@ -230,6 +259,11 @@ start_proc() {
         exit 1
     fi
 
+    if [ -z "$BIND_HOST" ] ; then
+        echo "[!] $MACHINE: no tailnet address to start on, see MACHINE_HOSTS"
+        exit 1
+    fi
+
     mkdir -p "$(dirname "$log")"
     local pidfile=$BASE_DIR/$name.pid
     local cwd=${CWD_OVERRIDE:-$BASE_DIR}
@@ -265,7 +299,7 @@ EOF
     fi
 
     CWD_OVERRIDE=$SCRATCH_DIR start_proc ggmcp "$LOG_GGMCP" "$GGMCP" \
-        --host 0.0.0.0 \
+        --host "$BIND_HOST" \
         --port "$GGMCP_PORT" \
         --alias "$alias" \
         --instructions "$instructions"
@@ -279,7 +313,7 @@ start_llama_server() {
         --models-preset "$preset/preset.ini" \
         --log-prompts-dir ./logs \
         --fit off \
-        --host 0.0.0.0 \
+        --host "$BIND_HOST" \
         --port "$LLAMA_PORT" \
         -lv 4 \
         --models-max 1 \
@@ -287,6 +321,9 @@ start_llama_server() {
         --agent
 }
 
+# the RPC server of the DGX and Strix pairs answers to its peer over the direct
+# link the presets name in their rpc line, not over the tailnet, so this is the
+# one service of a machine that keeps every address it has
 start_rpc_server() {
     local device=${1:-CUDA0}
 
@@ -302,7 +339,7 @@ start_rpc_server() {
 # own, so its address is the only secret here
 start_kiss_manager() {
     start_proc manager "$LOG_KISS" "$KISS_MANAGER" \
-        --host 0.0.0.0 \
+        --host "$BIND_HOST" \
         --port "$KISS_PORT" \
         --file "$BASE_DIR/servers.tsv"
 }

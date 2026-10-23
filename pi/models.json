@@ -1,7 +1,7 @@
 {
     "providers": {
         "llama-mac-m2": {
-            "baseUrl": "http://gg-studio:9932/v1",
+            "baseUrl": "http://100.109.206.95:9932/v1",
             "api": "openai-completions",
             "apiKey": "none",
             "models": [
@@ -38,7 +38,7 @@
             ]
         },
         "llama-mac-m5-1": {
-            "baseUrl": "http://gg-mbp-m5-1:9932/v1",
+            "baseUrl": "http://100.82.237.74:9932/v1",
             "api": "openai-completions",
             "apiKey": "none",
             "models": [
@@ -51,7 +51,7 @@
             ]
         },
         "llama-dgx": {
-            "baseUrl": "http://gg-spark-0:9932/v1",
+            "baseUrl": "http://100.64.225.101:9932/v1",
             "api": "openai-completions",
             "apiKey": "none",
             "models": [
@@ -70,7 +70,7 @@
             ]
         },
         "llama-rtx": {
-            "baseUrl": "http://homepc-2.shad-beta.ts.net:9932/v1",
+            "baseUrl": "http://100.111.34.101:9932/v1",
             "api": "openai-completions",
             "apiKey": "none",
             "models": [
@@ -107,7 +107,7 @@
             ]
         },
         "llama-strix": {
-            "baseUrl": "http://gg-strix-0:9932/v1",
+            "baseUrl": "http://100.112.93.68:9932/v1",
             "api": "openai-completions",
             "apiKey": "none",
             "models": [
