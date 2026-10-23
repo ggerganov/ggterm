@@ -257,6 +257,32 @@
             config:
               - id: compaction-basic
                 name: '@deepseek-ai/dsh-compaction-basic'
+                config:
+                  # headroomTokens is a fixed reservation (default 65536) taken after the
+                  # routed request's own maxTokens, and the pressure threshold is
+                  # min(0.8 * contextWindow, contextWindow - maxTokens - headroomTokens).
+                  # On these 128k llama.cpp routes that is 131072 - 32768 - 65536 = 32768,
+                  # well under the 0.8 cap, so compaction fired at ~32k. 16384 headroom
+                  # moves them to 81920. maxTokens is pinned so the summarization budget
+                  # does not silently track headroom. 256k routes are left at the default
+                  # headroom, so they stay at 262144 - 32768 - 65536 = 163840.
+                  modelPolicies:
+                    - provider: llama-rtx
+                      model: agent-dsv4
+                      headroomTokens: 16384
+                      maxTokens: 16384
+                    - provider: llama-rtx
+                      model: agent-qwen3.8
+                      headroomTokens: 16384
+                      maxTokens: 16384
+                    - provider: llama-rtx
+                      model: agent-qwen4
+                      headroomTokens: 16384
+                      maxTokens: 16384
+                    - provider: llama-rtx
+                      model: agent-glm
+                      headroomTokens: 16384
+                      maxTokens: 16384
               - id: command-compact
                 name: '@deepseek-ai/dsh-command-compact'
               - id: tool-result-pruner
