@@ -123,6 +123,36 @@
   config:
     default: standard
     selectedDefault: gg
+# The compaction the agents resolve is the host-level row the base bundle mounts bare; the
+# copy inside the gg preset below is a separate realm's instance. The block is given to
+# both so the numbers hold whichever one a session resolves. The threshold is
+# min(thresholdRatio * contextWindow, contextWindow - request maxTokens - headroomTokens)
+# and every route here reserves 16384 output: the 128k llama-rtx routes get 131072 - 16384
+# - 8192 = 106496, over their 0.8 cap of 104857, and the 262144 routes get 262144 - 16384
+# - 32768 = 212992, over their 0.8 cap of 209715, so the ratio binds both. maxTokens is the
+# summarization generation cap, pinned so it does not track headroom down with it.
+- id: compaction-basic
+  name: "@deepseek-ai/dsh-compaction-basic"
+  config:
+    headroomTokens: 32768
+    maxTokens: 32768
+    modelPolicies:
+      - provider: llama-rtx
+        model: agent-dsv4
+        headroomTokens: 8192
+        maxTokens: 16384
+      - provider: llama-rtx
+        model: agent-qwen3.8
+        headroomTokens: 8192
+        maxTokens: 16384
+      - provider: llama-rtx
+        model: agent-qwen4
+        headroomTokens: 8192
+        maxTokens: 16384
+      - provider: llama-rtx
+        model: agent-glm
+        headroomTokens: 8192
+        maxTokens: 16384
 # The `gg` agent preset: the standard web tool set plus one dsh-mcp-client row per
 # ggmcp machine, and a persona adapted from pi/SYSTEM.md.
 - insert:
