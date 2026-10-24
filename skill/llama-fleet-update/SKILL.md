@@ -1,5 +1,5 @@
 ---
-name: fleet-update
+name: llama-fleet-update
 description: Update and restart one machine of the ggterm llama.cpp fleet (its ggterm clone, llama.cpp, ggmcp and kiss-manager) over that machine's ggmcp MCP server. Use when asked to update, redeploy or restart a fleet machine such as m2, m5-0, m5-1, rtx, dgx-0, dgx-1, strix-0 or strix-1.
 ---
 
@@ -60,7 +60,7 @@ Ports a machine serves (`common.sh`): llama-server `9932` (`/v1`), ggmcp `9933`
    [mcp-call.sh](mcp-call.sh) to open a session and run a command:
 
    ```bash
-   skill/fleet-update/mcp-call.sh <ip> <alias> '<remote command>'
+   skill/llama-fleet-update/mcp-call.sh <ip> <alias> '<remote command>'
    ```
 
 3. **Survey before touching anything.** Print the clone's branch and HEAD, its

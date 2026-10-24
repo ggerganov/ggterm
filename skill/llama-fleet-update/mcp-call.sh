@@ -5,8 +5,8 @@
 # (every ./start-<machine>.sh does), that session is gone and the harness tools
 # answer session_not_found until it reconnects. This opens a session of its own.
 #
-#   skill/fleet-update/mcp-call.sh <ip> <alias> '<remote command>'
-#   skill/fleet-update/mcp-call.sh 100.109.1.92 m5-0 'uptime; pgrep -fl llama-server'
+#   skill/llama-fleet-update/mcp-call.sh <ip> <alias> '<remote command>'
+#   skill/llama-fleet-update/mcp-call.sh 100.109.1.92 m5-0 'uptime; pgrep -fl llama-server'
 #
 # The remote ggmcp applies its own timeout (60 s by default), so keep the command
 # short and detach anything long-running on the machine itself.
