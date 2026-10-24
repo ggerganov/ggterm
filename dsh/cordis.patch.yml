@@ -17,7 +17,7 @@
           - id: agent-qwen4
             name: m5-1/agent-qwen4
             contextWindow: 262144
-            maxTokens: 32768
+            maxTokens: 16384
             input: [ text, image ]
         apiKeyEnv: LLAMA_API_KEY
       llama-m2:
@@ -28,27 +28,27 @@
           - id: agent-qwen3.8
             name: m2/agent-qwen3.8
             contextWindow: 262144
-            maxTokens: 32768
+            maxTokens: 16384
             input: [ text, image ]
           - id: agent-dsv4
             name: m2/agent-dsv4
             contextWindow: 262144
-            maxTokens: 32768
+            maxTokens: 16384
             input: [ text, image ]
           - id: agent-mimo
             name: m2/agent-mimo
             contextWindow: 262144
-            maxTokens: 32768
+            maxTokens: 16384
             input: [ text, image ]
           - id: agent-qwen4
             name: m2/agent-qwen4
             contextWindow: 262144
-            maxTokens: 32768
+            maxTokens: 16384
             input: [ text, image ]
           - id: agent-glm
             name: m2/agent-glm
             contextWindow: 262144
-            maxTokens: 32768
+            maxTokens: 16384
             input: [ text, image ]
         apiKeyEnv: LLAMA_API_KEY
       llama-dgx:
@@ -59,12 +59,12 @@
           - id: agent-mimo
             name: dgx/agent-mimo
             contextWindow: 262144
-            maxTokens: 32768
+            maxTokens: 16384
             input: [ text, image ]
           - id: agent-glm
             name: dgx/agent-glm
             contextWindow: 262144
-            maxTokens: 32768
+            maxTokens: 16384
             input: [ text, image ]
         apiKeyEnv: LLAMA_API_KEY
       llama-rtx:
@@ -95,7 +95,7 @@
           - id: agent-flint
             name: rtx/agent-flint
             contextWindow: 262144
-            maxTokens: 32768
+            maxTokens: 16384
             input: [ text ]
         apiKeyEnv: LLAMA_API_KEY
       llama-strix:
@@ -106,7 +106,7 @@
           - id: agent-mimo
             name: strix/agent-mimo
             contextWindow: 262144
-            maxTokens: 32768
+            maxTokens: 16384
             input: [ text, image ]
         apiKeyEnv: LLAMA_API_KEY
 - id: ui-settings-general
@@ -273,13 +273,15 @@
                 name: '@deepseek-ai/dsh-compaction-basic'
                 config:
                   # The pressure threshold is min(thresholdRatio * contextWindow,
-                  # contextWindow - request maxTokens - headroomTokens). These 128k routes
-                  # carry a 16384 output reservation, so at the 65536 default headroom the
-                  # second term collapses to 32768 and folds fire at a quarter of the
-                  # window; at 16384 headroom they still fold at 81920. 8192 headroom
-                  # leaves 106496, just over the 0.8 cap of 104857, so the ratio becomes
-                  # the binding term. maxTokens here is the summarization generation cap,
-                  # not the output reservation, and is pinned so it does not track
+                  # contextWindow - request maxTokens - headroomTokens). The 262144 routes
+                  # carry no override, so this headroom is theirs: 262144 - 16384 - 32768
+                  # leaves 212992, above the 0.8 cap of 209715, so the ratio binds and they
+                  # fold at 209715 with 36045 of slack. maxTokens inherits this headroom as
+                  # the summarization generation cap, which is ample at 32768.
+                  headroomTokens: 32768
+                  # The 128k llama-rtx routes pay for the smaller window with their own
+                  # headroom: 131072 - 16384 - 8192 leaves 106496, just over their 0.8 cap
+                  # of 104857. Their maxTokens is pinned so the summary cap does not track
                   # headroom down with it.
                   modelPolicies:
                     - provider: llama-rtx
