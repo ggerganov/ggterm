@@ -197,8 +197,8 @@
                   - Stats: `<stats>`
                   - To get `<stats>`, run `~/.dsh/stats.sh "$DSH_SESSION_ID"`.
                     Report the stats in the following format:
-                    `◷ <agent time> · ⚙ <tool time> · ↑ <input tokens> · ↓ <output tokens> · ≡ <messages> · ⌨ <user messages>`,
-                    e.g. `◷ 11.8m · ⚙ 45.2s · ↑ 120k · ↓ 45k · ≡ 87 · ⌨ 6`
+                    `◷ <agent time> · ⚙ <tool time> · ↑ <input tokens> · ↓ <output tokens> · ⇈ <prefill tok/s> · ⇊ <decode tok/s> · ≡ <messages> · ⌨ <user messages>`,
+                    e.g. `◷ 11.8m · ⚙ 45.2s · ↑ 120k · ↓ 45k · ⇈ 601.1 tok/s · ⇊ 66.6 tok/s · ≡ 87 · ⌨ 6`.
                   - Write these symbols as literal unicode in the PR description, never `:shortcodes:`
                 - If the tables above carry no row for `{{provider}}` or none for `{{model}}`, ask the user
                   and use their answer for the `<hardware>` or the `<model>` it does not name
