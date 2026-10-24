@@ -68,24 +68,32 @@ Ports a machine serves (`common.sh`): llama-server `9932` (`/v1`), ggmcp `9933`
    is a stop-and-ask, not a `reset --hard`.
 4. **Pull ggterm.** `git fetch --prune origin`, `git checkout <branch>`,
    `git pull --ff-only`. A non-fast-forward is a stop-and-ask.
-5. **Build.** A llama.cpp build runs for minutes and the MCP call would time out, so
-   detach it and poll its log:
+5. **Build.** A llama.cpp build runs for minutes and a timed-out MCP call kills
+   everything in its process group (see the pitfalls), so detach the build into a
+   **new session** and poll its log:
 
    ```bash
    cd <clone>/llama
-   nohup ./setup-<machine>.sh > /tmp/setup-<machine>.log 2>&1 </dev/null &
+   python3 -c "import os,subprocess; os.setsid(); subprocess.Popen(
+     ['bash','-c','./setup-<machine>.sh; echo SETUP_EXIT=\$?'],
+     stdout=open('/tmp/setup-<machine>.log','ab'), stderr=subprocess.STDOUT,
+     stdin=subprocess.DEVNULL)"
    ```
 
    Poll `grep -E '^\[\+\]|^    - HEAD|^\[!\]|SETUP_EXIT' /tmp/setup-<machine>.log`
-   until `SETUP_EXIT=` shows. The script prints the HEAD it moved each repo to.
-6. **Restart.** Detach it the same way, and clear the leaked variable (see below):
+   until `SETUP_EXIT=0` shows. The script prints the HEAD it moved each repo to.
+6. **Restart.** Detach it into a new session the same way, and clear the leaked
+   variable (see below):
 
    ```bash
    cd <clone>/llama
-   env -u CWD_OVERRIDE nohup ./start-<machine>.sh > /tmp/start-<machine>.log 2>&1 </dev/null &
+   env -u CWD_OVERRIDE python3 -c "import os,subprocess; os.setsid(); subprocess.Popen(
+     ['./start-<machine>.sh'], stdout=open('/tmp/start-<machine>.log','ab'),
+     stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL)"
    ```
 
-   The call never returns: `stop_machine` kills the `ggmcp` that is serving it.
+   The launcher returns before `stop_machine` kills the `ggmcp` serving it a moment
+   later; the harness session dies with it. Come back on a fresh session.
 7. **Verify over a fresh session** (see the checklist below). Wait ~20 s after the
    start before the first check.
 8. **Report** each service with its new pid, port and state, and the old → new commit
@@ -117,9 +125,9 @@ the logs.
 ## Pitfalls
 
 - **`start-<machine>.sh` kills the `ggmcp` serving your call** (`stop_machine` →
-  `stop_proc ggmcp`). A foreground call hangs until it times out and its output is
-  lost, and the machine's harness session dies with it. Always detach (step 6) and
-  come back on a fresh session.
+  `stop_proc ggmcp`). A foreground call dies in the group kill halfway through the
+  restart, and the machine's harness session dies with it. Always detach (step 6)
+  and come back on a fresh session.
 - **`CWD_OVERRIDE` leaks out of `ggmcp`.** `start_ggmcp` runs
   `CWD_OVERRIDE=$SCRATCH_DIR start_proc ggmcp ...` (`common.sh:301`), and bash puts a
   function-call prefix assignment into that function's children, so the `ggmcp`
@@ -130,11 +138,18 @@ the logs.
   not exist: preset-<...>/preset.ini` and the server exits, while `ggmcp` and the
   KiSS manager come up fine on their absolute paths. Symptom: only llama-server is
   dead after a restart that reported `[+] Done`. Always `env -u CWD_OVERRIDE`.
-- **macOS has no `setsid`**, so `start_proc` falls back to `nohup`; a detached
-  `nohup ... &` is enough to survive the death of the calling shell.
-- **The MCP bash tool times out at 60 s by default.** Keep remote commands short and
-  never run `llama-server` in the foreground inside a check — it loads a model and
-  stays up. Test on a scratch port, then kill it.
+- **A timed-out `ggmcp` bash call kills its whole process group.** The bash tool's
+  budget is 60 s unless its `timeout` argument raises it; when it expires the server
+  reaps the call with `kill(-pid, SIGKILL)` (`ggmcp/src/shell.cpp`): partial output
+  comes back with `timedOut` or exit 137, and everything still running in the call's
+  group dies with it — a build "detached" as `nohup ./setup.sh > log 2>&1 &` shares
+  the shell's group, `nohup` ignores only SIGHUP, and the log just stops mid-compile
+  with no error. Detach by opening a **new session**, which the group kill cannot
+  reach (macOS has no `setsid(1)`, hence the `python3` launcher in steps 5–6;
+  verified: past a timed-out call a `nohup` child is gone, a `setsid` one lives).
+  Keep the rest of the remote commands short, and never run `llama-server` in the
+  foreground inside a check — it loads a model and stays up. Test on a scratch port,
+  then kill it.
 - **Router mode spawns a child `llama-server` per loaded model** (ports from 19000).
   `stop_proc llama-server` catches them by pattern; a server you started by hand does
   not get caught.
