@@ -116,13 +116,13 @@
 - id: agent-default-model
   name: "@deepseek-ai/dsh-agent-default-model"
   config:
-    provider: llama-rtx
-    model: agent-qwen4
+    provider: llama-dgx
+    model: agent-glm
 - id: agent-preset-registry
   name: "@deepseek-ai/dsh-agent-preset-registry"
   config:
     default: standard
-    selectedDefault: cordis
+    selectedDefault: gg
 # The `gg` agent preset: the standard web tool set plus one dsh-mcp-client row per
 # ggmcp machine, and a persona adapted from pi/SYSTEM.md.
 - insert:
@@ -131,7 +131,8 @@
       config:
         id: gg
         name: gg
-        description: Standard tool set with a llama.cpp fleet of ggmcp machines and the gg working rules.
+        description: Standard tool set with a llama.cpp fleet of ggmcp machines and the
+          gg working rules.
         order: 4
         plugins:
           - id: persona
