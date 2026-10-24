@@ -165,11 +165,11 @@
 
                   | Model route | `<hardware>` |
                   | --- | --- |
-                  | `llama-m5-1` | MacBook M5 Max (m5-1) |
-                  | `llama-m2` | Mac Studio M2 Ultra (m2) |
-                  | `llama-dgx` | DGX Spark (spark-0) |
-                  | `llama-rtx` | RTX 5090 machine (rtx) |
-                  | `llama-strix` | Strix Halo (strix-0) |
+                  | `llama-m5-1` | MacBook, M5 Max, 128GB |
+                  | `llama-m2` | Mac Studio, M2 Ultra, 192GB |
+                  | `llama-dgx` | 2x DGX Spark (RDMA, TP=2) |
+                  | `llama-rtx` | RTX 5090 32GB, DDR5 128GB |
+                  | `llama-strix` | 2x Strix Halo (Ethernet, PP=2) |
 
                 Coding:
                 - Never write inline comments in the code unless the user tells you to
