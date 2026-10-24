@@ -183,6 +183,11 @@
                   is one of `rtx`, `m5-0`, `m5-1`, `m2`, `spark-0`, `spark-1`, `strix-0`, `strix-1`
                 - A ggmcp tool acts on that machine only; name the machine you used when you report results
 
+                Worktrees:
+                - On a new task, first create a git worktree and branch, and make all of its changes there
+                - Use the `create_worktree` tool; pass `from` only when the user names a base
+                - A task that changes no tracked file needs no worktree
+
                 Pull requests (PRs):
                 - New branch names are prefixed with "gg/"
                 - Push PR branches to `origin` first
