@@ -6,7 +6,8 @@ usage() {
     "usage: $(basename "$0") [<session-id>]  ->  <agent> <tool> <in> <out> <msgs> <user>" \
     "agent: HH.Hh | MM.Mm | SS.Ss, model time: sum of the gap from the preceding record to every" \
     "assistant/message (dsh records carry no durationMs, so that gap is the model's turn share)" \
-    "tool:  same units, tool time: per turn, last tool/result - the turn's last assistant/message" \
+    "tool:  same units, tool time: every tool/result minus its own tool/call, paired by call id, so a" \
+    "re-delivered result for the same id does not add up again" \
     "in/out: sum of usage.inputTokens / outputTokens, k = 1e3, m = 1e6 (floored); cache reads are" \
     "not counted as input.  msgs/user: all messages (assistant, user, tool result, system) / user"
   exit 1
@@ -15,6 +16,7 @@ case ${1-} in -h|--help) usage ;; esac
 
 sid=${1-${DSH_SESSION_ID:-}}
 [ -n "$sid" ] || usage
+sid=${sid#session-}
 
 home=${DSH_HOME:-"$HOME/.dsh"}
 f=$(find "$home/sessions" -type f -name '*.jsonl.zstd' -path "*session-$sid*" -print -quit 2>/dev/null || true)
@@ -32,10 +34,12 @@ def usage_of($t; $f): [ .[] | select(.type == $t) | (((.data.usage // {})[$f]) /
 [ .[] | select((.time | type) == "number") | . + {t: .time} ] | sort_by(.t) as $e
 | ([ $e | to_entries[] | select(.value.type == "assistant/message")
      | (.value.t - (if .key == 0 then .value.t else $e[.key - 1].t end)) | pos ] | add // 0) as $agent
-| ([ $e | group_by([.data.turn, .data.step])[]
-     | ([ .[] | select(.type == "assistant/message") | .t ] | max) as $reply
-     | ([ .[] | select(.type == "tool/result") | .t ] | max) as $end
-     | (if $reply == null or $end == null then 0 else ($end - $reply) end) | pos ] | add // 0) as $tool
+| (reduce $e[] as $x ({open: {}, tool: 0};
+     if $x.type == "tool/call" and (($x.data.callId // null) != null) then .open[$x.data.callId] = $x.t
+     elif $x.type == "tool/result" and (($x.data.message.toolCallId // null) != null) then
+       ($x.data.message.toolCallId) as $id | (.open[$id]) as $start | .open[$id] = null
+       | .tool += (if $start == null then 0 else (($x.t - $start) | pos) end)
+     else . end) | .tool) as $tool
 | ($e | usage_of("assistant/message"; "inputTokens")) as $in
 | ($e | usage_of("assistant/message"; "outputTokens")) as $out
 | ([ $e[] | select(.type == "assistant/message" or .type == "user/message" or .type == "tool/result" or .type == "system/message") ] | length) as $msgs
