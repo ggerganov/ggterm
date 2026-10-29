@@ -20,6 +20,7 @@
             maxTokens: 16384
             input: [ text, image ]
         apiKeyEnv: LLAMA_API_KEY
+        streamIdleTimeoutMs: 600000
       llama-m2:
         displayName: m2
         api: openai-completions
@@ -51,6 +52,7 @@
             maxTokens: 16384
             input: [ text, image ]
         apiKeyEnv: LLAMA_API_KEY
+        streamIdleTimeoutMs: 600000
       llama-dgx:
         displayName: dgx
         api: openai-completions
@@ -67,6 +69,7 @@
             maxTokens: 16384
             input: [ text, image ]
         apiKeyEnv: LLAMA_API_KEY
+        streamIdleTimeoutMs: 600000
       llama-rtx:
         displayName: rtx
         api: openai-completions
@@ -98,6 +101,7 @@
             maxTokens: 16384
             input: [ text ]
         apiKeyEnv: LLAMA_API_KEY
+        streamIdleTimeoutMs: 600000
       llama-strix:
         displayName: strix
         api: openai-completions
@@ -109,6 +113,7 @@
             maxTokens: 16384
             input: [ text, image ]
         apiKeyEnv: LLAMA_API_KEY
+        streamIdleTimeoutMs: 600000
 - id: ui-settings-general
   name: "@deepseek-ai/dsh-client-ui-settings-general"
   config:
