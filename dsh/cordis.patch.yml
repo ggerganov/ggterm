@@ -20,7 +20,6 @@
             maxTokens: 16384
             input: [ text, image ]
         apiKeyEnv: LLAMA_API_KEY
-        apiKeyEnv: LLAMA_API_KEY
         streamIdleTimeoutMs: 600000
       llama-m5-2:
         displayName: m5-2
