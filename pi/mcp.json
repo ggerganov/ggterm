@@ -12,6 +12,10 @@
             "url": "http://100.82.237.74:9933/mcp",
             "description": "ggmcp on the MacBook M5 Max (m5-1)"
         },
+        "m5-2": {
+            "url": "http://100.101.165.16:9933/mcp",
+            "description": "ggmcp on the Mac Studio M5 Ultra (m5-2)"
+        },
         "m2": {
             "url": "http://100.109.206.95:9933/mcp",
             "description": "ggmcp on the Mac Studio M2 Ultra (m2)"

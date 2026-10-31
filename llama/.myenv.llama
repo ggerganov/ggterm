@@ -13,6 +13,9 @@ GGPI_PROVIDERS=(
     "m2-mimo       llama-mac-m2   agent-mimo      ggml-org/MiMo-V2.6-Flash-MOPD-GGUF Mac Studio, M2 Ultra, 192GB"
     "m2-glm        llama-mac-m2   agent-glm       ggml-org/GLM-5.3-Flash-GGUF Mac Studio, M2 Ultra, 192GB"
     "m5-1-qwen4    llama-mac-m5-1 agent-qwen4     ggml-org/Qwen3.8-Flash-Next-GGUF MacBook, M5 Max, 128GB"
+    "m5-2-dsv4     llama-mac-m5-2 agent-dsv4      ggml-org/DeepSeek-V4-Flash-Vision-Exp-GGUF Mac Studio, M5 Ultra, 256GB"
+    "m5-2-qwen4    llama-mac-m5-2 agent-qwen4     ggml-org/Qwen3.8-Flash-Next-GGUF Mac Studio, M5 Ultra, 256GB"
+    "m5-2-glm      llama-mac-m5-2 agent-glm       ggml-org/GLM-5.3-Flash-GGUF Mac Studio, M5 Ultra, 256GB"
     "dgx-mimo      llama-dgx      agent-mimo      ggml-org/MiMo-V2.6-Flash-MOPD-GGUF 2x DGX Spark (RDMA, TP=2)"
     "dgx-glm       llama-dgx      agent-glm       ggml-org/GLM-5.3-Flash-GGUF 2x DGX Spark (RDMA, TP=2)"
     "rtx-dsv4      llama-rtx      agent-dsv4      ggml-org/DeepSeek-V4-Flash-Vision-Exp-GGUF RTX 5090 32GB, DDR5 128GB"
@@ -184,6 +187,7 @@ KISS_SITE=${KISS_SITE:-$KISS_BASE/kiss-client.conf}
 KISS_ENDPOINTS=(
     "llama-mac-m2   m2"
     "llama-mac-m5-1 m5-1"
+    "llama-mac-m5-2 m5-2"
     "llama-dgx      dgx-0"
     "llama-rtx      rtx"
     "llama-strix    strix-0"

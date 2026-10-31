@@ -50,6 +50,31 @@
                 }
             ]
         },
+        "llama-mac-m5-2": {
+            "baseUrl": "http://100.101.165.16:9932/v1",
+            "api": "openai-completions",
+            "apiKey": "none",
+            "models": [
+                {
+                    "id": "agent-dsv4",
+                    "input": ["text", "image"],
+                    "contextWindow": 262144,
+                    "maxTokens": 32768
+                },
+                {
+                    "id": "agent-qwen4",
+                    "input": ["text", "image"],
+                    "contextWindow": 262144,
+                    "maxTokens": 32768
+                },
+                {
+                    "id": "agent-glm",
+                    "input": ["text", "image"],
+                    "contextWindow": 262144,
+                    "maxTokens": 32768
+                }
+            ]
+        },
         "llama-dgx": {
             "baseUrl": "http://100.64.225.101:9932/v1",
             "api": "openai-completions",
