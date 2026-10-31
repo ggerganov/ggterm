@@ -44,6 +44,7 @@ MACHINE_HOSTS=(
     "m2      100.109.206.95   gg-studio"
     "m5-0    100.109.1.92     gg-mbp-m5-0"
     "m5-1    100.82.237.74    gg-mbp-m5-1"
+    "m5-2    100.101.165.16   gg-studio-m5"
     "dgx-0   100.64.225.101   gg-spark-0"
     "dgx-1   100.69.125.93    gg-spark-1"
     "rtx     100.111.34.101   homepc-2.shad-beta.ts.net"

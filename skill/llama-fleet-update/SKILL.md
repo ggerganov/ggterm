@@ -1,6 +1,6 @@
 ---
 name: llama-fleet-update
-description: Update and restart one machine of the ggterm llama.cpp fleet (its ggterm clone, llama.cpp, ggmcp and kiss-manager) over that machine's ggmcp MCP server. Use when asked to update, redeploy or restart a fleet machine such as m2, m5-0, m5-1, rtx, dgx-0, dgx-1, strix-0 or strix-1.
+description: Update and restart one machine of the ggterm llama.cpp fleet (its ggterm clone, llama.cpp, ggmcp and kiss-manager) over that machine's ggmcp MCP server. Use when asked to update, redeploy or restart a fleet machine such as m2, m5-0, m5-1, m5-2, rtx, dgx-0, dgx-1, strix-0 or strix-1.
 ---
 
 # Update and restart a fleet machine
@@ -22,6 +22,7 @@ merge, and `setup-<machine>.sh` is the only truth about what gets built.
 | `m2` | 100.109.206.95 | `m2` | `master` | `preset-m2-192gb` | — | `llama-mac-m2` |
 | `m5-0` | 100.109.1.92 | `m5-0` | `master` | `preset-m5-0-48gb` | — | *(none)* |
 | `m5-1` | 100.82.237.74 | `m5-1` | `master` | `preset-m5-1-128gb` | — | `llama-mac-m5-1` |
+| `m5-2` | 100.101.165.16 | `m5-2` | `master` | `preset-m5-2-256gb` | — | `llama-mac-m5-2` |
 | `dgx-0` | 100.64.225.101 | `spark-0` | `gg/glm5` | `preset-dgx-128gb` | `-DGGML_CUDA=ON -DGGML_RPC=ON` | `llama-dgx` |
 | `dgx-1` | 100.69.125.93 | `spark-1` | `gg/glm5` | *(rpc peer)* | `-DGGML_CUDA=ON -DGGML_RPC=ON` | *(rpc peer)* |
 | `rtx` | 100.111.34.101 | `rtx` | `master` | `preset-rtx-32gb` | `-DGGML_CUDA=ON` | `llama-rtx` |
@@ -41,7 +42,7 @@ ggterm lives here on each machine (user, path):
 
 | Machines | User | Clone |
 | --- | --- | --- |
-| `m2`, `m5-0`, `m5-1` | `ggerganov` | `~/development/github/ggterm` |
+| `m2`, `m5-0`, `m5-1`, `m5-2` | `ggerganov` | `~/development/github/ggterm` |
 | `rtx` | `ggerganov` | `~/ggterm` |
 | `dgx-0`, `dgx-1` | `ggml` | `~/development/ggterm` |
 | `strix-0`, `strix-1` | `cluster` | `~/development/ggterm` |

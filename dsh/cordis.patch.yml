@@ -20,6 +20,29 @@
             maxTokens: 16384
             input: [ text, image ]
         apiKeyEnv: LLAMA_API_KEY
+        apiKeyEnv: LLAMA_API_KEY
+        streamIdleTimeoutMs: 600000
+      llama-m5-2:
+        displayName: m5-2
+        api: openai-completions
+        baseURL: http://100.101.165.16:9932
+        models:
+          - id: agent-dsv4
+            name: m5-2/agent-dsv4
+            contextWindow: 262144
+            maxTokens: 16384
+            input: [ text, image ]
+          - id: agent-qwen4
+            name: m5-2/agent-qwen4
+            contextWindow: 262144
+            maxTokens: 16384
+            input: [ text, image ]
+          - id: agent-glm
+            name: m5-2/agent-glm
+            contextWindow: 262144
+            maxTokens: 16384
+            input: [ text, image ]
+        apiKeyEnv: LLAMA_API_KEY
         streamIdleTimeoutMs: 600000
       llama-m2:
         displayName: m2
@@ -202,6 +225,7 @@
                   | Model route | `<hardware>` |
                   | --- | --- |
                   | `llama-m5-1` | MacBook, M5 Max, 128GB |
+                  | `llama-m5-2` | Mac Studio, M5 Ultra, 256GB |
                   | `llama-m2` | Mac Studio, M2 Ultra, 192GB |
                   | `llama-dgx` | 2x DGX Spark (RDMA, TP=2) |
                   | `llama-rtx` | RTX 5090 32GB, DDR5 128GB |
@@ -216,7 +240,7 @@
 
                 Machines:
                 - Each ggmcp machine exposes its own tools as `mcp__<machine>__<tool>`, where `<machine>`
-                  is one of `rtx`, `m5-0`, `m5-1`, `m2`, `spark-0`, `spark-1`, `strix-0`, `strix-1`
+                  is one of `rtx`, `m5-0`, `m5-1`, `m5-2`, `m2`, `spark-0`, `spark-1`, `strix-0`, `strix-1`
                 - A ggmcp tool acts on that machine only; name the machine you used when you report results
 
                 Worktrees:
@@ -407,6 +431,12 @@
               serverName: m5-1
               transport: streamable-http
               url: http://100.82.237.74:9933/mcp
+          - id: mcp-m5-2
+            name: '@deepseek-ai/dsh-mcp-client'
+            config:
+              serverName: m5-2
+              transport: streamable-http
+              url: http://100.101.165.16:9933/mcp
           - id: mcp-m2
             name: '@deepseek-ai/dsh-mcp-client'
             config:
