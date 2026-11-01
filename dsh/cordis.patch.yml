@@ -17,7 +17,7 @@
           - id: agent-qwen4
             name: m5-1/agent-qwen4
             contextWindow: 262144
-            maxTokens: 16384
+            maxTokens: 32768
             input: [ text, image ]
         apiKeyEnv: LLAMA_API_KEY
         streamIdleTimeoutMs: 600000
@@ -29,17 +29,17 @@
           - id: agent-dsv4
             name: m5-2/agent-dsv4
             contextWindow: 262144
-            maxTokens: 16384
+            maxTokens: 32768
             input: [ text, image ]
           - id: agent-qwen4
             name: m5-2/agent-qwen4
             contextWindow: 262144
-            maxTokens: 16384
+            maxTokens: 32768
             input: [ text, image ]
           - id: agent-glm
             name: m5-2/agent-glm
             contextWindow: 262144
-            maxTokens: 16384
+            maxTokens: 32768
             input: [ text, image ]
         apiKeyEnv: LLAMA_API_KEY
         streamIdleTimeoutMs: 600000
@@ -51,27 +51,27 @@
           - id: agent-qwen3.8
             name: m2/agent-qwen3.8
             contextWindow: 262144
-            maxTokens: 16384
+            maxTokens: 32768
             input: [ text, image ]
           - id: agent-dsv4
             name: m2/agent-dsv4
             contextWindow: 262144
-            maxTokens: 16384
+            maxTokens: 32768
             input: [ text, image ]
           - id: agent-mimo
             name: m2/agent-mimo
             contextWindow: 262144
-            maxTokens: 16384
+            maxTokens: 32768
             input: [ text, image ]
           - id: agent-qwen4
             name: m2/agent-qwen4
             contextWindow: 262144
-            maxTokens: 16384
+            maxTokens: 32768
             input: [ text, image ]
           - id: agent-glm
             name: m2/agent-glm
             contextWindow: 262144
-            maxTokens: 16384
+            maxTokens: 32768
             input: [ text, image ]
         apiKeyEnv: LLAMA_API_KEY
         streamIdleTimeoutMs: 600000
@@ -83,12 +83,12 @@
           - id: agent-mimo
             name: dgx/agent-mimo
             contextWindow: 262144
-            maxTokens: 16384
+            maxTokens: 32768
             input: [ text, image ]
           - id: agent-glm
             name: dgx/agent-glm
             contextWindow: 262144
-            maxTokens: 16384
+            maxTokens: 32768
             input: [ text, image ]
         apiKeyEnv: LLAMA_API_KEY
         streamIdleTimeoutMs: 600000
@@ -120,7 +120,7 @@
           - id: agent-flint
             name: rtx/agent-flint
             contextWindow: 262144
-            maxTokens: 16384
+            maxTokens: 32768
             input: [ text ]
         apiKeyEnv: LLAMA_API_KEY
         streamIdleTimeoutMs: 600000
@@ -132,7 +132,7 @@
           - id: agent-mimo
             name: strix/agent-mimo
             contextWindow: 262144
-            maxTokens: 16384
+            maxTokens: 32768
             input: [ text, image ]
         apiKeyEnv: LLAMA_API_KEY
         streamIdleTimeoutMs: 600000
@@ -153,11 +153,12 @@
 # The compaction the agents resolve is the host-level row the base bundle mounts bare; the
 # copy inside the gg preset below is a separate realm's instance. The block is given to
 # both so the numbers hold whichever one a session resolves. The threshold is
-# min(thresholdRatio * contextWindow, contextWindow - request maxTokens - headroomTokens)
-# and every route here reserves 16384 output: the 128k llama-rtx routes get 131072 - 16384
-# - 8192 = 106496, over their 0.8 cap of 104857, and the 262144 routes get 262144 - 16384
-# - 32768 = 212992, over their 0.8 cap of 209715, so the ratio binds both. maxTokens is the
-# summarization generation cap, pinned so it does not track headroom down with it.
+# min(thresholdRatio * contextWindow, contextWindow - request maxTokens - headroomTokens).
+# The 128k llama-rtx routes reserve 16384 output and pay for the smaller window with an
+# 8192 headroom: 131072 - 16384 - 8192 = 106496, over their 0.8 cap of 104857, so the ratio
+# binds. The 262144 routes reserve 32768 output: 262144 - 32768 - 32768 = 196608, under
+# their 0.8 cap of 209715, so the headroom binds. maxTokens is the summarization generation
+# cap, pinned so it does not track headroom down with it.
 - id: compaction-basic
   name: "@deepseek-ai/dsh-compaction-basic"
   config:
@@ -338,10 +339,10 @@
                 config:
                   # The pressure threshold is min(thresholdRatio * contextWindow,
                   # contextWindow - request maxTokens - headroomTokens). The 262144 routes
-                  # carry no override, so this headroom is theirs: 262144 - 16384 - 32768
-                  # leaves 212992, above the 0.8 cap of 209715, so the ratio binds and they
-                  # fold at 209715 with 36045 of slack. maxTokens inherits this headroom as
-                  # the summarization generation cap, which is ample at 32768.
+                  # carry no override, so this headroom is theirs: 262144 - 32768 - 32768
+                  # leaves 196608, under the 0.8 cap of 209715, so the headroom binds and
+                  # they fold at 196608. maxTokens inherits this headroom as the
+                  # summarization generation cap, which is ample at 32768.
                   headroomTokens: 32768
                   # The 128k llama-rtx routes pay for the smaller window with their own
                   # headroom: 131072 - 16384 - 8192 leaves 106496, just over their 0.8 cap
