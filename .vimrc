@@ -133,8 +133,9 @@ function! s:CopyPos(...) range
     call setreg('+', [l:header] + l:lines, l:type)
     echo l:header
 endfunction
-vnoremap <silent> Y :call <SID>CopyPos(0)<CR>`<
-vnoremap <silent> ^ :call <SID>CopyPos(1)<CR>`<
+vnoremap Y "+y
+vnoremap <silent> ^ :call <SID>CopyPos(0)<CR>`<
+vnoremap <silent> & :call <SID>CopyPos(1)<CR>`<
 
 " edit json
 let g:vim_json_conceal=0
