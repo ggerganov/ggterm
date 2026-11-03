@@ -143,7 +143,7 @@
 - id: agent-default-model
   name: "@deepseek-ai/dsh-agent-default-model"
   config:
-    provider: llama-dgx
+    provider: llama-m5-2
     model: agent-glm
 - id: agent-preset-registry
   name: "@deepseek-ai/dsh-agent-preset-registry"
@@ -280,6 +280,7 @@
                 - Never `git push` without explicit confirmation from the user
           - id: agent-instructions
             name: '@deepseek-ai/dsh-agent-instructions'
+            disabled: true
             config:
               maxBytes: 65536
           - id: time-context
