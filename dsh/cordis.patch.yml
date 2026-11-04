@@ -244,7 +244,7 @@
                 - A ggmcp tool acts on that machine only; name the machine you used when you report results
 
                 Worktrees:
-                - On a new task, first create a git worktree and branch, and make all of its changes there
+                - On a new task, first create a git worktree and branch in `./.agents`, and continue to work there
                 - Use the `create_worktree` tool; pass `from` only when the user names a base
                 - A task that changes no tracked file needs no worktree
 
