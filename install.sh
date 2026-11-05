@@ -22,6 +22,7 @@ else
 fi
 
 echo "[+] Creating ~/.* symlinks"
+ln -f -s ${PWD}/.inputrc ~/.inputrc
 ln -f -s ${PWD}/.vimrc ~/.vimrc
 ln -f -s ${PWD}/.gvimrc ~/.gvimrc
 ln -f -s ${PWD}/.myenv ~/.myenv
