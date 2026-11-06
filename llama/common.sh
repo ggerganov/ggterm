@@ -319,7 +319,9 @@ start_llama_server() {
         -lv 4 \
         --models-max 1 \
         --cors-origins '*' \
-        --agent
+        --agent \
+        --metrics \
+        --slots
 }
 
 # the RPC server of the DGX and Strix pairs answers to its peer over the direct
