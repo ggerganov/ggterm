@@ -41,6 +41,16 @@
             contextWindow: 262144
             maxTokens: 32768
             input: [ text, image ]
+          - id: agent-dsv41
+            name: m5-2/agent-dsv41
+            contextWindow: 524288
+            maxTokens: 65536
+            input: [ text, image ]
+          - id: agent-dsv41-s
+            name: m5-2/agent-dsv41-s
+            contextWindow: 524288
+            maxTokens: 65536
+            input: [ text, image ]
         apiKeyEnv: LLAMA_API_KEY
         streamIdleTimeoutMs: 600000
       llama-m2:
@@ -181,6 +191,14 @@
         model: agent-glm
         headroomTokens: 8192
         maxTokens: 16384
+      - provider: llama-m5-2
+        model: agent-dsv41
+        headroomTokens: 32768
+        maxTokens: 65536
+      - provider: llama-m5-2
+        model: agent-dsv41-s
+        headroomTokens: 32768
+        maxTokens: 65536
 # The `gg` agent preset: the standard web tool set plus one dsh-mcp-client row per
 # ggmcp machine, and a persona adapted from pi/SYSTEM.md.
 - insert:
@@ -218,6 +236,8 @@
                   | `agent-qwen3.8` | `ggml-org/Qwen3.8-27B-GGUF` |
                   | `agent-qwen4` | `ggml-org/Qwen3.8-Flash-Next-GGUF` |
                   | `agent-dsv4` | `ggml-org/DeepSeek-V4-Flash-Vision-Exp-GGUF` |
+                  | `agent-dsv41` | `ggml-org/DeepSeek-V4.1-Flash-1017-GGUF` |
+                  | `agent-dsv41-s` | `ggml-org/DeepSeek-V4.1-Flash-1017-GGUF` |
                   | `agent-mimo` | `ggml-org/MiMo-V2.6-Flash-MOPD-GGUF` |
                   | `agent-glm` | `ggml-org/GLM-5.3-Flash-GGUF` |
                   | `agent-flint` | `ggml-org/Flint-GGUF` |
@@ -366,6 +386,14 @@
                       model: agent-glm
                       headroomTokens: 8192
                       maxTokens: 16384
+                    - provider: llama-m5-2
+                      model: agent-dsv41
+                      headroomTokens: 32768
+                      maxTokens: 65536
+                    - provider: llama-m5-2
+                      model: agent-dsv41-s
+                      headroomTokens: 32768
+                      maxTokens: 65536
               - id: command-compact
                 name: '@deepseek-ai/dsh-command-compact'
               - id: tool-result-pruner

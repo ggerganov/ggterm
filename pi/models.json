@@ -72,6 +72,18 @@
                     "input": ["text", "image"],
                     "contextWindow": 262144,
                     "maxTokens": 32768
+                },
+                {
+                    "id": "agent-dsv41",
+                    "input": ["text", "image"],
+                    "contextWindow": 524288,
+                    "maxTokens": 65536
+                },
+                {
+                    "id": "agent-dsv41-s",
+                    "input": ["text", "image"],
+                    "contextWindow": 524288,
+                    "maxTokens": 65536
                 }
             ]
         },
