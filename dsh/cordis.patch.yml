@@ -454,3 +454,12 @@
   name: "@deepseek-ai/dsh-client-ui-theme"
   config:
     preference: system
+- id: dsh-llm-llamacpp
+  name: dsh-llm-llamacpp
+  config:
+    clientPollMs: 500
+    streamIdleTimeoutMs: 300000
+    servers:
+      llamacpp:
+        alias: gg-mbp-m5-1-plugin
+        baseURL: http://100.82.237.74:9932/v1
