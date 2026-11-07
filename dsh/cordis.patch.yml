@@ -153,8 +153,8 @@
 - id: agent-default-model
   name: "@deepseek-ai/dsh-agent-default-model"
   config:
-    provider: llama-m5-1-new
-    model: qwen3.8-flash-next
+    provider: llama-m5-2-new
+    model: agent-dsv41
 - id: agent-preset-registry
   name: "@deepseek-ai/dsh-agent-preset-registry"
   config:
