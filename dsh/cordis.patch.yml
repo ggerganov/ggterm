@@ -153,8 +153,8 @@
 - id: agent-default-model
   name: "@deepseek-ai/dsh-agent-default-model"
   config:
-    provider: llama-m5-2
-    model: agent-glm
+    provider: llama-m5-1-new
+    model: qwen3.8-flash-next
 - id: agent-preset-registry
   name: "@deepseek-ai/dsh-agent-preset-registry"
   config:
@@ -488,6 +488,21 @@
     clientPollMs: 500
     streamIdleTimeoutMs: 300000
     servers:
-      llamacpp:
-        alias: gg-mbp-m5-1-plugin
+      llama-m5-1-new:
         baseURL: http://100.82.237.74:9932/v1
+        alias: llama-m5-1-new
+      llama-m5-2-new:
+        baseURL: http://100.101.165.16:9932/v1
+        alias: llama-m5-2-new
+      llama-m2-new:
+        baseURL: http://100.109.206.95:9932/v1
+        alias: llama-m2-new
+      llama-dgx-new:
+        baseURL: http://100.64.225.101:9932/v1
+        alias: llama-dgx-new
+      llama-rtx-new:
+        baseURL: http://100.111.34.101:9932/v1
+        alias: llama-rtx-new
+      llama-strix-new:
+        baseURL: http://100.112.93.68:9932/v1
+        alias: llama-strix-new
