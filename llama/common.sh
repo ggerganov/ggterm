@@ -333,8 +333,7 @@ start_rpc_server() {
     start_proc rpc-server "$LOG_RPC" "$RPC_SERVER" \
         --host 0.0.0.0 \
         --port "$RPC_PORT" \
-        -d "$device" \
-        -c
+        -d "$device"
 }
 
 # the dashboard of the KiSS servers of this machine: it reads the registry the

@@ -4,7 +4,7 @@ set -e
 
 BASE_DIR=${BASE_DIR:-$(cd "$(dirname "$0")" && pwd)}
 MACHINE='dgx-0'
-LLAMA_REF=gg/dgx-spark
+LLAMA_REF=master
 GGMCP_REF=gg/qwen4-2
 KISS_REF=master
 source "$BASE_DIR/common.sh"
