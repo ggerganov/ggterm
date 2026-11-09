@@ -23,8 +23,8 @@ merge, and `setup-<machine>.sh` is the only truth about what gets built.
 | `m5-0` | 100.109.1.92 | `m5-0` | `master` | `preset-m5-0-48gb` | — | *(none)* |
 | `m5-1` | 100.82.237.74 | `m5-1` | `master` | `preset-m5-1-128gb` | — | `llama-mac-m5-1` |
 | `m5-2` | 100.101.165.16 | `m5-2` | `master` | `preset-m5-2-256gb` | — | `llama-mac-m5-2` |
-| `dgx-0` | 100.64.225.101 | `spark-0` | `gg/glm5` | `preset-dgx-128gb` | `-DGGML_CUDA=ON -DGGML_RPC=ON` | `llama-dgx` |
-| `dgx-1` | 100.69.125.93 | `spark-1` | `gg/glm5` | *(rpc peer)* | `-DGGML_CUDA=ON -DGGML_RPC=ON` | *(rpc peer)* |
+| `dgx-0` | 100.64.225.101 | `spark-0` | `master` | `preset-dgx-128gb` | `-DGGML_CUDA=ON -DGGML_RPC=ON` | `llama-dgx` |
+| `dgx-1` | 100.69.125.93 | `spark-1` | `master` | *(rpc peer)* | `-DGGML_CUDA=ON -DGGML_RPC=ON` | *(rpc peer)* |
 | `rtx` | 100.111.34.101 | `rtx` | `master` | `preset-rtx-32gb` | `-DGGML_CUDA=ON` | `llama-rtx` |
 | `strix-0` | 100.112.93.68 | `strix-0` | `master` | `preset-strix-128gb` | `-DGGML_VULKAN=ON -DGGML_RPC=ON` | `llama-strix` |
 | `strix-1` | 100.77.67.107 | `strix-1` | `master` | *(rpc peer)* | `-DGGML_VULKAN=ON -DGGML_RPC=ON` | *(rpc peer)* |
@@ -159,7 +159,6 @@ the logs.
 - **`dgx-1` and `strix-1` run only `ggml-rpc-server` and `ggmcp`** — no llama-server,
   no preset, no provider, so `9932` stays closed there and `/v1/models` is not a
   failure.
-- **The DGX pair is on `gg/glm5`, not `master`.** Do not "fix" it by pulling master.
 - **The KiSS manager does not answer `GET /`** on `9934`; a curl `000` there means
   nothing. Judge it by a listening socket and `Listening on` in `log-kiss.txt`.
 - **A machine missing from `MACHINE_HOSTS` starts nothing** unless `BIND_HOST` is

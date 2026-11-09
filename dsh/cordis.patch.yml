@@ -100,6 +100,16 @@
             contextWindow: 262144
             maxTokens: 32768
             input: [ text, image ]
+          - id: agent-dsv41
+            name: dgx/agent-dsv41
+            contextWindow: 524288
+            maxTokens: 65536
+            input: [ text, image ]
+          - id: agent-dsv41-s
+            name: dgx/agent-dsv41-s
+            contextWindow: 524288
+            maxTokens: 65536
+            input: [ text, image ]
         apiKeyEnv: LLAMA_API_KEY
         streamIdleTimeoutMs: 600000
       llama-rtx:
