@@ -320,6 +320,7 @@ start_llama_server() {
         --models-max 1 \
         --cors-origins '*' \
         --agent \
+        --allow-unauthenticated-tools \
         --metrics \
         --slots
 }
