@@ -12,6 +12,16 @@
 [interactive]
     diffFilter = delta --color-only
 
+[delta]
+    minus-style                   = red normal
+    minus-non-emph-style          = red normal
+    minus-emph-style              = bright-red normal
+    minus-empty-line-marker-style = normal normal
+    plus-style                    = green normal
+    plus-non-emph-style           = green normal
+    plus-emph-style               = bright-green normal
+    plus-empty-line-marker-style  = normal normal
+
 [merge]
     tool = vimdiff
 
